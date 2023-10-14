@@ -1,0 +1,11 @@
+---
+title: "Troisième séance"
+format: revealjs
+editor: visual
+---
+
+Création d'une présentation pour le cours
+
+-   D'analyse quantitative au S1
+
+-   D'analyse quantitative au S2
