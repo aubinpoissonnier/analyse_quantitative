@@ -19,5 +19,12 @@
     "title": "Troisième séance",
     "section": "",
     "text": "Création d’une présentation pour le cours\n. . .\n\nD’analyse quantitative au S1\n\n. . .\n\nD’analyse quantitative au S2"
+  },
+  {
+    "objectID": "1_2_basesR.html",
+    "href": "1_2_basesR.html",
+    "title": "Hello, Tutorial!",
+    "section": "",
+    "text": "This code computes the answer to one plus one, change it so it computes two plus two:\n\n\n1 + 1"
   }
 ]
