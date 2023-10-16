@@ -12,7 +12,7 @@ options(max.print = 100)
 
 # Prise en main
 
-R Studio fonctionne en complément du logiciel de programmation R. RStudio n'est pas à proprement parler une interface graphique qui permettrait d'utiliser R de manière "classique" via la souris, des menus et des boîtes de dialogue. Il s'agit plutôt de ce qu'on appelle un *Environnement de développement intégré* (IDE) qui facilite l'utilisation de R et le développement de scripts (voir @sec-rstudio).
+R Studio fonctionne en complément du logiciel de programmation R. RStudio n'est pas à proprement parler une interface graphique qui permettrait d'utiliser R de manière "classique" via la souris, des menus et des boîtes de dialogue. Il s'agit plutôt de ce qu'on appelle un *Environnement de développement intégré* (IDE) qui facilite l'utilisation de R et le développement de scripts.
 
 ## Les 4 panneaux de l'interface
 
