@@ -3,13 +3,15 @@ project:
   output-dir: docs
 
 website:
-  title: "analyse_quantitative"
+  title: "Analyse quantitative - M2 Villes et environnements urbains"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - troisieme_seance.qmd
-
+      - Seance1.qmd
+      - Seance2.qmd
+      - pptS2.qmd
+      - rappel_S1S2.qmd
 format:
   html:
     theme: cosmo

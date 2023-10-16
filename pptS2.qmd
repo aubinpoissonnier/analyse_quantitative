@@ -1,0 +1,321 @@
+---
+title: "Powerpoint - Séance 2"
+format:
+  revealjs:
+    incremental: true
+    smaller: true 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| include: false
+options(max.print = 100)
+```
+
+```{r packages}
+library(tidyverse)
+library(data.table)
+```
+
+```{r}
+#| include: false
+map(.x = list(
+  "nb_prop_immig.png",
+  "prog_immig.png",
+  "titre_sej.png",
+  "titre_sej_fam.png",
+  "natio.PNG",
+  "reg_nais.png"),
+  .f = 
+    ~ aws.s3::s3read_using(
+  FUN = png::readPNG,
+  # Mettre les options de FUN ici
+  object = paste0("analyse_quanti/", .x),
+  bucket = "aubinpoissonnier",
+  opts = list("region" = ""))
+   %>%
+  png::writePNG(., .x))
+
+```
+
+## Pourquoi travailler sur le fait migratoire
+
+-   Le droit des étranger.es est surtout droit contre les étranger.es : les moyens dont les États se dotent pour contrôler l'entrée et la vie des étranger.es sur son territoire
+
+-   Le conflit entre la souveraineté Étatique et le droit des personnes pose un problème juridique parfois tranché grâce à la statistique. Proportionnalité du droit : les moyens de contrôle dérogatoires restent-ils légaux ?
+
+-   Fabrication du droit de l'État lié à la conjoncture politique et la perception des flux migratoires
+
+::: notes
+-   Construction d'un droit contre les étrangers plutôt que droit des étrangers, droit des États à contrôler les étrangers. Lien entre les décisions judiciaires et la perception du fait migratoire : puisque la souveraineté des États entre en conflit avec le droit des personnes, il y a une incertitude juridique sur le degré de contrôle légal et réalisable dans les faits, c'est-à-dire les moyens de coercion.
+
+-   À partir de quel seuil les flux migratoires deviennent « massifs », et assez importants pour adopter des procédés dérogatoires sans enfreindre le principe de proportionnalité ?
+
+-   Fabrication du droit de l'État lié à la conjoncture politique et la perception des flux migratoires
+
+-   Fabrication du droit de l'État lié aux usages sociaux des statistiques par ceux qui pratiquent et produisent le droit (jurisprudence, interprétation des constitutions internationales, traités, droits nationaux, respect des procédures, situation d'urgence ..)
+:::
+
+## Le fait migratoire d'après les graphiques de François Héran
+
+![](nb_prop_immig.png)
+
+::: notes
+**Le graphique**
+
+-   Années 1850/1871 : doublement, craintes très fortes des population allogènes alors qu'en proportion, ce n'est rien.
+
+-   Fin XIXe, stagnation, grande crise, incidence directe des conditions économiques sur les flux migratoires.
+
+-   Première Guerre Mondiale, données manquante (recensement tous les 5 ans). Appel massif aux étranger·es, plus seulement les voisin·es puisqu'on va chercher les Polonais·es (avant plutôt Belges, Allemand·es, Italien·nes, Suisses). Les charbonnages de France.
+
+-   Crise des années 30, reflux très important, renvoi de + de 100 000 polonais·es « manu militari »
+
+-   Début années 50, les années de reconstruction et de rattrapage économique. 1974, stop à l'immigration de travail. Obsession de VGE avec les maghrébin·es, et d'autres haut·es fonctionnaires.
+
+-   Depuis 2000, la migration progresse de façon rapide et constante. Recensement tournant, estimation annuelle.
+
+**Insister sur**
+
+-   les deux dimensions et les deux échelles (avec une légende chacune) ainsi que les effets d'optiques : rappeler les valeurs chiffrées, ordre de grandeur
+
+-   sémiologie graphique : deux figurés, deux couleurs opposées avec cohérence des couleurs
+
+-   la forme même du graphique : ce sont des points reliés par des droites, soit une « linéarisation » des niveaux mesurés à intervalles fixes
+
+-   l'illusion de continuité : pour le coup, relative stabilité de la définition d'immigré·e, donc possible de remonter à longtemps
+
+-   les ruptures : données manquantes, changement de mode de collecte
+
+-   les légendes
+
+-   Revenir après sur concrètement, à quoi ressemble le tableau du recensement et quelles opérations on doit faire pour arriver à un tableau qui contient toutes les informations nécessaires?
+:::
+
+## La progression mondiale
+
+![](prog_immig.png)
+
+## Les titres de séjour
+
+![](titre_sej.png)
+
+## Les titres de séjours familiaux
+
+![](titre_sej_fam.png)
+
+## Les données du recensement de la population
+
+::: columns
+::: {.column width="60%"}
+::: fragment
+-   *La version anonymisée du recensement est en accès libre sur le site de l'INSEE. Plusieurs fichiers existent (niveau logement, niveau individu localisé à la région, au canton-ville) et censurent différents types d'information.*
+
+-   *Les données harmonisées entre 1968 et 2019 permettent de créer des séries longues beaucoup plus simplement qu'en compilant les différents recensements.*
+:::
+:::
+
+::: {.column width="40%"}
+::: fragment
+```{r donnees}
+#| include: false
+### Chargement des données
+rp <- aws.s3::s3read_using(
+  FUN = data.table::fread,
+  # Mettre les options de FUN ici
+  object = "analyse_quanti/Ficdep19.csv",
+  bucket = "aubinpoissonnier",
+  opts = list("region" = ""),
+  select = c(AN_RECENS="factor",
+             POND="numeric",
+             REG_NAIS="factor",
+             NATIO="factor")
+)
+```
+
+```{r dimensions}
+#| include: true
+#| echo: true
+dim(rp)
+head(rp, 20)
+```
+:::
+:::
+:::
+
+## Opérations nécessaires pour construire les graphiques d'évolution du nombre et de la proportion d'immigré.es
+
+-   Créer une variable qui renseigne le statut d'immigration
+
+-   Compter pour chaque année le nombre d'immigré.es (effectifs)
+
+-   Diviser le nombre d'immigré.es par le nombre de français.es à une année donnée
+
+-   Construire un graphique avec un abscisse pour les années et une ordonnée pour le nombre ou la proportion
+
+-   Placer les points et les relier avec des traits
+
+-   Ajouter des légendes
+
+## Créer une variable d'immigration
+
+::: columns
+::: {.column width="50%"}
+![](natio.PNG)
+:::
+
+::: {.column width="50%"}
+![](reg_nais.png)
+:::
+:::
+
+## Calculer les effectifs
+
+::: columns
+::: {.column width="70%"}
+```{r}
+### Calculs
+rp[, IMMI := ifelse(NATIO != "000" & REG_NAIS == "99", 1, 0)]
+tab_eff <- rp[, .(n = sum(POND)), by = c("AN_RECENS", "IMMI")]
+
+```
+
+```{r}
+#| echo: true
+#| eval: false
+## Obtenir les effectifs absolus
+tab_eff <-
+  rp %>% # Opérateur PIPE
+  mutate( # Fonction pour créer une variable
+    IMMI = # Nom de la variable
+      ifelse(NATIO != "000" & REG_NAIS == "99", # Condition
+             "Immigré.e", # Valeur si la conditin est vérifiée
+             "Pas immigré.e") # Valeur si la condition n'est pas vérifiée
+  ) %>%
+  count(AN_RECENS, IMMI, wt = POND) # Compte des effectifs pondérés
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+#| include: true
+#| echo: true
+tab_eff
+```
+:::
+:::
+
+## Calculer les pourcentages - 1
+
+::: columns
+::: {.column width="70%"}
+```{r}
+tab_p <- tab_eff %>%
+  mutate(AN_RECENS = as.factor(AN_RECENS),
+         p = n/sum(n), .by = AN_RECENS)
+```
+
+```{r}
+#| echo: true
+#| eval: false
+## Obtenir les pourcentages
+tab_p <-
+  rp %>% # Opérateur PIPE
+  mutate( # Fonction pour créer une variable
+    IMMI = # Nom de la variable
+      ifelse(NATIO != "000" & REG_NAIS == "99", # Condition
+             "Immigré.e", # Valeur si la conditin est vérifiée
+             "Pas immigré.e") # Valeur si la condition n'est pas vérifiée
+  ) %>%
+  count(AN_RECENS, IMMI, wt = POND) %>% # Compte des effectifs pondérés
+  group_by(AN_RECENS) %>% # Opération par année
+  mutate(p = n/sum(n)) %>% # Part dans la population
+  filter(IMMI == "Immigré.e") %>% # On ne garde qu'une ligne sur deux
+  select(-IMMI) # On enlève la colonne immigration
+  
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+#| include: true
+#| echo: true
+tab_p
+```
+:::
+:::
+
+## Calculer les pourcentages - 2
+
+::: columns
+::: {.column width="70%"}
+```{r}
+tab_p <- tab_eff %>%
+  mutate(AN_RECENS = as.factor(AN_RECENS),
+         p = n/sum(n), .by = AN_RECENS) %>%
+  filter(IMMI == 1) %>%
+  select(-IMMI)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+tab_p <-
+  rp %>% # Opérateur PIPE
+  mutate( # Fonction pour créer une variable
+    IMMI = # Nom de la variable
+      ifelse(NATIO != "000" & REG_NAIS == "99", # Condition
+             "Immigré.e", # Valeur si la conditin est vérifiée
+             "Pas immigré.e") # Valeur si la condition n'est pas vérifiée
+  ) %>%
+  count(AN_RECENS, IMMI, wt = POND) %>% # Compte des effectifs pondérés
+  group_by(AN_RECENS) %>% # Opération par année
+  mutate(p = n/sum(n)) %>% # Part dans la population
+  filter(IMMI == "Immigré.e") %>% # On ne garde qu'une ligne sur deux
+  select(-IMMI) # On enlève la colonne immigration
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+#| include: true
+#| echo: true
+tab_p
+```
+:::
+:::
+
+## Construction graphique
+
+```{r}
+### Calculs
+tab <- rp[, .(n = sum(POND)), by = c("AN_RECENS", "IMMI")] %>%
+  mutate(AN_RECENS = as.factor(AN_RECENS),
+         p = n/sum(n), .by = AN_RECENS) %>%
+  filter(IMMI == 1)
+tab %>%
+  ggplot(aes(x = AN_RECENS)) +
+  geom_line(aes(y = p,
+                group = 1)) + 
+  geom_line(aes(y = n/10^8),
+            color = "red",
+            group = 1) +
+  scale_y_continuous(sec.axis = sec_axis(~.*10^8, name="Nombre d'immigré·es",
+                                         seq(3*10^6, 7*10^6, 5*10^5),
+                                         labels = format(seq(3*10^6, 7*10^6, 5*10^5), big.mark = " ")),
+                     breaks = seq(0.0, 0.1, by = 0.005),
+                     labels = scales::label_percent(seq(0.00, 0.1, by = 0.005),
+                                                    decimal.mark = ","),
+                    name = "Part d'immigré·es") +
+  scale_x_discrete(breaks = levels(tab$AN_RECENS),
+                     name = "Année") +
+  theme_minimal() +
+  theme(axis.text.y.right = element_text(color = "red"),
+        axis.title.y.right = element_text(color = "red",
+                                          margin = margin(0, 0, 0, 10))) +
+  labs(title = "Nombre et proportion d'immigré·es en France depuis 1968",
+       caption = "Source : RP 1968-2019 (données harmonisées) | 2023 | A. Poissonnier\nLecture : en 1968, il y avait 3 250 000 immigré·es en France et la part de proportion immigrée dans la population française était de 6,50%.  ")
+
+```

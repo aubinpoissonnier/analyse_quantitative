@@ -1,0 +1,366 @@
+---
+title: "Rappel avant la troisième séance"
+format: html
+editor: visual
+---
+```{r}
+#| include: false
+options(max.print = 100)
+```
+
+La deuxième séance a été consacrée au recodage et à la visualisation de données. Nous sommes revenu.es sur les graphiques présentés par François Héran pour reconstituer le passage des données brutes, le recensement, aux représentations graphiques. Voici un résumé des éléments avec lesquels il faut être familier.e pour la troisième séance.
+
+## Les bases de la première séance
+
+L'essentiel de l'analyse des données repose sur la transformation de tableaux de données. Les lignes représentent des individus statistiques (qui peuvent être des personnes, des ménages, ou d'autres unités enquêtées). Les colonnes sont des variables numériques ou catégorielles.
+
+On prend ici l'exemple du recensement de la population restreint à la ville de Lyon en 2009 et 2019. Lancer le bloc de code suivant sans se soucier du code ni du message retourné par R.
+
+```{r}
+# Ne pas tenir compte de ces lignes, c'est le chargement des données
+rp <- aws.s3::s3read_using(FUN = data.table::fread,
+                           object = "/diffusion/RP_LYON_2009_2019.csv",
+                           bucket = "aubinpoissonnier",
+                           opts = list("region" = ""))
+```
+
+On appelle les colonnes des tableaux de données des vecteurs car ce sont des suites de valeurs (la valeur de la variable pour l'individu 1, pour l'individu 2 etc). Une fonction s'écrit sous la forme `nom_fonction()`. On peut utiliser l'onglet "Help" pour connaître les différents arguments ou paramètres d'une fonction. On sépare les arguments des fonctions par des virgules s'il y en a plusieurs. Il faut toujours veiller à fermer les parenthèses. La fonction `str` pour *structure* résume toutes les colonnes du tableau. Elle a un seul argument, l'objet qu'on veut décrire (ici le tableau). La fonction `head` renvoie les premières lignes du tableau, elle peut prendre un deuxième argument pour choisir le nombre de lignes.
+
+```{r}
+# Ici, rp correspond au tableau de données du rencesement
+str(rp)
+
+# Deux arguments indiqués de manière implicite
+head(rp, 10)
+
+# Ce qui est équivalent à la manière explicite
+# x = correspond à l'argument "objet sur lequel j'applique la fonction"
+# n = correspond à l'argument "nombre de lignes à afficher"
+head(x = rp, n = 10)
+```
+
+Ici toutes les vecteurs/colonnes sont de type numérique. Il sera possible de modifier les colonnes qui devraient être des facteurs car ce sont des variables catégorielles : la variable `IMMI` devrait par exemple être une variable catégorielle qui prend deux modalités, "Immigré.e" et "Pas immigré.e".
+
+La fonction `table` permet de faire un tri croisé sur une variable. On remarque que les données de 2009 et 2019 sont regroupées dans un même tableau. C'est ce qui permettra une comparaison temporelle mais on verra comment en tenir compte par la suite pour ne pas mélanger les données des deux enquêtes.
+
+```{r}
+# L'opérateur $ permet d'accéder à une colonne précise grâce au nom.
+# En faisant un tri croisé sur $annee, je compte le nombre d'individus recensé.es
+# en 2009 et en 2019. 
+table(rp$annee)
+
+# Il y 182070 lignes qui ont la valeur 2009, 182070 ont donc été personnes recensées
+# pour le recensement de 2009
+```
+
+L'essentiel du recodage s'opère avec des instructions logiques simples (égal, différent, inférieur ou supérieur à) que l'on peut combiner sur une variable (être cadre ou profession intermédiaire) ou plusieurs variables (être cadre et avoir plus de 60 ans).
+
+```{r}
+## Opérateur égal
+# Pour du numérique
+1 == 1
+1 == 2
+# Pour du factoriel ou du texte
+"Jaune" == "Jaune"
+"Jaune" == "Vert"
+# Opérateur différent
+1 != 1
+1 != 2
+# Inférieur ou supérieur
+1 > 2
+1 < 2
+# Compris dans un ensemble de valeurs
+1 %in% c(1, 2, 3) # c(1, 2, 3) est un vecteur créé par la fonction c(). Il contient les valeur de 1, 2, 3
+1 %in% c(2, 3, 4)
+
+"Jaune" %in% c("Jaune", "Vert")
+"Jaune" %in% c("Rouge", "Bleu")
+
+# Cumul des conditions
+# Opérateur et (&) : 1 est-il inférieur à 2 et à 3 ?
+1 < 2 & # On revient à la ligne pour que ça soit plus lisible
+  1 < 3
+# 1 est-il inférieur à 2 et supérieur à 2 ?
+1 < 2 &
+  1 > 2
+```
+
+## L'introduction au recodage et à la visualisation de données
+
+### Le recodage
+
+Il existe plusieurs façons de recoder sur R. On utilisera uniquement le recodage qui utilise les opérateurs logiques pour se concentrer sur deux fonctions polyvalentes, `ifelse` et `case_when`.
+
+La fonction `ifelse` permet de faire une action sous condition : si l'âge est supérieur à 18, donne la valeur "majeur.e", sinon donne la valeur "mineur.e". `case_when` étend ce fonctionnement à plus d'une possibilité : si l'âge est supérieur à 18 donne "majeur.e", si l'âge est compris entre 18 et 64 donne "adulte", si l'âge est supérieur à 64 donne "senior".
+
+Il faut associer ces fonctions à d'autres fonctions qui disent à R quoi faire avec le tableau. La fonction `mutate` permet de créer une nouvelle colonne. On pourra dire à R : crée une nouvelle colonne (`mutate`) à partir d'un test sur la valeur initiale de la variable (`ifelse`).
+
+Voici le code pour créer une variable binaire mineur.e/majeur.e.
+
+```{r}
+# Le package à charger pour faire les recodages
+library(tidyverse)
+
+
+# Voici deux versions du ecodage de l'âge des personnes recensées, soit la variable AGEREV. La première est lisible, la deuxième est commentée ligne par ligne.
+
+# Version plus lisible sans les commentaires
+mutate(
+  rp,
+  age_rec = 
+    ifelse(
+      AGEREV > 17,
+      "Majeur.e",
+      "Mineur.e"
+    )
+)
+
+# Version commentée
+mutate( # J'utilise la fonction mutate pour créer une colonne
+  rp, # Le premier argument de mutate, le tableau à transformer
+  age_rec = # Le deuxième argument de mutate, le nom de la colonne à créer (à gauche du =) et la valeur que je lui donne (à droite du =)
+    ifelse( # Elle sera créée à l'aide du test opérée par la fonction ifelse
+      AGEREV > 17, # Le premier argument de ifelse, la condition
+      "Majeur.e", # Le deuxième argument de ifelse, la valeur à donner si la condition est vérifiée,
+      "Mineur.e" # Le troisième argument de ] ifelse, la valeur à donner si la condition n'est pas vérifié
+    ) # Je ferme la parenthèse de la fonction ifelse
+) # Je ferme la parenthèse de la fonction mutate
+
+# On obtient bien une nouvelle variable/colonne nommée age_rec qui prend soit la valeur "Mineur.e", soit la valeur "Majeur.e"
+```
+
+Dès qu'on veut utiliser plus d'un test (par exemple, obtenir trois valeurs : mineur.e, adulte, senior), il faut utiliser la fonction `case_when`.
+
+```{r}
+# Version lisible
+mutate(
+  rp,
+  age_rec =
+    case_when(
+      AGEREV < 18 ~ "Mineur.e",
+      AGEREV > 17 & AGEREV < 65 ~ "Adulte",
+      AGEREV > 64 ~ "Senior"
+    )
+)
+
+
+# Version commentée
+mutate( # Je crée une variable grâce à la fonction mutate
+  rp, # Le premier argument, je transforme le tableau rp
+  age_rec = # Le deuxième argument, la variable à créer
+    case_when( # Qui sera créee grâce à la fonction case_when
+      # À gauche du "~", c'est la condition, à droite la valeur
+      AGEREV < 18 ~ "Mineur.e", # Si AGEREV est strictement inférieur à 18, alors la variable prendra la valeur "Mineur.e"
+      AGEREV > 17 & AGEREV < 65 ~ "Adulte", # Si AGEREV est strictement supérieur à 17 ET qu'AGEREV est strictement inférieur à 65, alors la variable prendra la valeur "Adulte"
+      AGEREV > 64 ~ "Senior" # Si AGEREV est strictement supérieur à 64, alors la variable prendra la valeur "Senior"
+    ) # Je ferme la parenthèse de la fonction case_when
+) # Je ferme la parenthèse de la fonction mutate
+```
+
+Il manque deux choses aux recodages ci-dessus. Nous n'avons pas enregistré notre travail car nous n'avons pas créé de nouvel objet avec l'opérateur d'assignation `<-`. On peut soit réécrire sur le tableau de données original ou en créer un nouveau qui sera notre nouveau support de travail.
+
+```{r}
+# Je transforme directement le tableau initial
+rp <- # Crée un nouvel objet rp (qui existait déjà, donc on réécrit desus) à partir du tableau initial (rp) transformé  avec mutate
+  mutate(
+  rp,
+  age_rec =
+    case_when(
+      AGEREV < 18 ~ "Mineur.e",
+      AGEREV > 17 & AGEREV < 65 ~ "Adulte",
+      AGEREV > 64 ~ "Senior"
+    )
+)
+
+# Je créer un autre tableau sur lequel je travail
+rp2 <- # Crée un nouvel objet rp2 (qui n'existait pas) à partir du tableau initial (rp) transformé avec mutate
+  mutate(
+  rp,
+  age_rec =
+    case_when(
+      AGEREV < 18 ~ "Mineur.e",
+      AGEREV > 17 & AGEREV < 65 ~ "Adulte",
+      AGEREV > 64 ~ "Senior"
+    )
+)
+```
+
+Deuxième élément manquant, nous n'avons pas spécifier la nature de notre nouvelle colonne/vecteur. On cherche ici à créer un facteur puisqu'on a une variable catégorielle. La fonction `fct` permet de créer un vecteur et de spécifier l'ordre de ses modalités (quand on fera des tableaux ou des graphiques, on voudra que "Senior" apparaisse en dernier, et non entre "Mineur.e" et "Majeur.e" !)
+
+```{r}
+# Un vecteur de type texte qui renseigne la catégorie d'âge de 6 personnes
+cat_age <- c("Mineur.e", 
+             "Adulte", 
+             "Adulte", 
+             "Senior", 
+             "Mineur.e",
+             "Senior")
+# Le tri croisé ne donne pas quelque chose d'intuitif :
+table(cat_age)
+# La catégorie adulte apparaît avant mineur.e
+# On le transforme en facteur
+cat_age <-
+  fct(cat_age, # Le premier argument, le facteur à transformer
+      levels = # Le deuxième argument, les modalités (levels) avec l'ordre d'apparition 
+        c("Mineur.e", "Adulte", "Senior")
+      )
+# Le problème est résolu
+table(cat_age)
+```
+
+### Savoir utiliser tidyverse et enchaîner les opérations
+
+Les graphiques utilisés par François Héran nous ont servi d'exemple pour comprendre toutes les opérations nécessaires pour passer de données tabulaires brutes -- un recensement où chaque individu est représenté par une ligne -- à des graphiques qui représentent l'évolution du nombre d'immigré.es et de la proportion d'immigré.es sur plusieurs années. **Vous pouvez retrouver le powerpoint à cette adresse, je vous conseille d'aller regarder comment chaque opération est traduite par une ligne de code.**
+
+Il faut à partir d'ici bien comprendre la logique d'enchaînement des opérations propre au *tidyverse*. Nous avons jusqu'à présent vu qu'on pouvait emboîter les fonctions, par exemple créer un vecteur avec `c()` puis en faire un facteur avec `fct()` :
+
+```{r}
+fct(
+  c("Jaune", "Vert")
+)
+```
+
+Ici l'objet brut qu'on va vouloir transformer se situe à la fin du code. L'opérateur pipe `%>%` permet d'enchaîner les opérations. Il prend un objet et il applique une par une les fonctions qu'on lui donne. C'est l'image d'un objet passant par un tuyau et qu'on modifie progressivement jusqu'au produit final.
+
+```{r}
+c("Jaune", "Vert") %>% # Prends ce vecteur
+  fct() # Applique lui la fonction fct()
+```
+
+Voici un exemple à partir du recensement lyonnais. Il faudra vous familiariser au fur et à mesure avec la fonction adaptée à chaque opération. **Les codes sont commentés dans le premier bloc de code. Je vous conseille d'aller voir les blocs de codes suivants pour vous rendre compte de la transformation progressive du tableau.**
+
+```{r}
+# Compter le nombre d'immigré.es et de non-immigré.es à Lyon en 2019
+rp %>% # Prends le tableau de données du recensement
+  filter(annee == 2019) %>% # Garde uniquement les données de 2019
+  mutate( # Crée une nouvelle variable 
+    # Le dictionnaire des codes nous dit que la variable IMMI brute vaut 1 si la personne est immigrée, 2 si elle ne l'est pas. On le recode en facteur.
+    IMMI = 
+      fct(
+        ifelse(IMMI == 1,
+             "Immigré.e",
+             "Pas immigré.e"),
+        levels = c("Pas immigré.e", "Immigré.e")
+      )
+  ) %>% 
+  count(IMMI, # Compte les effectifs pour la variable IMMI
+        wt = IPONDI) # en tenant compte de la pondération (IPONDI est la variable de poids, on la donne à l'argument wt pour weights)
+
+
+# Comparer la proportion d'immigré.es en 2009 et 2019
+rp %>%
+  mutate(
+    IMMI = 
+      fct(
+        ifelse(IMMI == 1, 
+               "Immigré.e",
+               "Pas immigré.e"),
+        levels = c("Pas immigré.e", "Immigré.e")
+      )
+  ) %>%
+  count(annee, # On compte d'abord en fonction de l'année
+        IMMI,  # Puis de la varible d'immigration
+        wt = IPONDI) %>%
+  # On crée une nouvelle colonne pour les pourcentages. Il faut pour cela faire une opération groupée : calculer la population totale en 2009 et 2019 = nombre d'immigré.es + nombre de non-immigré.es
+  group_by(annee) %>% # On dit au tidyverse de faire les prochaines opérations au sein du groupe défini par la variable "annee"
+  mutate( 
+    # La proportion, c'est l'effectif divisé par la population totale. L'effectif ici c'est n, la population totale c'est la somme des n (calculée pour chaque année de façon indépendante !)
+    p =
+      n/sum(n)
+  ) %>%
+  filter(IMMI == "Immigré.e") %>% # On ne garde que le pourcentage d'immigré.e car les lignes sont redondantes
+  select(-IMMI) # On enlève la variable IMMI vu qu'on n'a plus que les lignes "Immigré.e"
+```
+
+```{r}
+rp %>%
+  mutate(
+    IMMI = 
+      fct(
+        ifelse(IMMI == 1, 
+               "Immigré.e",
+               "Pas immigré.e"),
+        levels = c("Pas immigré.e", "Immigré.e")
+      )
+  )
+```
+
+```{r}
+rp %>%
+  mutate(
+    IMMI = 
+      fct(
+        ifelse(IMMI == 1, 
+               "Immigré.e",
+               "Pas immigré.e"),
+        levels = c("Pas immigré.e", "Immigré.e")
+      )
+  ) %>%
+  count(annee,
+        IMMI,
+        wt = IPONDI
+  )
+```
+
+```{r}
+rp %>%
+  mutate(
+    IMMI = 
+      fct(
+        ifelse(IMMI == 1, 
+               "Immigré.e",
+               "Pas immigré.e"),
+        levels = c("Pas immigré.e", "Immigré.e")
+      )
+  ) %>%
+  count(annee,
+        IMMI,
+        wt = IPONDI
+  ) %>%
+  group_by(annee) %>%
+  mutate(p =
+           n/sum(n))
+```
+
+```{r}
+rp %>%
+  mutate(
+    IMMI = 
+      fct(
+        ifelse(IMMI == 1, 
+               "Immigré.e",
+               "Pas immigré.e"),
+        levels = c("Pas immigré.e", "Immigré.e")
+      )
+  ) %>%
+  count(annee,
+        IMMI,
+        wt = IPONDI
+  ) %>%
+  group_by(annee) %>%
+  mutate(p =
+           n/sum(n)) %>%
+  filter(IMMI == "Immigré.e")
+```
+
+```{r}
+rp %>%
+  mutate(
+    IMMI = 
+      fct(
+        ifelse(IMMI == 1, 
+               "Immigré.e",
+               "Pas immigré.e"),
+        levels = c("Pas immigré.e", "Immigré.e")
+      )
+  ) %>%
+  count(annee,
+        IMMI,
+        wt = IPONDI
+  ) %>%
+  group_by(annee) %>%
+  mutate(p =
+           n/sum(n)) %>%
+  filter(IMMI == "Immigré.e") %>%
+  select(-IMMI)
+```
