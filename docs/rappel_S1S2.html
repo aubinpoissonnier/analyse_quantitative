@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Seance1.html" rel="" target="">
- <span class="menu-text">Prise en main</span></a>
+ <span class="menu-text">Séance 1</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Seance2.html" rel="" target="">
@@ -197,47 +197,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ici, rp correspond au tableau de données du rencesement</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Classes 'data.table' and 'data.frame':  377833 obs. of  7 variables:
- $ annee : int  2019 2019 2019 2019 2019 2019 2019 2019 2019 2019 ...
+<pre><code>Classes 'data.table' and 'data.frame':  377833 obs. of  11 variables:
+ $ id    : int  1 1 1 1 1 1 1 1 1 1 ...
  $ ARM   : int  69388 69388 69388 69384 69383 69388 69384 69383 69383 69383 ...
  $ IPONDI: num  1.178 1.178 1.178 2.965 0.956 ...
+ $ CS1   : int  8 3 8 8 8 4 5 8 4 6 ...
  $ IMMI  : int  2 2 2 1 2 2 2 2 2 2 ...
  $ SEXE  : int  1 2 1 2 1 1 2 1 2 1 ...
- $ CS1   : int  8 3 8 8 8 4 5 8 4 6 ...
  $ AGEREV: int  14 43 11 85 23 28 50 23 23 21 ...
+ $ NPERR : int  3 3 3 1 1 1 1 2 2 1 ...
+ $ NBPI  : int  3 3 3 4 1 1 2 1 1 3 ...
+ $ LPRM  : chr  "3" "1" "3" "1" ...
+ $ annee : int  2019 2019 2019 2019 2019 2019 2019 2019 2019 2019 ...
  - attr(*, ".internal.selfref")=&lt;externalptr&gt; </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deux arguments indiqués de manière implicite</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rp, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    annee   ARM    IPONDI IMMI SEXE CS1 AGEREV
- 1:  2019 69388 1.1778303    2    1   8     14
- 2:  2019 69388 1.1778303    2    2   3     43
- 3:  2019 69388 1.1778303    2    1   8     11
- 4:  2019 69384 2.9651895    1    2   8     85
- 5:  2019 69383 0.9564125    2    1   8     23
- 6:  2019 69388 1.0714436    2    1   4     28
- 7:  2019 69384 2.6176763    2    2   5     50
- 8:  2019 69383 3.0192726    2    1   8     23
- 9:  2019 69383 3.0192726    2    2   4     23
-10:  2019 69383 2.9490264    2    1   6     21</code></pre>
+<pre><code>    id   ARM    IPONDI CS1 IMMI SEXE AGEREV NPERR NBPI LPRM annee
+ 1:  1 69388 1.1778303   8    2    1     14     3    3    3  2019
+ 2:  1 69388 1.1778303   3    2    2     43     3    3    1  2019
+ 3:  1 69388 1.1778303   8    2    1     11     3    3    3  2019
+ 4:  1 69384 2.9651895   8    1    2     85     1    4    1  2019
+ 5:  1 69383 0.9564125   8    2    1     23     1    1    1  2019
+ 6:  1 69388 1.0714436   4    2    1     28     1    1    1  2019
+ 7:  1 69384 2.6176763   5    2    2     50     1    2    1  2019
+ 8:  1 69383 3.0192726   8    2    1     23     2    1    1  2019
+ 9:  1 69383 3.0192726   4    2    2     23     2    1    2  2019
+ [ reached getOption("max.print") -- omitted 1 row ]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce qui est équivalent à la manière explicite</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># x = correspond à l'argument "objet sur lequel j'applique la fonction"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># n = correspond à l'argument "nombre de lignes à afficher"</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="at">x =</span> rp, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    annee   ARM    IPONDI IMMI SEXE CS1 AGEREV
- 1:  2019 69388 1.1778303    2    1   8     14
- 2:  2019 69388 1.1778303    2    2   3     43
- 3:  2019 69388 1.1778303    2    1   8     11
- 4:  2019 69384 2.9651895    1    2   8     85
- 5:  2019 69383 0.9564125    2    1   8     23
- 6:  2019 69388 1.0714436    2    1   4     28
- 7:  2019 69384 2.6176763    2    2   5     50
- 8:  2019 69383 3.0192726    2    1   8     23
- 9:  2019 69383 3.0192726    2    2   4     23
-10:  2019 69383 2.9490264    2    1   6     21</code></pre>
+<pre><code>    id   ARM    IPONDI CS1 IMMI SEXE AGEREV NPERR NBPI LPRM annee
+ 1:  1 69388 1.1778303   8    2    1     14     3    3    3  2019
+ 2:  1 69388 1.1778303   3    2    2     43     3    3    1  2019
+ 3:  1 69388 1.1778303   8    2    1     11     3    3    3  2019
+ 4:  1 69384 2.9651895   8    1    2     85     1    4    1  2019
+ 5:  1 69383 0.9564125   8    2    1     23     1    1    1  2019
+ 6:  1 69388 1.0714436   4    2    1     28     1    1    1  2019
+ 7:  1 69384 2.6176763   5    2    2     50     1    2    1  2019
+ 8:  1 69383 3.0192726   8    2    1     23     2    1    1  2019
+ 9:  1 69383 3.0192726   4    2    2     23     2    1    2  2019
+ [ reached getOption("max.print") -- omitted 1 row ]</code></pre>
 </div>
 </div>
 <p>Ici toutes les vecteurs/colonnes sont de type numérique. Il sera possible de modifier les colonnes qui devraient être des facteurs car ce sont des variables catégorielles : la variable <code>IMMI</code> devrait par exemple être une variable catégorielle qui prend deux modalités, “Immigré.e” et “Pas immigré.e”.</p>
@@ -362,18 +366,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        annee   ARM    IPONDI IMMI SEXE CS1 AGEREV  age_rec
-     1:  2019 69388 1.1778303    2    1   8     14 Mineur.e
-     2:  2019 69388 1.1778303    2    2   3     43 Majeur.e
-     3:  2019 69388 1.1778303    2    1   8     11 Mineur.e
-     4:  2019 69384 2.9651895    1    2   8     85 Majeur.e
-     5:  2019 69383 0.9564125    2    1   8     23 Majeur.e
-    ---                                                    
-377829:  2009 69381 0.9999903    1    1   5     31 Majeur.e
-377830:  2009 69381 0.9999903    2    1   6     43 Majeur.e
-377831:  2009 69381 0.9999903    1    1   8     29 Majeur.e
-377832:  2009 69381 0.9999903    2    1   6     25 Majeur.e
-377833:  2009 69381 0.9999903    2    1   6     32 Majeur.e</code></pre>
+<pre><code>        id   ARM    IPONDI CS1 IMMI SEXE AGEREV NPERR NBPI LPRM annee  age_rec
+     1:  1 69388 1.1778303   8    2    1     14     3    3    3  2019 Mineur.e
+     2:  1 69388 1.1778303   3    2    2     43     3    3    1  2019 Majeur.e
+     3:  1 69388 1.1778303   8    2    1     11     3    3    3  2019 Mineur.e
+     4:  1 69384 2.9651895   8    1    2     85     1    4    1  2019 Majeur.e
+     5:  1 69383 0.9564125   8    2    1     23     1    1    1  2019 Majeur.e
+    ---                                                                       
+377829:  2 69381 0.9999903   5    1    1     31    NA   NA    Z  2009 Majeur.e
+377830:  2 69381 0.9999903   6    2    1     43    NA   NA    Z  2009 Majeur.e
+ [ reached getOption("max.print") -- omitted 3 rows ]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Version commentée</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>( <span class="co"># J'utilise la fonction mutate pour créer une colonne</span></span>
@@ -386,18 +388,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># Je ferme la parenthèse de la fonction ifelse</span></span>
 <span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Je ferme la parenthèse de la fonction mutate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        annee   ARM    IPONDI IMMI SEXE CS1 AGEREV  age_rec
-     1:  2019 69388 1.1778303    2    1   8     14 Mineur.e
-     2:  2019 69388 1.1778303    2    2   3     43 Majeur.e
-     3:  2019 69388 1.1778303    2    1   8     11 Mineur.e
-     4:  2019 69384 2.9651895    1    2   8     85 Majeur.e
-     5:  2019 69383 0.9564125    2    1   8     23 Majeur.e
-    ---                                                    
-377829:  2009 69381 0.9999903    1    1   5     31 Majeur.e
-377830:  2009 69381 0.9999903    2    1   6     43 Majeur.e
-377831:  2009 69381 0.9999903    1    1   8     29 Majeur.e
-377832:  2009 69381 0.9999903    2    1   6     25 Majeur.e
-377833:  2009 69381 0.9999903    2    1   6     32 Majeur.e</code></pre>
+<pre><code>        id   ARM    IPONDI CS1 IMMI SEXE AGEREV NPERR NBPI LPRM annee  age_rec
+     1:  1 69388 1.1778303   8    2    1     14     3    3    3  2019 Mineur.e
+     2:  1 69388 1.1778303   3    2    2     43     3    3    1  2019 Majeur.e
+     3:  1 69388 1.1778303   8    2    1     11     3    3    3  2019 Mineur.e
+     4:  1 69384 2.9651895   8    1    2     85     1    4    1  2019 Majeur.e
+     5:  1 69383 0.9564125   8    2    1     23     1    1    1  2019 Majeur.e
+    ---                                                                       
+377829:  2 69381 0.9999903   5    1    1     31    NA   NA    Z  2009 Majeur.e
+377830:  2 69381 0.9999903   6    2    1     43    NA   NA    Z  2009 Majeur.e
+ [ reached getOption("max.print") -- omitted 3 rows ]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On obtient bien une nouvelle variable/colonne nommée age_rec qui prend soit la valeur "Mineur.e", soit la valeur "Majeur.e"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -414,18 +414,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        annee   ARM    IPONDI IMMI SEXE CS1 AGEREV  age_rec
-     1:  2019 69388 1.1778303    2    1   8     14 Mineur.e
-     2:  2019 69388 1.1778303    2    2   3     43   Adulte
-     3:  2019 69388 1.1778303    2    1   8     11 Mineur.e
-     4:  2019 69384 2.9651895    1    2   8     85   Senior
-     5:  2019 69383 0.9564125    2    1   8     23   Adulte
-    ---                                                    
-377829:  2009 69381 0.9999903    1    1   5     31   Adulte
-377830:  2009 69381 0.9999903    2    1   6     43   Adulte
-377831:  2009 69381 0.9999903    1    1   8     29   Adulte
-377832:  2009 69381 0.9999903    2    1   6     25   Adulte
-377833:  2009 69381 0.9999903    2    1   6     32   Adulte</code></pre>
+<pre><code>        id   ARM    IPONDI CS1 IMMI SEXE AGEREV NPERR NBPI LPRM annee  age_rec
+     1:  1 69388 1.1778303   8    2    1     14     3    3    3  2019 Mineur.e
+     2:  1 69388 1.1778303   3    2    2     43     3    3    1  2019   Adulte
+     3:  1 69388 1.1778303   8    2    1     11     3    3    3  2019 Mineur.e
+     4:  1 69384 2.9651895   8    1    2     85     1    4    1  2019   Senior
+     5:  1 69383 0.9564125   8    2    1     23     1    1    1  2019   Adulte
+    ---                                                                       
+377829:  2 69381 0.9999903   5    1    1     31    NA   NA    Z  2009   Adulte
+377830:  2 69381 0.9999903   6    2    1     43    NA   NA    Z  2009   Adulte
+ [ reached getOption("max.print") -- omitted 3 rows ]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Version commentée</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>( <span class="co"># Je crée une variable grâce à la fonction mutate</span></span>
@@ -439,18 +437,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># Je ferme la parenthèse de la fonction case_when</span></span>
 <span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Je ferme la parenthèse de la fonction mutate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        annee   ARM    IPONDI IMMI SEXE CS1 AGEREV  age_rec
-     1:  2019 69388 1.1778303    2    1   8     14 Mineur.e
-     2:  2019 69388 1.1778303    2    2   3     43   Adulte
-     3:  2019 69388 1.1778303    2    1   8     11 Mineur.e
-     4:  2019 69384 2.9651895    1    2   8     85   Senior
-     5:  2019 69383 0.9564125    2    1   8     23   Adulte
-    ---                                                    
-377829:  2009 69381 0.9999903    1    1   5     31   Adulte
-377830:  2009 69381 0.9999903    2    1   6     43   Adulte
-377831:  2009 69381 0.9999903    1    1   8     29   Adulte
-377832:  2009 69381 0.9999903    2    1   6     25   Adulte
-377833:  2009 69381 0.9999903    2    1   6     32   Adulte</code></pre>
+<pre><code>        id   ARM    IPONDI CS1 IMMI SEXE AGEREV NPERR NBPI LPRM annee  age_rec
+     1:  1 69388 1.1778303   8    2    1     14     3    3    3  2019 Mineur.e
+     2:  1 69388 1.1778303   3    2    2     43     3    3    1  2019   Adulte
+     3:  1 69388 1.1778303   8    2    1     11     3    3    3  2019 Mineur.e
+     4:  1 69384 2.9651895   8    1    2     85     1    4    1  2019   Senior
+     5:  1 69383 0.9564125   8    2    1     23     1    1    1  2019   Adulte
+    ---                                                                       
+377829:  2 69381 0.9999903   5    1    1     31    NA   NA    Z  2009   Adulte
+377830:  2 69381 0.9999903   6    2    1     43    NA   NA    Z  2009   Adulte
+ [ reached getOption("max.print") -- omitted 3 rows ]</code></pre>
 </div>
 </div>
 <p>Il manque deux choses aux recodages ci-dessus. Nous n’avons pas enregistré notre travail car nous n’avons pas créé de nouvel objet avec l’opérateur d’assignation <code>&lt;-</code>. On peut soit réécrire sur le tableau de données original ou en créer un nouveau qui sera notre nouveau support de travail.</p>
@@ -599,18 +595,25 @@ Levels: Jaune Vert</code></pre>
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        annee   ARM    IPONDI          IMMI SEXE CS1 AGEREV  age_rec
-     1:  2019 69388 1.1778303 Pas immigré.e    1   8     14 Mineur.e
-     2:  2019 69388 1.1778303 Pas immigré.e    2   3     43   Adulte
-     3:  2019 69388 1.1778303 Pas immigré.e    1   8     11 Mineur.e
-     4:  2019 69384 2.9651895     Immigré.e    2   8     85   Senior
-     5:  2019 69383 0.9564125 Pas immigré.e    1   8     23   Adulte
-    ---                                                             
-377829:  2009 69381 0.9999903     Immigré.e    1   5     31   Adulte
-377830:  2009 69381 0.9999903 Pas immigré.e    1   6     43   Adulte
-377831:  2009 69381 0.9999903     Immigré.e    1   8     29   Adulte
-377832:  2009 69381 0.9999903 Pas immigré.e    1   6     25   Adulte
-377833:  2009 69381 0.9999903 Pas immigré.e    1   6     32   Adulte</code></pre>
+<pre><code>        id   ARM    IPONDI CS1          IMMI SEXE AGEREV NPERR NBPI LPRM annee
+     1:  1 69388 1.1778303   8 Pas immigré.e    1     14     3    3    3  2019
+     2:  1 69388 1.1778303   3 Pas immigré.e    2     43     3    3    1  2019
+     3:  1 69388 1.1778303   8 Pas immigré.e    1     11     3    3    3  2019
+     4:  1 69384 2.9651895   8     Immigré.e    2     85     1    4    1  2019
+     5:  1 69383 0.9564125   8 Pas immigré.e    1     23     1    1    1  2019
+    ---                                                                       
+377829:  2 69381 0.9999903   5     Immigré.e    1     31    NA   NA    Z  2009
+377830:  2 69381 0.9999903   6 Pas immigré.e    1     43    NA   NA    Z  2009
+         age_rec
+     1: Mineur.e
+     2:   Adulte
+     3: Mineur.e
+     4:   Senior
+     5:   Adulte
+    ---         
+377829:   Adulte
+377830:   Adulte
+ [ reached getOption("max.print") -- omitted 3 rows ]</code></pre>
 </div>
 </div>
 <div class="cell">
