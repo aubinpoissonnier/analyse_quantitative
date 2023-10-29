@@ -12,6 +12,7 @@ website:
       - Seance2.qmd
       - pptS2.qmd
       - rappel_S1S2.qmd
+      - Seance3.qmd
 format:
   html:
     theme: cosmo
