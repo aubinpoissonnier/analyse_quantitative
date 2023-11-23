@@ -40,9 +40,7 @@ data(hdv2003)
 
 2.  Rappel sur le raisonnement statistique inférentiel
 
-3.  Lecture d'un tableau croisé et test du Khi2
-
-4.  Introduction aux méthodes de régression
+3.  Lecture d'un tableau croisé, test du Khi2 et de Student
 
 ## La lecture d'une boîte à moustaches
 
@@ -73,12 +71,6 @@ ggplot(hdv2003) +
 
 ## L'annotation d'un graphique
 
--   La note de lecture permet de s'assurer de la bonne compréhension d'un graphique. Elle correspond à un exemple de lecture pour chaque dimension du tableau ou de la représentation graphique présentés.
-
--   Le champ doit rappeler la population de référence. Quand certaines catégories sont ambigues, il faut préciser ce que celles-ci recouvrent. Par exemple, les retraité·es sont parfois regroupé·es dans la catégorie "inactif" et parfois rattaché·es à leur ancienne position professionnelle.
-
--   La source indique l'origine des données, l'auteur·e et la date de production. . . .
-
 ```{r}
 #| fig-width: 12
 #| fig-height: 8
@@ -104,6 +96,13 @@ hdv2003 %>%
         plot.caption.position = "plot",
         plot.title.position = "plot")
 ```
+
+-   La note de lecture permet de s'assurer de la bonne compréhension d'un graphique. Elle correspond à un exemple de lecture pour chaque dimension du tableau ou de la représentation graphique présentés.
+
+-   Le champ doit rappeler la population de référence. Quand certaines catégories sont ambigues, il faut préciser ce que celles-ci recouvrent. Par exemple, les retraité·es sont parfois regroupé·es dans la catégorie "inactif" et parfois rattaché·es à leur ancienne position professionnelle.
+
+-   La source indique l'origine des données, l'auteur·e et la date de production. . . .
+
 
 ## Choisir les bonnes formulations selon la nature des statistiques représentées
 
@@ -372,7 +371,8 @@ hdv2003 %>%
 
 ```
 
-# Le test du Khi2 pour les variables catégorielles à plusieurs modalités (exemple sans pondération)
+# Les tests d'hypothèses
+###  Le test du Khi2 pour les variables catégorielles à plusieurs modalités
 
 Le test du Khi2 repose sur une idée simple : si les effectifs du tri croisé de deux variables sont très différents des effectifs qu'on devrait observer si les deux variables étaient indépendantes, alors on peut raisonnablement conclure qu'elles n'ont pas d'effets l'une sur l'autre. Voilà pourquoi on part d'abord du [tableau de contingence]{style="color:#FF7F50"} qui présente les [effectifs observés]{style="color:#FF7F50"} du croisement de deux variables.
 
@@ -745,7 +745,7 @@ hdv2003 %>%
 
 -   Le lien entre la catégorie d'âge et la typologie familiale s'explique en partie par les différences générationnelles de fécondité. Les 31-60 ans correspondent grossièrement aux générations nées pendant le baby-boom.
 
-# Le test de Student pour comparer deux moyennes
+## Le test de Student pour comparer deux moyennes
 
 La logique des tests d'hypothèses vue dans le cadre du $\chi^2$ est valable pour tout un ensemble de tests qui servent des objectifs précis. Le test de Student permet de comparer la moyenne de deux groupes distincts.
 
