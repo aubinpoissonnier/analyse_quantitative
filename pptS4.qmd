@@ -103,7 +103,6 @@ hdv2003 %>%
 
 -   La source indique l'origine des données, l'auteur·e et la date de production. . . .
 
-
 ## Choisir les bonnes formulations selon la nature des statistiques représentées
 
 ```{r}
@@ -225,6 +224,7 @@ hdv2003 %>%
 :::
 
 # Statistiques descriptives et inférentielles
+
 ## Le raisonnement inférentiel
 
 Si les traitements statistiques et les représentations graphiques semblent aller dans le sens d'une hypothèse scientifique, il faut alors s'assurer de leur fiabilité vis-à-vis de la question de recherche.
@@ -373,7 +373,9 @@ hdv2003 %>%
 ```
 
 # Les tests d'hypothèses
+
 ## Le test du Khi2
+
 Le test du Khi2 sert à tester la dépendance entre des variables catégorielles à plusieurs modalités. Il repose sur une idée simple : si les effectifs du tri croisé de deux variables sont très différents des effectifs qu'on devrait observer si les deux variables étaient indépendantes, alors on peut raisonnablement conclure qu'elles n'ont pas d'effets l'une sur l'autre. Voilà pourquoi on part d'abord du [tableau de contingence]{style="color:#FF7F50"} qui présente les [effectifs observés]{style="color:#FF7F50"} du croisement de deux variables.
 
 ```{r}

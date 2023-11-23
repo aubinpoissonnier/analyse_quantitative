@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analyse quantitative - M2 Villes et environnements urbains - DM d’application - Code complété</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse quantitative - M2 Villes et environnements urbains</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Seance1.html" rel="" target="">
+ <span class="menu-text">Séance 1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Seance2.html" rel="" target="">
+ <span class="menu-text">Séance 2</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./pptS2.html" rel="" target="">
+ <span class="menu-text">Powerpoint - Séance 2</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./rappel_S1S2.html" rel="" target="">
+ <span class="menu-text">Rappel avant la troisième séance</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Seance3.html" rel="" target="">
+ <span class="menu-text">Séance 3</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./pptS4.html" rel="" target="">
+ <span class="menu-text">Powerpoint - Séance 4</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./DM_corrige_code.html" rel="" target="" aria-current="page">
+ <span class="menu-text">DM d’application - Code complété</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#comment-faire-ce-dm" id="toc-comment-faire-ce-dm" class="nav-link active" data-scroll-target="#comment-faire-ce-dm">Comment faire ce DM</a>
+  <ul class="collapse">
+  <li><a href="#bloc-de-code-à-lancer-pour-charger-les-packages-et-les-données" id="toc-bloc-de-code-à-lancer-pour-charger-les-packages-et-les-données" class="nav-link" data-scroll-target="#bloc-de-code-à-lancer-pour-charger-les-packages-et-les-données">Bloc de code à lancer pour charger les packages et les données</a></li>
+  <li><a href="#les-consignes" id="toc-les-consignes" class="nav-link" data-scroll-target="#les-consignes">Les consignes</a></li>
+  <li><a href="#les-ressources" id="toc-les-ressources" class="nav-link" data-scroll-target="#les-ressources">Les ressources</a></li>
+  </ul></li>
+  <li><a href="#explorer-un-tableau-de-données-et-ses-colonnes" id="toc-explorer-un-tableau-de-données-et-ses-colonnes" class="nav-link" data-scroll-target="#explorer-un-tableau-de-données-et-ses-colonnes">Explorer un tableau de données et ses colonnes</a></li>
+  <li><a href="#transformation-et-analyse-de-variables-qualitatives" id="toc-transformation-et-analyse-de-variables-qualitatives" class="nav-link" data-scroll-target="#transformation-et-analyse-de-variables-qualitatives">Transformation et analyse de variables qualitatives</a>
+  <ul class="collapse">
+  <li><a href="#rappel-sur-le-fonctionnement-de-lunivers-tidyverse" id="toc-rappel-sur-le-fonctionnement-de-lunivers-tidyverse" class="nav-link" data-scroll-target="#rappel-sur-le-fonctionnement-de-lunivers-tidyverse">Rappel sur le fonctionnement de l’univers tidyverse</a></li>
+  <li><a href="#recoder-des-données" id="toc-recoder-des-données" class="nav-link" data-scroll-target="#recoder-des-données">Recoder des données</a></li>
+  <li><a href="#construire-un-tableau-de-contingence-à-partir-dun-tri-croisé-de-deux-variables-catérogielles" id="toc-construire-un-tableau-de-contingence-à-partir-dun-tri-croisé-de-deux-variables-catérogielles" class="nav-link" data-scroll-target="#construire-un-tableau-de-contingence-à-partir-dun-tri-croisé-de-deux-variables-catérogielles">Construire un tableau de contingence à partir d’un tri croisé de deux variables catérogielles</a></li>
+  <li><a href="#lire-et-interpréter-un-tableau-de-contingence" id="toc-lire-et-interpréter-un-tableau-de-contingence" class="nav-link" data-scroll-target="#lire-et-interpréter-un-tableau-de-contingence">Lire et interpréter un tableau de contingence</a></li>
+  </ul></li>
+  <li><a href="#analyser-visuellement-les-données" id="toc-analyser-visuellement-les-données" class="nav-link" data-scroll-target="#analyser-visuellement-les-données">Analyser visuellement les données</a>
+  <ul class="collapse">
+  <li><a href="#boîte-à-moustaches" id="toc-boîte-à-moustaches" class="nav-link" data-scroll-target="#boîte-à-moustaches">Boîte à moustaches</a></li>
+  <li><a href="#diagrammes-en-bâton" id="toc-diagrammes-en-bâton" class="nav-link" data-scroll-target="#diagrammes-en-bâton">Diagrammes en bâton</a>
+  <ul class="collapse">
+  <li><a href="#effectifs-absolus" id="toc-effectifs-absolus" class="nav-link" data-scroll-target="#effectifs-absolus">Effectifs absolus</a></li>
+  <li><a href="#pourcentages" id="toc-pourcentages" class="nav-link" data-scroll-target="#pourcentages">Pourcentages</a></li>
+  </ul></li>
+  <li><a href="#nuage-de-points-et-graphique-linéaire" id="toc-nuage-de-points-et-graphique-linéaire" class="nav-link" data-scroll-target="#nuage-de-points-et-graphique-linéaire">Nuage de points et graphique linéaire</a></li>
+  <li><a href="#nuage-détiquettes-ou-de-texte" id="toc-nuage-détiquettes-ou-de-texte" class="nav-link" data-scroll-target="#nuage-détiquettes-ou-de-texte">Nuage d’étiquettes ou de texte</a></li>
+  </ul></li>
+  <li><a href="#mener-une-démonstration-associant-statistiques-descriptives-et-visualisation-des-données" id="toc-mener-une-démonstration-associant-statistiques-descriptives-et-visualisation-des-données" class="nav-link" data-scroll-target="#mener-une-démonstration-associant-statistiques-descriptives-et-visualisation-des-données">Mener une démonstration associant statistiques descriptives et visualisation des données</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">DM d’application - Code complété</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="comment-faire-ce-dm" class="level1">
+<h1>Comment faire ce DM</h1>
+<section id="bloc-de-code-à-lancer-pour-charger-les-packages-et-les-données" class="level2">
+<h2 class="anchored" data-anchor-id="bloc-de-code-à-lancer-pour-charger-les-packages-et-les-données">Bloc de code à lancer pour charger les packages et les données</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">max.print =</span> <span class="dv">20</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Hmisc'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:questionr':
+
+    describe, wtd.mean, wtd.table, wtd.var</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    format.pval, units</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter()    masks stats::filter()
+✖ dplyr::lag()       masks stats::lag()
+✖ dplyr::src()       masks Hmisc::src()
+✖ dplyr::summarize() masks Hmisc::summarize()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"hdv2003"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="les-consignes" class="level2">
+<h2 class="anchored" data-anchor-id="les-consignes">Les consignes</h2>
+<p>Ce DM doit vous permettre de réviser les fonctions vues sur R. Votre rendu permettra de vous accorder maximum 2 points bonus mais ce sera l’évaluation en janvier qui déterminera votre note. Il faudra remplir tous les blocs de code en dessous des consignes. Si malgré plusieurs essais vous ne parvenez pas à faire fonctionner votre code, <strong>il ne faut ni le supprimer ni recopier le code d’une autre personne</strong>. Vous pouvez vous entraider si vous vous retrouvez bloquée mais gardez une trace de votre travail en écrivant le code fonctionnel dans un nouveau bloc de code (petit icône vert “+C” en haut à droite du panneau des scritps, à côté du bouton pour lancer le code). Vous ne serez pas pénalisées et c’est la seule façon d’identifier les points mal compris ou les erreurs systématiques grâce à la correction.</p>
+<p><strong>Il faut écrire en dessous des blocs pour répondre aux consignes et, quand c’est nécessaire</strong> (j’indiquerai “Commentez les résultats”), <strong>proposer une analyse simple des résultats obtenus</strong>. La première partie du cours a été plutôt focalisée sur les compétences sur R que sur les méthodes d’analyses quantitatives même si nous nous sommes entraîné·es à l’oral à interpréter les résultats statistiques. On reprendra à la rentrée ce qui aura potentiellement posé problème.</p>
+<p>Exemple d’une consigne et de la façon dont il faut remplir le script :</p>
+<p>Utilisez la fonction <code>nrow</code>pour compter le nombre d’individus dans notre tableau <code>hdv2003</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(hdv2003)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2000</code></pre>
+</div>
+</div>
+<p>Il y a 2000 individus dans notre tableau de données.</p>
+<p>Utilisez les fonctions <code>count</code>, <code>group_by</code> et <code>mutate</code> pour connaître la part d’hommes et de femmes qui déclarent pratiquer la chasse ou la pêche. Faites de même pour la lecture de BD.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sexe, peche.chasse, <span class="at">wt =</span> poids) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sexe) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+# Groups:   sexe [2]
+  sexe  peche.chasse        n      p
+  &lt;fct&gt; &lt;fct&gt;           &lt;dbl&gt;  &lt;dbl&gt;
+1 Homme Non          4101242. 0.796 
+2 Homme Oui          1048141. 0.204 
+3 Femme Non          5615441. 0.948 
+4 Femme Oui           306403. 0.0517</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sexe, lecture.bd, <span class="at">wt =</span> poids) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sexe) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+# Groups:   sexe [2]
+  sexe  lecture.bd        n      p
+  &lt;fct&gt; &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+1 Homme Non        5065699. 0.984 
+2 Homme Oui          83683. 0.0163
+3 Femme Non        5731322. 0.968 
+4 Femme Oui         190522. 0.0322</code></pre>
+</div>
+</div>
+<p>20,4% des hommes déclarent pratiquer la chasse ou la pêche contre seulement 5,2% des femmes. Au contraire, seulement 1,6% des hommes déclarent lire des BD contre 3,2% des femmes. Les pratiques de loisirs semblent donc dépendantes du genre. La chasse et la pêche apparaissent comme communs, un homme cinq déclarent l’avoir comme loisir, mais particulièrement masculin puisque quatre fois moins de femmes les pratiquent (on ne se soucie pas ici du test statistique qui montrerait que ce loisir est dépendant du genre, le Khi2 sera revu au cours de la quatrième séance).</p>
+</section>
+<section id="les-ressources" class="level2">
+<h2 class="anchored" data-anchor-id="les-ressources">Les ressources</h2>
+<p>Revenez sur les scripts des séances précédentes si vous ne vous souvenez plus des fonctions à utiliser. Je rappelle que j’ai repris en grande partie <a href="https://juba.github.io/tidyverse/">l’introduction à R et au Tidyverse</a> de Julien Barnier pour les 2 premières séances, n’hésitez pas à naviguer sur son site ou à faire des recherches google en français ou en anglais. Il faut aussi utiliser le panneau d’aide (en appuyant sur la touche <code>F1</code> ou en lançant la commande <code>help(nom_fonction)</code> dans votre console) pour connaître les arguments à utiliser. Pour les fonctions de l’univers tidyverse, utilisez plutôt le site en ligne de chaque package pour vous orienter (<a href="https://dplyr.tidyverse.org/">dplyr pour la transformation des données</a>, <a href="https://ggplot2.tidyverse.org/">ggplot2 pour la visualisation de données</a>). Les aides-mémoires sont accessibles directement depuis R-Studio en allant dans l’onglet Help &gt; Cheat Sheets.</p>
+</section>
+</section>
+<section id="explorer-un-tableau-de-données-et-ses-colonnes" class="level1">
+<h1>Explorer un tableau de données et ses colonnes</h1>
+<p>Le tableau de données s’appelle <code>hdv2003</code>. Utilisez les fonctions <code>dim</code> et <code>str</code> pour décrire la structure du tableau de données.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(hdv2003)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   2000 obs. of  20 variables:
+ $ id           : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ age          : int  28 23 59 34 71 35 60 47 20 28 ...
+ $ sexe         : Factor w/ 2 levels "Homme","Femme": 2 2 1 1 2 2 2 1 2 1 ...
+ $ nivetud      : Factor w/ 8 levels "N'a jamais fait d'etudes",..: 8 NA 3 8 3 6 3 6 NA 7 ...
+ $ poids        : num  2634 9738 3994 5732 4329 ...
+ $ occup        : Factor w/ 7 levels "Exerce une profession",..: 1 3 1 1 4 1 6 1 3 1 ...
+ $ qualif       : Factor w/ 7 levels "Ouvrier specialise",..: 6 NA 3 3 6 6 2 2 NA 7 ...
+ $ freres.soeurs: int  8 2 2 1 0 5 1 5 4 2 ...
+ $ clso         : Factor w/ 3 levels "Oui","Non","Ne sait pas": 1 1 2 2 1 2 1 2 1 2 ...
+ $ relig        : Factor w/ 6 levels "Pratiquant regulier",..: 4 4 4 3 1 4 3 4 3 2 ...
+ $ trav.imp     : Factor w/ 4 levels "Le plus important",..: 4 NA 2 3 NA 1 NA 4 NA 3 ...
+ $ trav.satisf  : Factor w/ 3 levels "Satisfaction",..: 2 NA 3 1 NA 3 NA 2 NA 1 ...
+ $ hard.rock    : Factor w/ 2 levels "Non","Oui": 1 1 1 1 1 1 1 1 1 1 ...
+ $ lecture.bd   : Factor w/ 2 levels "Non","Oui": 1 1 1 1 1 1 1 1 1 1 ...
+ $ peche.chasse : Factor w/ 2 levels "Non","Oui": 1 1 1 1 1 1 2 2 1 1 ...
+ $ cuisine      : Factor w/ 2 levels "Non","Oui": 2 1 1 2 1 1 2 2 1 1 ...
+ $ bricol       : Factor w/ 2 levels "Non","Oui": 1 1 1 2 1 1 1 2 1 1 ...
+ $ cinema       : Factor w/ 2 levels "Non","Oui": 1 2 1 2 1 2 1 1 2 2 ...
+ $ sport        : Factor w/ 2 levels "Non","Oui": 1 2 2 2 1 2 1 1 1 2 ...
+ $ heures.tv    : num  0 1 0 2 3 2 2.9 1 2 2 ...</code></pre>
+</div>
+</div>
+<p>Créez un duplicata de ce tableau de données que vous appellerez <code>df</code> avec l’opérateur <code>&lt;-</code> .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> hdv2003</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Accédez à la variable <code>poids</code> du tableau de données à l’aide de l’opérateur <code>$</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hdv2003<span class="sc">$</span>poids</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  2634.3982  9738.3958  3994.1025  5731.6615  4329.0940  8674.6994
+ [7]  6165.8035 12891.6408  7808.8721  2277.1605   704.3227  6697.8682
+[13]  7118.4659   586.7714 11042.0774  9958.2287  4836.1393  1551.4846
+[19]  3141.1572 27195.8378
+ [ reached getOption("max.print") -- omitted 1980 entries ]</code></pre>
+</div>
+</div>
+<p>Citez une variable catégorielle, vérifiez sa classe avec la fonction <code>class</code> et présentez ses modalités à l’aide de la fonction <code>levels</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hdv2003<span class="sc">$</span>occup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(hdv2003<span class="sc">$</span>occup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Exerce une profession" "Chomeur"               "Etudiant, eleve"      
+[4] "Retraite"              "Retire des affaires"   "Au foyer"             
+[7] "Autre inactif"        </code></pre>
+</div>
+</div>
+<p>Citez une variable numérique, vérifiez sa classe avec la fonction <code>class</code> et présentez sa distribution à l’aide de la fonction <code>summary</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(hdv2003<span class="sc">$</span>heures.tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(hdv2003<span class="sc">$</span>heures.tv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  0.000   1.000   2.000   2.247   3.000  12.000       5 </code></pre>
+</div>
+</div>
+<p>Calculer la moyenne de la variable <code>heures.tv</code> avec la fonction <code>mean</code>. Ajoutez un argument à la fonction <code>mean</code> pour que le résultat obtenu ne soit pas <code>NA</code> en expliquant ce que fait cet argument au calcul de la moyenne.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(hdv2003<span class="sc">$</span>heures.tv, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.246566</code></pre>
+</div>
+</div>
+<p>Expliquez pourquoi la moyenne donnée par la fonction <code>mean</code> est biaisée et utilisez la fonction <code>weighted.mean</code> (ou <code>wtd.mean</code> du package <code>Hmisc</code>, déjà chargé ici) pour obtenir une estimation pondérée de la moyenne.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wtd.mean</span>(hdv2003<span class="sc">$</span>heures.tv, <span class="at">w =</span> hdv2003<span class="sc">$</span>poids, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.169276</code></pre>
+</div>
+</div>
+<p>Faites de même pour la variance à l’aide de la fonction <code>wtd.var</code> du package <code>Hmisc</code> (il est déjà chargé ici et il n’existe pas d’équivalent dans le <code>R</code> de base. Attention, l’argument pour spécifier le paramètre des poids ne s’écrit pas <code>w =</code> comme pour la fonction <code>weighted.mean</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wtd.var</span>(hdv2003<span class="sc">$</span>heures.tv, <span class="at">weights =</span> hdv2003<span class="sc">$</span>poids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.987131</code></pre>
+</div>
+</div>
+<p>Utilisez la fonction <code>table</code> pour faire un tri à plat de la variable <code>relig</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(hdv2003<span class="sc">$</span>relig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+        Pratiquant regulier      Pratiquant occasionnel 
+                        266                         442 
+ Appartenance sans pratique Ni croyance ni appartenance 
+                        760                         399 
+                      Rejet                 NSP ou NVPR 
+                         93                          40 </code></pre>
+</div>
+</div>
+<p>Précisions : il est possible de faire des tris croisés à l’aide de la fonction <code>table</code> en indiquant 2 variables en argument. Dans le package <code>Hmisc</code>, la fonction <code>wtd.table</code> du package permet de faire ces mêmes tris en tenant compte des poids. Il suffit d’utiliser la fonction <code>lprop</code> ou <code>rprop</code> pour obtenir des pourcentages par catégorie, pour l’ensemble de la population et les totaux. <strong>Les verbes du package <code>dplyr</code></strong> <strong>(tidyverse) ont été privilégiés dans ce cours pour leur flexibilité mais rien ne vous empêche d’utiliser ces fonctions, notamment si vous ne souhaitez pas utiliser les résultats pour faire des représentations graphiques et voulez obtenir rapidement une présentation synthétique des tableaux de fréquence.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Le tri croisé pondéré</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># questionr:: permet de spécifier qu'on veut la fonction wtd.table de questionr et pas du package Hmisc contenant une fonction du même nom</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>questionr<span class="sc">::</span><span class="fu">wtd.table</span>(hdv2003<span class="sc">$</span>sexe, hdv2003<span class="sc">$</span>relig, <span class="at">weights =</span> hdv2003<span class="sc">$</span>poids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Pratiquant regulier Pratiquant occasionnel Appartenance sans pratique
+Homme           456652.73             1024073.97                 2046967.76
+Femme           922195.49             1384642.54                 2148145.29
+      Ni croyance ni appartenance      Rejet NSP ou NVPR
+Homme                  1244476.91  313998.24    63212.83
+Femme                  1114866.17  208420.24   143574.18</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Les pourcentages en ligne avec les ensembles et les totaux </span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#lprop(tab)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|eval: false</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Les pourcentages en colonne avec les ensembles et les totaux</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#rprop(tab)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="transformation-et-analyse-de-variables-qualitatives" class="level1">
+<h1>Transformation et analyse de variables qualitatives</h1>
+<section id="rappel-sur-le-fonctionnement-de-lunivers-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="rappel-sur-le-fonctionnement-de-lunivers-tidyverse">Rappel sur le fonctionnement de l’univers tidyverse</h2>
+<p>On rappelle que l’opérateur <code>%&gt;%</code> permet d’enchaîner les opérations. Cet opérateur est adapté à l’univers tidyverse dans lequel il n’est plus nécessaire d’utiliser l’opérateur <code>$</code> pour travailler sur une colonne une fois qu’on a annoncé les données à utiliser. Voici un exemple pour le tri croisé.</p>
+<p>Lancez bien chaque bloc de code individuellement pour observer les résultats obtenus.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Faire un tri croisé avec le R de base sur la variable sexe</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(hdv2003<span class="sc">$</span>sexe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Homme Femme 
+  899  1101 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ici, on a un seul argument : la colonne sexe récupérée en écrivant hdv2003$sexe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Faire un tri croisé avec la fonction count du tidyverse (spécifiquement, le package dplyr du tidyverse), sans utiliser l'opérateur pipe</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(hdv2003, sexe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sexe    n
+1 Homme  899
+2 Femme 1101</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ici, on a 2 arguments, le tableau de données puis la colonne sur laquelle on fait l'opération</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Faire un tri croisé avec la fonction count et l'opérateur pipe</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sexe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sexe    n
+1 Homme  899
+2 Femme 1101</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ici, on a "envoyé" le tableau hdv2003 à la deuxième ligne pour la deuxième opération. Du coup, hdv2003 est automatiquement considéré comme le premier argument de count, et il faut quand même rajouter le deuxième argument de la colonne sur laquelle on travaille</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># L'enchaînement des transformations peut continuer. On peut "envoyer" notre tri croisé pour continuer à le transformer, par exemple en crééant une nouvelle colonne qui convertit l'unité en milliers d'individus (division par 1000 des effectifs)</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sexe) <span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_1000 =</span> <span class="co"># la colonne à créer</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>           n<span class="sc">/</span><span class="dv">1000</span>) <span class="co"># qui vaut la colonne des effectifs n divisée par 1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sexe    n n_1000
+1 Homme  899  0.899
+2 Femme 1101  1.101</code></pre>
+</div>
+</div>
+<p>On rappelle les opérateurs logiques :</p>
+<ul>
+<li><p><code>==</code> pour tester l’égalité</p></li>
+<li><p><code>!=</code> pour tester la différence</p></li>
+<li><p><code>%in%</code> pour tester l’inclusion dans un ensemble de valeurs, par exemple de 1 à 10 : <code>x %in% 1:10</code></p></li>
+<li><p><code>&gt;</code> <code>&gt;=</code> <code>&lt;</code> <code>&lt;=</code> pour supérieur, supérieur ou égal, inférieur et inférieur ou égal</p></li>
+<li><p>Les opérateurs pour combiner les conditions</p>
+<ul>
+<li><p><code>&amp;</code> pour la combinaison de deux conditions : opérateur ET</p></li>
+<li><p><code>|</code> pour l’alternative entre deux conditions : opérateur OU</p></li>
+<li><p><code>!</code> pour inverser le sens logique du test</p></li>
+<li><p><code>()</code> pour faire des blocs de condition</p></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Un exemple simple</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumul de deux conditions (ET) équivalentes mais écrites différemment</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># x est-il supérieur à 2 et inférieur à 10</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">10</span>) <span class="sc">&amp;</span> <span class="co"># ET</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># l'inverse de "x inférieur à 2 et supérieur à 10"</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># soit x supérieur à 2 et inférieur à 10"</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span>(x <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="recoder-des-données" class="level2">
+<h2 class="anchored" data-anchor-id="recoder-des-données">Recoder des données</h2>
+<p>Ajoutez une colonne au tableau <code>hdv2003</code> appelée <code>fam_nombreuse</code> avec la fonction <code>mutate</code>. Utilisez la fonction <code>ifelse</code> pour recoder la variable <code>freres.soeurs</code> : dans le cas où l’enquêté.e a plus de 5 frères et soeurs, la variable prend la valeur “plus de 5 frères et soeurs”, sinon la valeur “5 ou moins frères et soeurs”. N’oubliez pas qu’il faut réécrire sur <code>hdv2003</code> avec l’opérateur d’assignation <code>&lt;-</code> pour modifier le tableau, sinon le tableau transformé sera juste affiché dans la console mais rien ne sera enregistré.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="ot">&lt;-</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fam_nombreuse =</span> <span class="fu">ifelse</span>(freres.soeurs <span class="sc">&gt;</span> <span class="dv">5</span>,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"plus de 5 frères et soeurs"</span>,</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"5 ou moins frères et soeurs"</span>)</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En plus d’<code>ifelse</code>, utilisez la fonction <code>fct</code> pour que la nouvelle colonne obtenue soit un facteur. L’ordre des modalités doit être : “5 ou moins frères et soeurs” puis “plus de 5 fréres et soeurs”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="ot">&lt;-</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fam_nombreuse =</span> </span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fct</span>(</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ifelse</span>(freres.soeurs <span class="sc">&gt;</span> <span class="dv">5</span>,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">"plus de 5 frères et soeurs"</span>,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">"5 ou moins frères et soeurs"</span>),</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="st">"5 ou moins frères et soeurs"</span>,</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>          <span class="st">"plus de 5 frères et soeurs"</span>)</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Utilisez la fonction <code>case_when</code> pour créer une colonne appelée <code>type_fam</code> qui aura 3 modalités : pas de frères et soeurs, 1 à 3 frères et soeurs, plus de 5 frères et soeurs. Il faut à nouveau utiliser la fonction <code>fct</code> pour que la nouvelle colonne soit bien un facteur dont vous préciserez l’ordre des modalités. On rappelle que l’opérateur <code>:</code> permet d’avoir des séquences de nombre : le vecteur <code>c(1, 2, 3)</code> peut s’écrire <code>1:3</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="ot">&lt;-</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">type_fam =</span> </span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fct</span>(</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">case_when</span>(freres.soeurs <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"pas de frères et soeurs"</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>                  freres.soeurs <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">~</span> <span class="st">"1 à 3 frères et soeurs"</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>                  freres.soeurs <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"plus de 3 frères et soeurs"</span>),</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pas de frères et soeurs"</span>,</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"1 à 3 frères et soeurs"</span>,</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"plus de 3 frères et soeurs"</span>)</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Utilisez la fonction <code>case_when</code> pour créer trois classes d’âges à partir de la variable <code>age</code> : 18 à 30 ans, 31 à 60 ans, 61 ans et plus. Appelez la nouvelle colonne <code>cat_age</code> et n’oubliez pas d’en faire un facteur dont les modalités sont dans le bon ordre.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="ot">&lt;-</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cat_age =</span> </span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fct</span>(</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">case_when</span>(age <span class="sc">%in%</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">30</span> <span class="sc">~</span> <span class="st">"18 à 30 ans"</span>,</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>                  age <span class="sc">%in%</span> <span class="dv">31</span><span class="sc">:</span><span class="dv">60</span> <span class="sc">~</span> <span class="st">"31 à 60 ans"</span>,</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>                  age <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"61 ans et plus"</span>),</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"18 à 30 ans"</span>,</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"31 à 60 ans"</span>,</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"61 ans et plus"</span>)</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Remarque : l’âge est une propriété sociale qui peut être mesurée par des variables de plusieurs natures. Théoriquement, l’âge est une variable quantitative continue : il peut prendre un nombre infini de valeurs qu’on exprime avec une précision plus ou moins grandes (avoir 19 ans, 3 mois, 2 jours, 3 heures etc). L’âge est dans les faits souvent exprimé sous forme de variable quantitative discrète prenant un nombre fini de valeurs (18 ans, 19 ans, avec comme minimum 0 an et un maximum autour de 120 ans). L’enquête histoire de vie mesure l’âge en années révolues, ce qui correspond bien à des nombres entiers plutôt que des nombreux décimaux. Ici, l’utilisation de classes d’âge permet de traiter l’âge comme une variable qualitative : chaque enquêté.e appartient à une catégorie d’âge parmi les 3 options disponibles.</p>
+</section>
+<section id="construire-un-tableau-de-contingence-à-partir-dun-tri-croisé-de-deux-variables-catérogielles" class="level2">
+<h2 class="anchored" data-anchor-id="construire-un-tableau-de-contingence-à-partir-dun-tri-croisé-de-deux-variables-catérogielles">Construire un tableau de contingence à partir d’un tri croisé de deux variables catérogielles</h2>
+<p>Utilisez la fonction <code>count</code> pour faire un tri croisé des variables <code>cat_age</code> et <code>type_fam</code>. N’oubliez pas qu’il faut utiliser l’argument <code>wt =</code> pour que les calculs utilisent la variable de pondération <code>poids</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cat_age, type_fam, <span class="at">wt =</span> poids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      cat_age                   type_fam         n
+1 18 à 30 ans    pas de frères et soeurs  253115.8
+2 18 à 30 ans     1 à 3 frères et soeurs 1889411.7
+3 18 à 30 ans plus de 3 frères et soeurs  537738.0
+4 31 à 60 ans    pas de frères et soeurs  378411.4
+5 31 à 60 ans     1 à 3 frères et soeurs 3138094.0
+6 31 à 60 ans plus de 3 frères et soeurs 2176295.3
+ [ reached 'max' / getOption("max.print") -- omitted 3 rows ]</code></pre>
+</div>
+</div>
+<p>Reprenez le code que vous venez d’écrire et continuez à transformer le tableau avec l’opérateur <code>%&gt;%</code> pour calculer des pourcentages. Il faudra utiliser la fonction <code>group_by</code> associée à la fonction <code>mutate</code> pour créer une nouvelle colonne appelée <code>p</code> qui fait la division de <code>n</code>, les effectifs de chaque ligne (= l’effectif de chaque type familial <strong>calculé au sein de chaque catégorie d’âge</strong>), par <code>sum(n)</code>, le total d’individu <strong>dans chaque catégorie d’âge</strong>. Retournez voir la séance 3 pour trouver la présentation de cette opération si vous n’y arrivez pas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cat_age, type_fam, <span class="at">wt =</span> poids) <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cat_age) <span class="sc">%&gt;%</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+  cat_age        type_fam                          n      p
+  &lt;fct&gt;          &lt;fct&gt;                         &lt;dbl&gt;  &lt;dbl&gt;
+1 18 à 30 ans    pas de frères et soeurs     253116. 0.0944
+2 18 à 30 ans    1 à 3 frères et soeurs     1889412. 0.705 
+3 18 à 30 ans    plus de 3 frères et soeurs  537738. 0.201 
+4 31 à 60 ans    pas de frères et soeurs     378411. 0.0665
+5 31 à 60 ans    1 à 3 frères et soeurs     3138094. 0.551 
+6 31 à 60 ans    plus de 3 frères et soeurs 2176295. 0.382 
+7 61 ans et plus pas de frères et soeurs     383987. 0.142 
+8 61 ans et plus 1 à 3 frères et soeurs     1530113. 0.567 
+9 61 ans et plus plus de 3 frères et soeurs  784061. 0.291 </code></pre>
+</div>
+</div>
+<p>Calculez maintenant les moyennes d’ensemble pour pouvoir interpréter les pourcentages du tri croisé. Elles correspondent à la part de chaque type familial dans la population, soit le tri à plat de variable <code>type_fam</code> transformé en pourcentages. Il faut à nouveau utiliser les fonctions <code>count</code> et <code>mutate</code> mais <code>group_by</code> ne sera pas nécessaire car on n’a croisé aucune variable dans le compte des effectifs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cat_age, <span class="at">wt =</span> poids) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         cat_age       n         p
+1    18 à 30 ans 2680265 0.2420929
+2    31 à 60 ans 5692801 0.5141978
+3 61 ans et plus 2698160 0.2437092</code></pre>
+</div>
+</div>
+</section>
+<section id="lire-et-interpréter-un-tableau-de-contingence" class="level2">
+<h2 class="anchored" data-anchor-id="lire-et-interpréter-un-tableau-de-contingence">Lire et interpréter un tableau de contingence</h2>
+<p>Voici le tableau croisé que l’on peut construire à partir des pourcentages obtenus par le code.</p>
+<p><img src="cat_age.png" class="img-fluid" width="569"></p>
+<p><strong>Commentez en deux temps ce tableau :</strong></p>
+<ol type="1">
+<li>Présenter les résultats de ce tableau en quelques phrases et expliquez ce qu’on apprend du lien entre le type de famille et l’âge des enquêté·es</li>
+<li>Expliquez ce résultat à l’aide du graphique ci-dessous</li>
+</ol>
+<p><img src="fecondite.PNG" class="img-fluid" width="532"></p>
+<blockquote class="blockquote">
+<p>Définitions :</p>
+<ul>
+<li><p>La descendance finale d’une génération représente le nombre moyen d’enfants mis au monde par les femmes nées au cours d’une année donnée et ayant survécu jusqu’à l’âge de 50 ans au moins.</p></li>
+<li><p>L’indice conjoncturel de fécondité est la somme des taux de fécondité par âge observés une année donnée. Il indique le nombre total d’enfants des femmes d’une génération fictive qui aurait à chaque âge la fécondité observée à cet âge l’année considérée</p></li>
+</ul>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'gt'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:Hmisc':
+
+    html</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(cat_age, type_fam, <span class="at">wt =</span> poids) <span class="sc">%&gt;%</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cat_age) <span class="sc">%&gt;%</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n),</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">tot =</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">values_from =</span> p,</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> type_fam) <span class="sc">%&gt;%</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"cat_age"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grand_summary_rows</span>(</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">fns =</span> <span class="fu">list</span>(<span class="at">Ensemble =</span> <span class="sc">~</span> <span class="fu">wtd.mean</span>(., <span class="at">w =</span>tot)),</span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmt =</span> <span class="sc">~</span><span class="fu">fmt_percent</span>(.x, <span class="at">decimals =</span> <span class="dv">0</span>)</span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_percent</span>(<span class="at">columns =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_stubhead</span>(<span class="st">"Catégorie d'âge"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_spanner</span>(<span class="at">columns =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Type de famille (en %)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_hide</span>(<span class="st">"tot"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="st">"Typologie des familles par classe d'âge en 2003"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_footnote</span>(<span class="fu">md</span>(<span class="st">"Lecture : en 2003, 7% des personnes âgées de 31 à 60 ans n'avaient pas de frères et soeurs. Dans l'ensemble, 9% de la population française toutes catégories d'âge confondues n'avaient pas de frères et soeurs </span><span class="sc">\\</span></span>
+<span id="cb66-24"><a href="#cb66-24" aria-hidden="true" tabindex="-1"></a><span class="st">  Champ : Individus de 18 ans et plus habitant en France métropolitaine </span><span class="sc">\\</span></span>
+<span id="cb66-25"><a href="#cb66-25" aria-hidden="true" tabindex="-1"></a><span class="st">                  Source : Histoire de Vie 2003 | A. POISSONNIER | 2023"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb66-26"><a href="#cb66-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_width</span>(</span>
+<span id="cb66-27"><a href="#cb66-27" aria-hidden="true" tabindex="-1"></a>    is.numeric <span class="sc">~</span> <span class="fu">px</span>(<span class="dv">120</span>),</span>
+<span id="cb66-28"><a href="#cb66-28" aria-hidden="true" tabindex="-1"></a>    is.factor <span class="sc">~</span> <span class="fu">px</span>(<span class="dv">180</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="bzbxedmqpi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bzbxedmqpi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bzbxedmqpi thead, #bzbxedmqpi tbody, #bzbxedmqpi tfoot, #bzbxedmqpi tr, #bzbxedmqpi td, #bzbxedmqpi th {
+  border-style: none;
+}
+
+#bzbxedmqpi p {
+  margin: 0;
+  padding: 0;
+}
+
+#bzbxedmqpi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bzbxedmqpi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bzbxedmqpi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bzbxedmqpi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bzbxedmqpi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bzbxedmqpi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bzbxedmqpi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bzbxedmqpi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bzbxedmqpi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bzbxedmqpi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bzbxedmqpi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bzbxedmqpi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bzbxedmqpi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bzbxedmqpi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bzbxedmqpi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzbxedmqpi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bzbxedmqpi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bzbxedmqpi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bzbxedmqpi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzbxedmqpi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bzbxedmqpi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzbxedmqpi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bzbxedmqpi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzbxedmqpi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bzbxedmqpi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzbxedmqpi .gt_left {
+  text-align: left;
+}
+
+#bzbxedmqpi .gt_center {
+  text-align: center;
+}
+
+#bzbxedmqpi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bzbxedmqpi .gt_font_normal {
+  font-weight: normal;
+}
+
+#bzbxedmqpi .gt_font_bold {
+  font-weight: bold;
+}
+
+#bzbxedmqpi .gt_font_italic {
+  font-style: italic;
+}
+
+#bzbxedmqpi .gt_super {
+  font-size: 65%;
+}
+
+#bzbxedmqpi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bzbxedmqpi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bzbxedmqpi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bzbxedmqpi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bzbxedmqpi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bzbxedmqpi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bzbxedmqpi .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" style="table-layout: fixed;; width: 0px" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <colgroup>
+    <col style="width:180px;">
+    <col style="width:120px;">
+    <col style="width:120px;">
+    <col style="width:120px;">
+  </colgroup>
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Typologie des familles par classe d'âge en 2003</td>
+    </tr>
+    
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="Catégorie d'âge">Catégorie d'âge</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Type de famille (en %)">
+        <span class="gt_column_spanner">Type de famille (en %)</span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pas de frères et soeurs">pas de frères et soeurs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="1 à 3 frères et soeurs">1 à 3 frères et soeurs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="plus de 3 frères et soeurs">plus de 3 frères et soeurs</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub">18 à 30 ans</th>
+<td headers="stub_1_1 pas de frères et soeurs" class="gt_row gt_right">9%</td>
+<td headers="stub_1_1 1 à 3 frères et soeurs" class="gt_row gt_right">70%</td>
+<td headers="stub_1_1 plus de 3 frères et soeurs" class="gt_row gt_right">20%</td></tr>
+    <tr><th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub">31 à 60 ans</th>
+<td headers="stub_1_2 pas de frères et soeurs" class="gt_row gt_right">7%</td>
+<td headers="stub_1_2 1 à 3 frères et soeurs" class="gt_row gt_right">55%</td>
+<td headers="stub_1_2 plus de 3 frères et soeurs" class="gt_row gt_right">38%</td></tr>
+    <tr><th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub">61 ans et plus</th>
+<td headers="stub_1_3 pas de frères et soeurs" class="gt_row gt_right">14%</td>
+<td headers="stub_1_3 1 à 3 frères et soeurs" class="gt_row gt_right">57%</td>
+<td headers="stub_1_3 plus de 3 frères et soeurs" class="gt_row gt_right">29%</td></tr>
+    <tr><th id="grand_summary_stub_1" scope="row" class="gt_row gt_left gt_stub gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row">Ensemble</th>
+<td headers="grand_summary_stub_1 pas de frères et soeurs" class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row">9%</td>
+<td headers="grand_summary_stub_1 1 à 3 frères et soeurs" class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row">59%</td>
+<td headers="grand_summary_stub_1 plus de 3 frères et soeurs" class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row">32%</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"> Lecture : en 2003, 7% des personnes âgées de 31 à 60 ans n’avaient pas de frères et soeurs. Dans l’ensemble, 9% de la population française toutes catégories d’âge confondues n’avaient pas de frères et soeurs <br>
+Champ : Individus de 18 ans et plus habitant en France métropolitaine <br>
+Source : Histoire de Vie 2003 | A. POISSONNIER | 2023</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analyser-visuellement-les-données" class="level1">
+<h1>Analyser visuellement les données</h1>
+<p>Remarque : ne pas s’inquiéter si vous recevez un message d’erreur indiquant</p>
+<pre><code>The following aesthetics were dropped during statistical transformation: weight</code></pre>
+<section id="boîte-à-moustaches" class="level2">
+<h2 class="anchored" data-anchor-id="boîte-à-moustaches">Boîte à moustaches</h2>
+<p>Revenez sur le TP et le corrigé de la troisième séance si le fonctionnement du package <code>ggplot2</code> n’est plus clair pour vous. À l’aide des fonctions <code>ggplot</code> et <code>geom_boxplot</code>, construisez une boîte à moustache représentant la distribution du nombre d’heures passées devant la télévision <code>heures.tv</code>. N’oubliez pas d’utiliser l’argument <code>weight =</code> pour spécifier les poids à utiliser.</p>
+<ul>
+<li><p>Moins de combien d’heures environ passent devant la télévision les 50% de la population qui regardent le moins la télévision ?</p></li>
+<li><p>Au moins combien d’heures environ passent devant la télévision les 25% de la population qui regardent le plus la télévision ?</p></li>
+<li><p>Environ combien d’heures au minimum et combien d’heures au maximum faut-il regarder la télévision pour faire partie des 50% de la population qui a une consommation intermédiaire (= ne fait pas partie des 25% qui passent le moins de temps devant la télé, ni des 25% qui passent le plus de temps devant la télé)</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hdv2003) <span class="sc">+</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> heures.tv,</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 5 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Construire un graphique similaire où le temps passé devant la télé est représenté sur l’axe des abscisses en fonction du niveau de qualification renseigné par la variable <code>qualif</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hdv2003) <span class="sc">+</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> heures.tv,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> qualif,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 5 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Construire un graphique similaire où le temps passé devant la télé est représenté sur l’axe des ordonnées en fonction du niveau de qualification renseigné par la variable <code>qualif</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hdv2003) <span class="sc">+</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> heures.tv,</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> qualif,</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 5 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Construire un graphique similaire où le temps passé devant la télé est représenté sur l’axe des abscisses en fonction du niveau de qualification renseigné par la variable <code>qualif</code> , cette-fois ci en excluant au préalable les enquêté·es qui ont un niveau de qualification égal à “Autre” ou “NA”. Il faudra utiliser la fonction <code>filter</code>, n’oubliez pas que l’on peut utiliser l’opérateur <code>%&gt;%</code> pour transformer le tableau de données avant de l’envoyer dans la fonction <code>ggplot</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> heures.tv,</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> qualif,</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 4 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Remarque : Les valeurs manquantes sont parfois codées sous forme logique <code>NA</code> plutôt que sous forme de texte. Il faut normalement utiliser la fonction <code>is.na</code> pour faire un test logique <code>!is.na(qualif)</code> qui les exclue. Le <code>!</code> est très important car <code>is.na(qualif)</code> retournerait toutes les lignes pour lesquelles la variable <code>qualif</code> prend la valeur logique <code>NA</code>, alors que nous voulons l’inverse ! Le verbe <code>filter</code> comprend quand même qu’il faut supprimer les <code>NA</code> logiques de <code>qualif</code> si vous utilisez le test <code>qualif != "NA"</code> normalement adapté au codage des valeurs manquantes sous forme de texte, en tant que modalité à part entière du facteur étudié.</p>
+<p>Reprenez votre code et à l’aide de la fonction <code>lims</code>, recentrez le graphique pour que l’axe des abscisses aillent de 0 heures à 8 heures passées devant la télé.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> heures.tv,</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> qualif,</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weight =</span> poids)) <span class="sc">+</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lims</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 19 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Reprenez votre code et ajoutez à l’aide de la fonction <code>labs</code> un titre au graphique, un intitulé pour l’axe des ordonnées et l’axes des abscisses, une légende précisant une note de lecture, le champ et la source (origine des données/auteur·e/date). <strong>Astuce : si le texte dépasse du graphique, vous pouvez ajoutez “\n” au milieu de votre texte pour qu’il y ait un retour à la ligne.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> heures.tv,</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> qualif,</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weight =</span> poids)) <span class="sc">+</span></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lims</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nombre d'heures passées par jour devant la télévision selon le niveau</span><span class="sc">\n</span><span class="st">de qualification"</span>,</span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Heures passées devant la télévision"</span>,</span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Niveau de qualification"</span>,</span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Note de lecture : 50% des cadres passent moins d'environ une heure et demie devant la télévision,</span><span class="sc">\n</span><span class="st">25% passent moins d'environ 1 heures et quart, 25% passent plus d'environ 2 heures</span></span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a><span class="st">       Source : Histoire de vie 2003 | A. POISSONNIER | 2023"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 19 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="diagrammes-en-bâton" class="level2">
+<h2 class="anchored" data-anchor-id="diagrammes-en-bâton">Diagrammes en bâton</h2>
+<section id="effectifs-absolus" class="level3">
+<h3 class="anchored" data-anchor-id="effectifs-absolus">Effectifs absolus</h3>
+<p>Utilisez les fonctions <code>ggplot</code> et <code>geom_bar</code> pour représenter la distribution du niveau de qualification <code>qualif</code>. N’oubliez à nouveau pas les poids et retirez préalablement les enquêté·es pour qui <code>qualif</code> vaut “Autre” ou “NA” à l’aide la fonction <code>filter</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> qualif,</span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Rajoutez l’argument <code>fill</code> <strong>en dehors de la fonction <code>aes</code></strong> pour colorer toutes les barres en rouge.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> qualif,</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> poids),</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Réessayez en ajoutant maintenant l’argument <code>fill</code> <strong>à l’intérieur d’<code>aes</code></strong> pour colorer les barres en fonction du sexe (variable <code>sexe</code>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> qualif,</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> sexe,</span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Construisez un diagramme en bâtons où le sexe <strong>apparaît en abscisse</strong> et le niveau de qualification <strong>apparaît sous forme de couleur.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> sexe,</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> qualif,</span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Reprenez votre code et ajoutez l’argument <code>position = "dodge"</code> <strong>en dehors d’<code>aes</code></strong> pour décaler les bâtons de chaque niveau de qualification. Commentez le graphique obtenu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> sexe,</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> qualif,</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> poids),</span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="pourcentages" class="level3">
+<h3 class="anchored" data-anchor-id="pourcentages">Pourcentages</h3>
+<p>Réalisez le même diagramme en bâtons que précédemment, qui représente le sexe en abscisse et qui distingue le niveau de qualification par couleur mises côte-à-côte, en représentant cette fois-ci des pourcentages plutôt que des effectifs absolus. Il faudra à nouveau utiliser l’opérateur <code>%&gt;%</code> pour enchaîner les transformations, associé aux fonctions <code>count</code>, <code>group_by</code> et <code>mutate</code>. Aidez-vous des codes présentés dans la troisième séance et rappelez vous qu’<strong>il faudra spécifier la hauteur des barres avec l’argument <code>y = p</code></strong>, p étant le nom de la colonne des pourcentages, <strong>et ajouter en dehors d’<code>aes</code></strong> <strong>l’arguement <code>stat = "identity"</code></strong><em>,</em> ce qui indique à <code>geom_bar</code> que les pourcentages doivent être représentés comme tels car vous avez déjà fait les calculs à la main.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(qualif <span class="sc">!=</span> <span class="st">"Autre"</span> <span class="sc">&amp;</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>           qualif <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sexe, qualif, <span class="at">wt =</span> poids) <span class="sc">%&gt;%</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sexe) <span class="sc">%&gt;%</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> sexe,</span>
+<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> p,</span>
+<span id="cb85-11"><a href="#cb85-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> qualif),</span>
+<span id="cb85-12"><a href="#cb85-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb85-13"><a href="#cb85-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="nuage-de-points-et-graphique-linéaire" class="level2">
+<h2 class="anchored" data-anchor-id="nuage-de-points-et-graphique-linéaire">Nuage de points et graphique linéaire</h2>
+<p>Construisez un nuage de points avec <code>geom_point</code> dans lequel la variable <code>age</code> est en abscisse et la variable <code>heures.tv</code> en ordonnées. Par définition, on ne peut spécifier de poids dans cette représentation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hdv2003) <span class="sc">+</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> age,</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> heures.tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 5 rows containing missing values (`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Utilisez maintenant <code>geom_count</code> à la place de <code>geom_point</code> et spécifiez bien l’argument <code>weight =</code>. Que permet de faire cette fonction ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hdv2003) <span class="sc">+</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>(<span class="fu">aes</span>(<span class="at">x =</span> age,</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> heures.tv,</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">weight =</span> poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 5 rows containing non-finite values (`stat_sum()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Trouvez-vous ces deux visualisations graphiques lisibles et convaincantes ? Pourquoi ?</p>
+<p>Le code ci-dessous crée une variable <code>age5</code> correspondant à des classes d’âges de 5 ans, sauf la dernière regroupant les personnes de 76 ans et plus. Complétez ce code avec l’opérateur <code>%&gt;%</code>, les fonctions <code>group_by</code>, <code>summarize</code> et <code>wtd.mean</code> pour calculer la moyenne pondérée d’heures passées à la télévision <strong>par classe d’âge</strong>. Vous apellerez la colonne créée dans <code>summarize</code> <code>heures.tv</code>, et <code>tab</code> doit être un tableau de 2 colonnes (<code>age5</code> et <code>heures.tv</code> avec une ligne par classe d’âge).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> </span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age5 =</span> </span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">cut</span>(age,</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">15</span>, <span class="dv">75</span>, <span class="dv">5</span>), <span class="dv">120</span>))</span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span></span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age5) <span class="sc">%&gt;%</span></span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">heures.tv =</span> <span class="fu">wtd.mean</span>(heures.tv, poids))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lancez maintenant ce bloc de code et commentez le graphique.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>tab <span class="sc">%&gt;%</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> age5,</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">group =</span> <span class="dv">1</span>,</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> heures.tv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="nuage-détiquettes-ou-de-texte" class="level2">
+<h2 class="anchored" data-anchor-id="nuage-détiquettes-ou-de-texte">Nuage d’étiquettes ou de texte</h2>
+<p>Calculez à l’aide des fonctions <code>group_by</code> et <code>summarize</code> et <code>wtd.mean</code> les moyennes d’âge <strong>et</strong> d’heures passées devant la télévision pour chaque statut d’occupation (variable <code>occup</code>). Utilisez <code>ggplot</code> et <code>geom_label</code> pour créer un nuage d’étiquettes plaçant chaque statut d’occupation (étudiant·e, retraité·e etc) dans un plan où l’âge sera en abscisse et le nombre d’heures en ordonnée. Copiez votre code et voyez ce qui diffère en remplaçant <code>geom_label</code> par <code>geom_text</code>. Commentez le graphique.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>hdv2003 <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(occup) <span class="sc">%&gt;%</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">heures.tv =</span> <span class="fu">wtd.mean</span>(heures.tv, poids),</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">wtd.mean</span>(age, poids)) <span class="sc">%&gt;%</span></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> age,</span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> heures.tv,</span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> occup))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DM_corrige_code_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="mener-une-démonstration-associant-statistiques-descriptives-et-visualisation-des-données" class="level1">
+<h1>Mener une démonstration associant statistiques descriptives et visualisation des données</h1>
+<p>Proposez ici une petite démonstration associant au moins 2 statistiques descriptives et une visualisation des données. Il faudra croiser au moins 2 dimensions (le niveau de qualification et le rapport au travail par exemple).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

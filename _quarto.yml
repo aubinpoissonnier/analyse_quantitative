@@ -14,6 +14,7 @@ website:
       - rappel_S1S2.qmd
       - Seance3.qmd
       - pptS4.qmd
+      - DM_corrige_code.qmd
 format:
   html:
     theme: cosmo
