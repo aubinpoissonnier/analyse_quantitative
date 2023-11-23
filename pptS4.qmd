@@ -1,0 +1,777 @@
+---
+title: "Powerpoint - Séance 4"
+format:
+  revealjs:
+    height: 800
+    width: 1200
+    incremental: true
+    smaller: true
+    css: custom.css
+execute: 
+  echo: false
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css}
+<style type="text/css">
+p {
+    text-align: right;
+  }
+</style>
+```
+
+```{r}
+#| include: false
+options(max.print = 100)
+library(tidyverse)
+library(gt)
+library(questionr)
+library(ggtext)
+library(survey)
+data(hdv2003)
+```
+
+# Plan de la séance
+
+1.  Correction de certains éléments du DM\
+    Les erreurs de code dans votre rendu ont été surlignées ou commentées. Il faut consulter la correction du DM pour comparer votre code au mien.
+
+2.  Rappel sur le raisonnement statistique inférentiel
+
+3.  Lecture d'un tableau croisé et test du Khi2
+
+4.  Introduction aux méthodes de régression
+
+## La lecture d'une boîte à moustaches
+
+::: columns
+::: {.column width="60%"}
+```{r}
+ggplot(hdv2003) +
+  geom_boxplot(aes(x = heures.tv,
+                   weight = poids)) +
+  scale_x_continuous(limits = c(0, 8),
+                     breaks = seq(0, 8)) +
+  labs(x = "Nombre d'heures passées devant la télévision",
+       title = "Boîte à moustache du nombre d'heures passées par jour\ndevant la télévision") +
+  theme(text = element_text(size = 20))
+```
+:::
+
+::: {.column width="40%"}
+-   50% de la population regarde la télévision moins de 2 heures par jour, 50% de la population la regarde plus de 2 heures par jour.
+
+-   Il faut regarder moins d'1 heure par jour la télé pour faire partie des 25% de la population qui regarde le moins la télé.
+
+-   Il faut regarder plus de 3 heures par jour la télé pour faire partie des 25% de la population qui regarde le plus la télé.
+
+-   Les 50% de la population qui ont une consommation intermédiaire regardent la télé entre 1 heure et 3 heures par jour. Autrement dit, il ne faut pas regarder moins de 1 heure ni regarde plus de 3 heures la télévision par jour pour être dans la norme.
+:::
+:::
+
+## L'annotation d'un graphique
+
+-   La note de lecture permet de s'assurer de la bonne compréhension d'un graphique. Elle correspond à un exemple de lecture pour chaque dimension du tableau ou de la représentation graphique présentés.
+
+-   Le champ doit rappeler la population de référence. Quand certaines catégories sont ambigues, il faut préciser ce que celles-ci recouvrent. Par exemple, les retraité·es sont parfois regroupé·es dans la catégorie "inactif" et parfois rattaché·es à leur ancienne position professionnelle.
+
+-   La source indique l'origine des données, l'auteur·e et la date de production. . . .
+
+```{r}
+#| fig-width: 12
+#| fig-height: 8
+#| fig-align: center
+hdv2003 %>%
+  filter(!is.na(qualif) & qualif != "Autre") %>%
+  ggplot() +
+  geom_boxplot(aes(x = heures.tv,
+                   y = qualif,
+                   weight = poids)) +
+  scale_x_continuous(limits = c(0, 8),
+                     breaks = seq(0, 8)) +
+  labs(x = "Nombre d'heures passées devant la télévision",
+       y = "Niveau de qualification",
+       title = "Boîte à moustache du nombre d'heures passées par jour devant la télévision",
+       caption = "Lecture : la moitié des employé·es regardent moins de 2 heures la télévision par jour. 25% des employé·es la regardent moins d'une heure par jour et 25% plus de 3 heures. 90% des employé·es regardent entre 0 et 6 heures la télévision quotidiennement. \\
+       Champ : Individus de 18 ans et plus habitant en France métropolitaine \\
+       Source : Histoire de Vie 2003 | A. POISSONNIER | 2023"
+       ) +
+  theme(text = element_text(size = 18),
+        plot.title = element_textbox_simple(margin = margin(10, 10, 10, 10)),
+        plot.caption = element_textbox_simple(margin = margin(10, 10, 10, 10)),
+        plot.caption.position = "plot",
+        plot.title.position = "plot")
+```
+
+## Choisir les bonnes formulations selon la nature des statistiques représentées
+
+```{r}
+#| fig-width: 12
+#| fig-height: 8
+#| fig-align: "center"
+hdv2003 <- hdv2003 %>%
+  mutate(occup = fct(
+    case_when(occup == "Retire des affaires" ~ "Retraite",
+              occup == "Au foyer" ~ "Autre inactif",
+              TRUE ~ occup)))
+
+hdv2003 %>%
+  group_by(occup) %>%
+  summarize(
+    heures.tv = wtd.mean(heures.tv, poids),
+    age = wtd.mean(age, poids)) %>%
+  ggplot() + 
+  geom_label(aes(x = age,
+                y = heures.tv,
+                label = occup),
+             size = 5) +
+  scale_x_continuous(limits = c(15, 80),
+                     breaks = seq(20, 80, 10)) +
+  scale_y_continuous(limits = c(0, 3.5),
+                     breaks = 0:3,
+                     labels = scales::label_number(decimal.mark = ",")) +
+  labs(x = "Âge moyen",
+       y = "Nombre moyen d'heures passées\ndevant la télévision",
+       title = "Nombre moyen d'heures passées par jour devant la télévision et âge moyen en fonction du niveau de qualification ",
+       caption = "Lecture :  les étudiant·es ont 21 ans en moyenne. Ils et elles passent en moyenne 1,3 heures par jour devant la télévision. \\
+       Champ : personnes majeures habitant en France métropolitaine \\
+       Source : Histoire de Vie 2003 (INSEE) | A. POISSONNIER | 2023"
+       ) +
+  theme(text = element_text(size = 18),
+        plot.title = element_textbox_simple(margin = margin(10, 10, 10, 10)),
+        plot.caption = element_textbox_simple(margin = margin(10, 10, 10, 10)),
+        plot.caption.position = "plot",
+        plot.title.position = "plot")
+```
+
+-   En moyenne, les étudiant·es sont les plus jeunes (âge moyen : 21 ans) et passent le moins de temps devant la télévision (temps quotidien moyen : 1,3 heures).
+
+-   En moyenne, les retraité·es sont les plus âgé·es (âge moyen : 70 ans) et passent le plus de temps devant la télévision (temps quotidien moyen : 2,8 heures).
+
+-   En moyenne, les chômeur·es et les personnes employé·es ont des âges proches (respectivement 35 ans et 39 ans). Néanmoins, les chômeur·es passent plus de temps devant la télévision (temps quotidien moyen : 2,8 heures) que les personnes employé·es (temps quotidien moyen : 1,8 heures).
+
+## L'exploration des données
+
+Tous comme les différents indicateurs statistiques (moyenne, variance, corrélation), les représentations graphiques n'ont pas toujours vocation à être utilisées dans l'argumentation scientifique finale. La majorité des visualisations graphiques ne sont pas publiées. Elles servent à explorer les données et à accompagner la construction de l'objet de recherche.
+
+Elles permettent de tester temporairement des hypothèses ou d'identifier des régularités sociales à partir de la distribution des données : est-ce que les niveaux de qualifications semblent être répartis à peu près similairement chez les hommes et chez les femmes ? Est-ce que le nombre moyen d'heures passées devant la télé a l'air de croître avec l'âge ?
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-width: 12
+#| fig-height: 8
+hdv2003 %>%
+  filter(age < 81) %>%
+  mutate(age5 = 
+           cut(age,
+               breaks = c(18, seq(20, 80, 5)),
+               include.lowest = T)
+         ) %>%
+  group_by(age5) %>%
+  summarize(heures.tv = wtd.mean(heures.tv, poids)) %>%
+  ggplot() +
+  geom_bar(aes(x = age5,
+                 y = heures.tv),
+           fill = "cadetblue",
+           stat = "identity") +
+  theme_minimal() +
+  labs(x = "Classe d'âge",
+       y = "Heures quotidiennes passées devant la télé",
+       title = "Temps par jour passé devant la télévision selon la classe d'âge",
+       caption = "Note de lecture : en moyenne, les personnes âgées de 36 à 40 ans regardent 2 heures par jour la télévision. \\
+       Champ : personne majeure résidant en France métropolitaine \\
+       Source : Histoire de vie 2003 (INSEE) | A. POISSONNIER | 2023") +
+  theme(plot.caption = element_textbox_simple(margin = margin(10, 10, 10, 10)),
+         text = element_text(size = 20))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| fig-width: 12
+#| fig-height: 8
+hdv2003 %>%
+  filter(qualif != "Autre" &
+           qualif != "NA") %>%
+  count(sexe, qualif, wt = poids) %>%
+  group_by(sexe) %>%
+  mutate(p = n/sum(n)) %>%
+  ungroup() %>%
+  ggplot() +
+  geom_bar(aes(x = sexe,
+               y = p,
+               fill = qualif),
+           stat = "identity",
+           position = "dodge") +
+  scale_y_continuous(breaks = seq(0, 0.6, 0.1),
+                     labels = scales::label_percent()) +
+  scale_fill_brewer(palette = "Paired",
+                     name = "Niveau de qualification") +
+  theme_minimal() +
+  labs(x = "Sexe",
+       y = "Part",
+       title = "Niveau de qualification selon le sexe",
+       caption = "Note de lecture : 14% des hommes et 11% des femmes sont ouvrier·es spécialisé·es. \\
+       Champ : personne majeure résidant en France métropolitaine \\
+       Source : Histoire de vie 2003 (INSEE) | A. POISSONNIER | 2023") +
+  theme(plot.caption = element_textbox_simple(margin = margin(10, 10, 10, 10)),
+        text = element_text(size = 20))
+```
+:::
+:::
+
+# Statistiques descriptives et inférentielles
+
+Si les traitements statistiques et les représentations graphiques semblent aller dans le sens d'une hypothèse scientifique, il faut alors s'assurer de leur fiabilité vis-à-vis de la question de recherche.
+
+-   Les [statistiques descriptives]{style="color:#FF7F50"} correspondent (dans un sens restreint) aux opérations de calcul réalisées sur des populations exhaustives. Cela dépend de la base de données : recensement de la population vs enquêtes par questionnaires; bases administratives complètes vs collecte de données de terrain.
+
+-   On appelle [population de référence]{style="color:#FF7F50"} la population que l'on souhaite étudier : les étudiant·es, les entreprises du CAC40, les député·es de l'Assemblée Nationale etc.
+
+-   Les [statistiques inférentielles]{style="color:#FF7F50"} correspondent aux opérations réalisées sur une partie de la population de référence, appelée [échantillon]{style="color:#FF7F50"}, dans le but de tirer des conclusions **fiables** sur celle-ci. La fiabilité de nos affirmations dépend de la [représentativité]{style="color:#FF7F50"} de notre échantillon -- ce qui implique de mettre en place des procédures d'[échantillonnage]{style="color:#FF7F50"} et de [pondération]{style="color:#FF7F50"} adéquates -- et de ses [effectifs]{style="color:#FF7F50"}.
+
+-   L'essentiel de l'analyse quantitative en science sociale repose sur l'[estimation]{style="color:#FF7F50"} de [paramètres]{style="color:#FF7F50"} à l'aide d'[estimateurs]{style="color:#FF7F50"} ainsi que sur l'élaboration de [modèles]{style="color:#FF7F50"} confirmés ou infirmés par des [tests d'hypothèse]{style="color:#FF7F50"}.
+
+    -   On peut vouloir décrire la structure d'âge d'une population en calculant la moyenne de l'âge (le paramètre M). Comme on dispose rarement d'information sur l'ensemble de la population, on réalise une estimation de la valeur réelle du paramètre grâce à un outil statistique, la moyenne observée (m). La théorie statistique permet de construire des [intervalles de confiance]{style="color:#FF7F50"} renseignant sur la qualité de cette estimation. Elle peut être très précise ou au contraire imprécise.
+
+    -   On peut vouloir savoir si le niveau de qualification professionnelle est dépendant du genre, c'est-à-dire si le niveau de qualification diffère en fonction du genre des individus. On doit ici aussi souvent partir d'un échantillon observé et mettre en place des thèses d'hypothèse pour conclure, selon un certain [niveau de risque]{style="color:#FF7F50"} ou [seuil de confiance]{style="color:#FF7F50"}, s'il existe ou non un lien entre les variables étudiées.
+
+## Le cadre général du raisonnement statistique inférentiel
+
+![Tiré du Raisonnement statistique en sociologie, Selz et Mailllochon, 2009](schema_inf.jpg){width="575"}
+
+## La lecture d'un tableau croisé
+
+```{r}
+hdv2003 <-
+  hdv2003 %>%
+  mutate(
+    cat_age = 
+      fct(
+        case_when(age %in% 18:30 ~ "18 à 30 ans",
+                  age %in% 31:60 ~ "31 à 60 ans",
+                  age > 60 ~ "61 ans et plus"),
+        levels = c("18 à 30 ans",
+                   "31 à 60 ans",
+                   "61 ans et plus")
+      ),
+    type_fam = 
+      fct(
+        case_when(freres.soeurs == 0 ~ "pas de frères et soeurs",
+                  freres.soeurs %in% 1:3 ~ "1 à 3 frères et soeurs",
+                  freres.soeurs > 3 ~ "plus de 3 frères et soeurs"),
+        levels = c("pas de frères et soeurs",
+                   "1 à 3 frères et soeurs",
+                   "plus de 3 frères et soeurs")
+      )
+  )
+```
+
+```{r tab_croise}
+#| fig-height: 10
+#| fig-width: 14
+hdv2003 %>%
+  count(cat_age, type_fam, wt = poids) %>%
+  group_by(cat_age) %>%
+  mutate(p = n/sum(n),
+         tot = sum(n)) %>%
+  select(-n) %>%
+  ungroup() %>%
+  pivot_wider(values_from = p,
+              names_from = type_fam) %>%
+  gt(rowname_col = "cat_age") %>%
+  grand_summary_rows(
+    columns = 3:5,
+    fns = list(Ensemble = ~ wtd.mean(., w =tot)),
+    fmt = ~fmt_percent(.x, decimals = 0)
+  ) %>%
+  fmt_percent(columns = 3:5,
+              decimals = 0) %>%
+  tab_stubhead("Catégorie d'âge") %>%
+  tab_spanner(columns = 3:5,
+              "Type de famille (en %)") %>%
+  cols_hide("tot") %>%
+  tab_header("Typologie des familles par classe d'âge en 2003") %>%
+  tab_footnote(md("Lecture : en 2003, 7% des personnes âgées de 31 à 60 ans n'avaient pas de frères et soeurs. Dans l'ensemble, 9% de la population française toutes catégories d'âge confondues n'avaient pas de frères et soeurs \\
+  Champ : personnes majeures habitant en France métropolitaine \\
+                  Source : Histoire de Vie 2003 (N = 2000) | A. POISSONNIER | 2023")) |>
+  cols_width(
+    is.numeric ~ px(160),
+    is.factor ~ px(200)) %>%
+  tab_options(table.font.size = 20)
+```
+
+-   Les personnes âgées de 18 à 30 ans sont sur-représentées parmi les familles d'1 à 3 frères et soeurs (70% contre 59% dans l'ensemble) et sous-représentées parmi les familles de plus de 3 frères et soeurs (20% contre 32% dans l'ensemble).
+
+-   Les personnes âgées de 31 à 60 ans sont sous-représentées parmi les familles d'1 à 3 frères et soeurs (55% contre 59% dans l'ensemble) et sur-représentées parmi les familles de plus de 3 frères et soeurs (38% contre 32% dans l'ensemble).
+
+-   Les personnes de plus de 61 ans sont sur-représentées parmi les familles uniques (14% contre 9% dans l'ensemble).
+
+## Une idée de la variabilité des données
+
+```{r}
+hdv2003 %>%
+  count(cat_age, type_fam, wt = poids) %>%
+  left_join(
+    hdv2003 %>% count(cat_age, type_fam, name = "n_s")
+  ) %>%
+  mutate(p = n/sum(n),
+         tot = sum(n),
+         var = p*(1-p)/n_s,
+         lower_ci = qt(0.975, df= n_s)*sqrt(var/n_s),
+         upper_ci = qt(0.975, df= n_s)*sqrt(var/n_s),
+         .by = cat_age) %>%
+  select(-n, -n_s, -var) %>%
+  pivot_wider(values_from = c(p, lower_ci, upper_ci),
+              names_from = type_fam) %>%
+  gt(rowname_col = "cat_age") %>%
+  grand_summary_rows(
+    columns = 3:5,
+    fns = list(Ensemble = ~ wtd.mean(., w =tot)),
+    fmt = ~fmt_percent(.x, decimals = 0)
+  ) %>%
+  cols_merge_uncert(
+    col_val = `p_pas de frères et soeurs`,
+    col_uncert = c(`lower_ci_pas de frères et soeurs`,
+                   `upper_ci_pas de frères et soeurs`),
+    autohide = T
+  ) %>%
+  cols_merge_uncert(
+    col_val = `p_plus de 3 frères et soeurs`,
+    col_uncert = c(`lower_ci_plus de 3 frères et soeurs`,
+                   `upper_ci_plus de 3 frères et soeurs`),
+    autohide = T
+  )  %>%
+  cols_merge_uncert(
+    col_val = `p_1 à 3 frères et soeurs`,
+    col_uncert = c(`lower_ci_1 à 3 frères et soeurs`,
+                   `upper_ci_1 à 3 frères et soeurs`),
+    autohide = T
+  ) %>% 
+  cols_label_with(columns = 3:5,
+                  fn = ~ str_remove(., "p_")) %>%
+  fmt_percent(columns = 3:9,
+              decimals = 0) %>%
+  tab_stubhead("Catégorie d'âge") %>%
+  tab_spanner(columns = 3:5,
+              "Type de famille (en %)") %>%
+  cols_hide("tot") %>%
+  tab_header("Typologie des familles par classe d'âge en 2003") %>%
+  tab_footnote(md("Lecture : en 2003, 7% des personnes âgées de 31 à 60 ans n'avaient pas de frères et soeurs. Dans l'ensemble, 9% de la population française toutes catégories d'âge confondues n'avaient pas de frères et soeurs \\
+  Champ : Individus de 18 ans et plus habitant en France métropolitaine \\
+                  Source : Histoire de Vie 2003 (N = 2000) | A. POISSONNIER | 2023"))  |>
+  cols_width(
+    is.numeric ~ px(160),
+    is.factor ~ px(200)) %>%
+  tab_options(table.font.size = 20) 
+
+```
+
+# Le test du Khi2 pour les variables catégorielles à plusieurs modalités (exemple sans pondération)
+
+Le test du Khi2 repose sur une idée simple : si les effectifs du tri croisé de deux variables sont très différents des effectifs qu'on devrait observer si les deux variables étaient indépendantes, alors on peut raisonnablement conclure qu'elles n'ont pas d'effets l'une sur l'autre. Voilà pourquoi on part d'abord du [tableau de contingence]{style="color:#FF7F50"} qui présente les [effectifs observés]{style="color:#FF7F50"} du croisement de deux variables.
+
+```{r}
+### Tableau de contingence
+hdv2003 %>%
+  count(cat_age, type_fam) %>%
+  pivot_wider(values_from = n,
+              names_from = type_fam) %>%
+  mutate(Ensemble = 
+          `pas de frères et soeurs` +
+           `1 à 3 frères et soeurs` +
+           `plus de 3 frères et soeurs`) %>%
+  gt(rowname_col = "cat_age",
+     locale = "fr_FR") %>%
+  fmt_number(columns = everything(),
+             decimals = 0) %>%
+  grand_summary_rows(columns = everything(),
+                     fns = list(Ensemble = ~ sum(.)),
+                     fmt = ~ fmt_number(., decimals = 0)) %>%
+  tab_stubhead("Catégorie d'âge") %>%
+  tab_spanner(columns = 2:4,
+              "Type de famille") %>%
+  tab_header("Tableau de contingence : effectifs observés")  |>
+  cols_width(
+    is.numeric ~ px(160),
+    is.factor ~ px(200)) %>%
+  tab_options(table.font.size = 20) %>%
+  cols_align(columns = everything(),
+             "center") %>%
+  tab_style(
+    style = 
+      list(
+        cell_borders(
+          sides = "left",
+          color = "lightgrey",
+          weight = "2px")
+        ),
+    locations = 
+      cells_body(
+        columns = c(`Ensemble`)
+      )) 
+```
+
+## Les effectifs marginaux
+
+Il faut par la suite adopter un raisonnement conditionnel : si les deux variables étaient indépendantes, quels seraient nos effectifs ? Ce sont les [effectifs marginaux]{style="color:#FF7F50"} (les totaux d'ensemble) qui nous permettent de calculer ces valeurs.
+
+-   On sait que la catégorie d'âge 18 à 30 ans représente $\frac{351}{2000}=17,55\%$ de la population.
+
+-   On sait que les familles uniques représentent $\frac{167}{2000}=8,35\%$ de la population.
+
+-   Par déduction, parmi les 18-30 ans, soit $17,55\%$ des $2000$ individus, il devrait y en avoir $8,35\%$ qui appartiennent à une famille unique. On obtient $29$ individus.
+
+```{r}
+#| fig-height: 10
+#| fig-width: 14
+### Tableau de contingence
+hdv2003 %>%
+  count(cat_age, type_fam) %>%
+  pivot_wider(values_from = n,
+              names_from = type_fam) %>%
+  mutate(Ensemble = 
+          `pas de frères et soeurs` +
+           `1 à 3 frères et soeurs` +
+           `plus de 3 frères et soeurs`) %>%
+  gt(rowname_col = "cat_age",
+     locale = "fr_FR") %>%
+  fmt_number(columns = everything(),
+             decimals = 0) %>%
+  grand_summary_rows(columns = everything(),
+                     fns = list(Ensemble = ~ sum(.)),
+                     fmt = ~ fmt_number(., decimals = 0)) %>%
+  tab_stubhead("Catégorie d'âge") %>%
+  tab_spanner(columns = 2:4,
+              "Type de famille") %>%
+  tab_header("Tableau de contingence : effectifs observés") %>%
+  cols_align(columns = everything(),
+             "center") %>%
+  tab_style(
+    style = 
+      list(
+        cell_borders(
+          sides = "left",
+          color = "lightgrey",
+          weight = "2px")
+        ),
+    locations = 
+      cells_body(
+        columns = c(`Ensemble`)
+      )) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "lightblue")
+    ),
+    locations = 
+      list(
+        cells_grand_summary(
+          columns = c(`pas de frères et soeurs`, `Ensemble`)
+        ),
+        cells_body(
+          rows = cat_age == "18 à 30 ans",
+          columns = c(`Ensemble`)
+        )
+      )
+  )  %>%
+  cols_width(
+    is.numeric ~ px(160),
+    is.factor ~ px(200)) %>%
+  tab_options(table.font.size = 20)
+```
+
+## Les effectifs théoriques
+
+Le tableau des effectifs théoriques contient bien de nouvelles valeurs pour les cases des catégories, mais les mêmes valeurs pour les cases d'ensemble. Il faut maintenant mesurer à quel point ces deux tableaux diffèrent : on calculera simplement des écarts.
+
+```{r}
+### Tableau de contingence
+hdv2003 %>%
+  count(cat_age, type_fam) %>%
+  pivot_wider(values_from = n,
+              names_from = type_fam) %>%
+  mutate(Ensemble = 
+          `pas de frères et soeurs` +
+           `1 à 3 frères et soeurs` +
+           `plus de 3 frères et soeurs`) %>%
+  mutate(
+    across(
+      .cols = `pas de frères et soeurs`:`plus de 3 frères et soeurs`,
+      .fns = ~ round((Ensemble*sum(.))/sum(Ensemble), 0)
+    )
+  ) %>%
+  gt(rowname_col = "cat_age",
+     locale = "fr_FR") %>%
+  fmt_number(columns = everything(),
+             decimals = 0) %>%
+  grand_summary_rows(columns = everything(),
+                     fns = list(Ensemble = ~ sum(.)),
+                     fmt = ~ fmt_number(., decimals = 0)) %>%
+  tab_stubhead("Catégorie d'âge") %>%
+  tab_spanner(columns = 2:4,
+              "Type de famille") %>%
+  tab_header("Tableau de contingence : effectifs théoriques") %>%
+  cols_align(columns = everything(),
+             "center") %>%
+  tab_style(
+    style = 
+      list(
+        cell_borders(
+          sides = "left",
+          color = "lightgrey",
+          weight = "2px")
+        ),
+    locations = 
+      cells_body(
+        columns = c(`Ensemble`)
+      )) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "lightblue")
+    ),
+    locations = 
+      list(
+        cells_grand_summary(
+          columns = c(`pas de frères et soeurs`, `Ensemble`)
+        ),
+        cells_body(
+          rows = cat_age == "18 à 30 ans",
+          columns = c(`pas de frères et soeurs`, `Ensemble`)
+        )
+      )
+  )  |>
+  cols_width(
+    is.numeric ~ px(160),
+    is.factor ~ px(200)) %>%
+  tab_options(table.font.size = 20)
+```
+
+## Les écarts au carré rapportés à l'effectif théorique
+
+Ainsi, la valeur du Khi2 est donnée par la formule :
+
+$$ 
+{\chi}^2=\sum_{i,j}^{}\frac{(Eff^{theo}_{i,j}-Eff^{obs}_{i,j})^2}{Eff^{theo}_{i,j}} 
+$$
+
+```{r}
+hdv2003 %>%
+  count(cat_age, type_fam) %>%
+  pivot_wider(values_from = n,
+              names_from = type_fam) %>%
+  left_join(hdv2003 %>%
+  count(cat_age, type_fam) %>%
+  pivot_wider(values_from = n,
+              names_from = type_fam) %>%
+  mutate(Ensemble = 
+          `pas de frères et soeurs` +
+           `1 à 3 frères et soeurs` +
+           `plus de 3 frères et soeurs`) %>%
+  mutate(
+    across(
+      .cols = `pas de frères et soeurs`:`plus de 3 frères et soeurs`,
+      .fns = ~ round((Ensemble*sum(.))/sum(Ensemble), 0),
+      .names = "t_{.col}"
+    )
+  )) %>%
+  gt(rowname_col = "cat_age",
+     locale = "fr_FR") %>%
+  fmt_number(columns = everything(),
+             decimals = 0) %>%
+  grand_summary_rows(columns = everything(),
+                     fns = list(Ensemble = ~ sum(.)),
+                     fmt = ~ fmt_number(., decimals = 0)) %>%
+  cols_merge(columns = c(2, 6),
+              pattern = md("({2} - {1})<sup>2</sup>/{2}")) %>%
+  cols_merge(columns = c(3, 7),
+             pattern = md("({2} - {1})<sup>2</sup>/{2}")) %>%
+  cols_merge(columns = c(4, 8),
+             pattern = md("({2} - {1})<sup>2</sup>/{2}")) %>%
+  tab_stubhead("Catégorie d'âge") %>%
+  tab_spanner(columns = 2:4,
+              "Type de famille") %>%
+  tab_header("Tableau de contingence : écarts au carré rapportés à l'effectif théorique") %>%
+  cols_align(columns = everything(),
+             "center") %>%
+  tab_style(
+    style = 
+      list(
+        cell_borders(
+          sides = "left",
+          color = "lightgrey",
+          weight = "2px")
+        ),
+    locations = 
+      cells_body(
+        columns = c(`Ensemble`)
+      )) |>
+  cols_width(
+    is.numeric ~ px(160),
+    is.factor ~ px(200)) %>%
+  tab_options(table.font.size = 20)
+```
+
+## Le test statistique et la p-value associée
+
+-   La [statistique de test]{style="color:#FF7F50"} $\chi^2$ donne donc une mesure de l'écart à l'indépendance : jusqu'à quel point ce qu'on observe est éloigné d'une situation où il n'y aurait pas de lien entre les variables ?
+
+-   Le [test statistique]{style="color:#FF7F50"} part de la valeur du $\chi^2$ et la compare avec les écarts qu'on considérerait comme étant le fruit du hasard. Grâce à la loi Normale, on sait modéliser l'aléa de sous forme de probabilités, donc le risque de se tromper en concluant quelque chose à partir des écarts observés.
+
+    -   L'[hypothèse nulle]{style="color:#FF7F50"} du test est celle qu'on essaie souvent de rejeter : la catégorie d'âge et le type de famille n'ont pas de lien entre eux
+
+    -   L'[hypothèse alternative]{style="color:#FF7F50"} est celle qu'on accepte quand l'hypothèse nulle est rejetée : la catégorie d'âge et le type de famille sont bien interdépendants
+
+    -   La logique est similaire à celle d'un procès : on suppose qu'une personne est innocente jusqu'au point où on a assez d'éléments pour raisonnablement juger qu'elle ne l'est pas, même s'il y a toujours un risque de se tromper.
+
+-   La [p-value]{style="color:#FF7F50"}, c'est le plus petit niveau de risque tel qu'on peut encore rejeter l'hypothèse nulle. Au vu de la grandeur ou de la petitesse des écarts à l'indépendance mesuré par le $\chi^2$, est-ce qu'en affirmant qu'il y a un lien entre les variables je risque de me tromper dans 50%, dans 10% ou dans seulement 1% des cas ? En général, on prend comme [niveau de risque]{style="color:#FF7F50"} acceptable 10% pour affirmer que la relation est [significative]{style="color:#FF7F50"}.\
+    Mais attention :
+
+    -   C'est un seuil arbitraire qui s'est cristallisé dans la pratique mais il n'y a aucune justification mathématique à ce niveau.
+
+    -   Quand *p* est supérieur au seuil, c'est soit qu'il y a interdépendance, **soit que votre échantillon était trop petit pour conclure avec fiabilité sur l'interdépendance des variables.**
+
+    -   *p* ne mesure pas l'intensité de la relation entre les deux variables, seulement la significativité du lien.
+
+    -   *p* n'est pas la probabilité que les deux variables soient interdépendantes. C'est seulement la probabilité de se tromper en affirmant cela à partir de ce que vous avez observé !
+
+## Réaliser un test du Khi2 dans R
+
+Le type de famille et la catégorie d'âge sont-ils interdépendantes ?
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+## Test d'indépendance du Khi2 sans pondération
+chisq.test(hdv2003$cat_age, hdv2003$type_fam)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+## Test d'indépendance du Khi2 avec pondération
+# Utilisation du package survey
+library(survey)
+# On crée une base de données qui tient compte de la pondération
+hdv2003_ponderes <- svydesign(ids = ~ 1, 
+                              data = hdv2003,
+                              weights = hdv2003$poids)
+# On utilise les fonctions du package survey pour faire le test
+svychisq(formula = ~cat_age+type_fam,
+         design = hdv2003_ponderes)
+```
+:::
+:::
+
+-   La valeur du Khi2 associé au tri croisé de la catégorie d'âge et du type de famille est d'environ 59.
+
+-   Cette valeur aboutit à une p-valeur extrêmement petite : il y a 11 zéros après la virgule ! On rejette donc l'hypothèse nulle au profit de l'hypothèse alternative au seuil de 1% (pas besoin de dire au seuil de 0,000...1%), selon laquelle ces deux variables sont bien interdépendantes.
+
+## Le sexe et le type de famille sont-ils interdépendants ?
+
+```{r}
+#| echo: true
+## Test d'indépendance du Khi2 sans pondération
+chisq.test(hdv2003$sexe, hdv2003$type_fam)
+```
+
+-   La valeur du khi2 associé au tri croisé du sexe et du type de famille est inférieure à 0,1
+
+-   La p-valeur est extrêmement élevée. Il y a plus de 95% de chances de se tromper en affirmant que le sexe et la structure familiale sont interdépendants. On est dans une sorte d'impasse : **on ne peut pas rejeter l'hypothèse nulle, mais on ne peut pas dire qu'elle est vérifiée !**
+
+-   Un plus grand échantillon pourrait être capable d'appréhender des effets subtiles du sexe des enfants sur les comportements de fécondité des parents, par exemple si les parents cherchent à avoir un nouvel enfant quand le premier est une fille. Cela établirait *in fine* un lien entre ces deux variables qui n'est pas perceptible avec seulement 2000 enquêté·es. En l'état, on ne peut donc rien dire.
+
+## L'interprétation et les hypothèses sociologiques
+
+Les conclusions tirées des tests d'hypothèse sont ne concernent donc que lespossibilités d'inférence de nos données. Elles n'ont de sens que lorsque ces tests sont mis en place pour répondre à une question de recherche et lorsqu'ils sont suivis d'une interprétation sociologique. Il faut toujours se demander :
+
+-   La (non)-significativité de mes résultats est-elle surtout le fruit des catégories choisies, de la taille de mon échantillon et de la façon dont il a été constitué, ou est-elle vraisemblable d'un point de vue sociologique ?\
+    Exemple : une enquête réalisée sur internet interroge le lien entre l'âge et le fait de posséder un portable et un ordinateur. Elle trouve que les senior ne détiennent pas significativement moins d'ordinateurs et de portables que les plus jeunes.
+
+-   Est-ce que le lien statistique mis en lumière suggère un lien de causalité entre ces variables, qui a un vrai sens sociologique, ou ai-je seulement identifié une corrélation peu intéressante, qui cache une troisième variable explicative, voire fallacieuse, le lien n'étant que le pur fruit du hasard ?\
+    Exemple : une enquête par questionnaire cherche à savoir si les parisien·nes ont plus souvent des accidents de voiture que les habitant·es du reste du territoire français. Elle trouve au contraire que les parisien·nes sont sous-représenté·es parmi les accidents mineurs et graves.
+
+-   Quelles sont les connaissances sociologiques et les résultats empiriques d'autres recherches qui peuvent expliquer le lien d'interdépendance indiqué par les tests ?
+
+## L'interprétation démographique du lien entre la catégorie d'âge et la typologie familiale
+
+::: columns
+::: {.column width="50%"}
+```{r}
+hdv2003 %>%
+  count(cat_age, type_fam, wt = poids) %>%
+  group_by(cat_age) %>%
+  mutate(p = n/sum(n),
+         tot = sum(n)) %>%
+  select(-n) %>%
+  ungroup() %>%
+  pivot_wider(values_from = p,
+              names_from = type_fam) %>%
+  gt(rowname_col = "cat_age") %>%
+  grand_summary_rows(
+    columns = 3:5,
+    fns = list(Ensemble = ~ wtd.mean(., w =tot)),
+    fmt = ~fmt_percent(.x, decimals = 0)
+  ) %>%
+  fmt_percent(columns = 3:5,
+              decimals = 0) %>%
+  tab_stubhead("Catégorie d'âge") %>%
+  tab_spanner(columns = 3:5,
+              "Type de famille (en %)") %>%
+  cols_hide("tot") %>%
+  tab_header("Typologie des familles par classe d'âge en 2003") %>%
+  tab_footnote(md("Lecture : en 2003, 7% des personnes âgées de 31 à 60 ans n'avaient pas de frères et soeurs. Dans l'ensemble, 9% de la population française toutes catégories d'âge confondues n'avaient pas de frères et soeurs \\
+  Champ : personnes majeures habitant en France métropolitaine \\
+                  Source : Histoire de Vie 2003 (N = 2000) | A. POISSONNIER | 2023")) |>
+  cols_width(
+    is.numeric ~ px(100),
+    is.factor ~ px(140)) %>%
+  tab_options(table.font.size = 13)
+```
+:::
+
+::: {.column width="50%"}
+![](fecondite.PNG){width="280"}
+:::
+:::
+
+-   Les personnes âgées de 18 à 30 ans en 2003 sont nées entre 1973 et 1985; de 31 à 60 ans entre 1943 et 1972; de 61 ans et plus avant 1943
+
+-   Le lien entre la catégorie d'âge et la typologie familiale s'explique en partie par les différences générationnelles de fécondité. Les 31-60 ans correspondent grossièrement aux générations nées pendant le baby-boom.
+
+# Le test de Student pour comparer deux moyennes
+
+La logique des tests d'hypothèses vue dans le cadre du $\chi^2$ est valable pour tout un ensemble de tests qui servent des objectifs précis. Le test de Student permet de comparer la moyenne de deux groupes distincts.
+
+::: columns
+::: {.column width="50%"}
+```{r}
+## T-tests non pondérés
+# Différence entre sexes des heures passées devant la télé
+t.test(heures.tv ~ sexe, data = hdv2003)
+
+# Différence entre les personnes qui vont au cinéma
+t.test(heures.tv ~ cinema, data = hdv2003)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+## T-tests pondérés
+# Base pondérée
+hdv2003w <- svydesign(ids = ~ 1, data = hdv2003, weights = hdv2003$poids)
+
+# Différence entre sexes des heures passées devant la télé
+svyttest(heures.tv ~ sexe, design = hdv2003w)
+
+# Différence entre les personnes qui vont au cinéma
+svyttest(heures.tv ~ cinema, design = hdv2003w)
+```
+:::
+:::
