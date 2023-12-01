@@ -12,7 +12,6 @@ body {
 text-align: justify}
 </style>
 ```
-
 ```{r setup, include=FALSE}
 install.packages("questionr")
 library(tidyverse)
@@ -335,6 +334,7 @@ ggplot(rp19) +
 Il faut bien distinguer deux types de commandes données aux fonctions `geom_`. Celles à l'intérieur de `aes` vont interroger les données pour produire quelque chose : compter les effectifs des modalités d'une variable, différencier la coulour ou la forme des points selon les modalités d'une variable etc. Les arguments à l'extérieur de `aes` s'appliquent uniformément à tous les éléments du graphique.
 
 Avant de le montrer en graphique, recodez la variable `SEXE` en facteur. La valeur 1 correspond aux hommes et 2 aux femmes. Faites en sorte que la modalité "Femme" soit la première modalité du nouveau facteur plutôt que l'inverse.
+
 ```{r rec_SEXE-solution}
 rp19 <-
   rp19 %>%
@@ -386,10 +386,11 @@ ggplot(rp19) +
 ```
 
 ### Les variables catégorielles à plus de deux modalités
+
 Représentez la population de chaque arrondissement et sa composition socio-professionnelle en excluant les agriculteur.ices, les retraité.es et les inacti.f.ves.
 
 | Code | Modalité                                          |
-|--------|-----------------------------------------------------|
+|------|---------------------------------------------------|
 | 1    | Agriculteurs exploitants                          |
 | 2    | Artisans, commerçants et chefs d'entreprise       |
 | 3    | Cadres et professions intellectuelles supérieures |
@@ -400,6 +401,7 @@ Représentez la population de chaque arrondissement et sa composition socio-prof
 | 8    | Inactifs                                          |
 
 : Dictionnaire des codes de la variable CS1
+
 ```{r pop_ARM_CS1-solution}
 rp19 <-
   rp19 %>%
@@ -440,7 +442,6 @@ rp19 %>%
 
 Il faut ensuite ajouter tous les éléments nécessaires à la bonne lecture d'un graphique. On choisit des couleurs à l'aide du site [ColorBrewer](https://colorbrewer2.org/).
 
-
 ```{r include=FALSE}
 rp19 <-
   rp19 %>%
@@ -469,7 +470,6 @@ rp19 <-
 
 
 ```
-
 
 ```{r, fig.height=6, fig.width=8}
 # Je créer un vecteur nommé, c'est-à-dire que je donne un nom à chacune des valeurs.
@@ -510,14 +510,11 @@ graph +
                              byrow = T))
 ```
 
-
 ## La visualisation de données avec ggplot2 - Choisir la représentation adéquate
+
 ### Changer la position des barres superposées
+
 La lisibilité d'un graphique et le risque qu'il amène des erreurs d'interprétation est très différent selon la façon dont on représente l'information.
-
-
-
-
 
 ```{r, fig.height=6, fig.width=8}
 # Je créer un vecteur nommé, c'est-à-dire que je donne un nom à chacune des valeurs.
@@ -560,6 +557,7 @@ graph +
 ```
 
 ### Représenter des distributions en pourcentages
+
 ```{r, fig.height=6, fig.width=8}
 # Je créer un vecteur nommé, c'est-à-dire que je donne un nom à chacune des valeurs.
 couleurs_csp <-
@@ -607,9 +605,10 @@ graph +
 ```
 
 ## La visualisation de données avec ggplot2 - les variables numériques
+
 ### Les distributions à l'aide des boîtes à moustache
 
-Créez des boîtes à moustache à l'aide de la fonction `geom_boxplot` qui représente la distribution de l'âge en fonction de la variable `IMMI`. N'utilisez pas les poids cette fois-ci. 
+Créez des boîtes à moustache à l'aide de la fonction `geom_boxplot` qui représente la distribution de l'âge en fonction de la variable `IMMI`. N'utilisez pas les poids cette fois-ci.
 
 ```{r box-setup}
 rp <-
@@ -672,7 +671,6 @@ rp19 <-
                levels = c("Femme", "Homme")))
 ```
 
-
 ```{r box-solution}
 rp19 %>%
   ggplot() +
@@ -686,6 +684,7 @@ rp19 %>%
 ```
 
 ### Combiner plusieurs graphiques
+
 On souhaite parfois réaliser la même opération de visualisation mais le représenter dans des graphiques différents. Cela permet de distinguer les niveaux d'analyse à plus de deux dimensions. Il faut pour cela utiliser les fonctions `facet_`
 
 ```{r, include = FALSE}
@@ -749,7 +748,6 @@ rp19 <-
                levels = c("Femme", "Homme")))
 ```
 
-
 ```{r}
 # Reproduire la comparaison des âges à 2 recensements mis côte-à-côte
 rp %>%
@@ -766,10 +764,9 @@ rp %>%
   facet_grid(vars(SEXE), vars(annee))
 ```
 
-
 ### Transformer des données numériques avant de les représenter
-Nous avons déjà vu que les verbes de dplyr tel `mutate` changeaient leur fonctionnement si un groupement avait été annoncé avec `group_by`. Les variables `NBPI` et `NPERR` représentent respectivement le nombre de pièces et le nombre de personnes dans le logement habité par la personne recensée. La variable `LPRM` prend la valeur 1 quand la personne recensée est la personne de référence du logement. 
-Créez une nouvelle colonne sur le tableau du recensement de 2019 du nombre de pièces et de personnes moyens par arrondissement. La fonction `weighted.mean` qui prend les arguments `x` pour le vecteur et `w` pour les poids vous permettra de tenir compte de la pondération.
+
+Nous avons déjà vu que les verbes de dplyr tel `mutate` changeaient leur fonctionnement si un groupement avait été annoncé avec `group_by`. Les variables `NBPI` et `NPERR` représentent respectivement le nombre de pièces et le nombre de personnes dans le logement habité par la personne recensée. La variable `LPRM` prend la valeur 1 quand la personne recensée est la personne de référence du logement. Créez une nouvelle colonne sur le tableau du recensement de 2019 du nombre de pièces et de personnes moyens par arrondissement. La fonction `weighted.mean` qui prend les arguments `x` pour le vecteur et `w` pour les poids vous permettra de tenir compte de la pondération.
 
 ```{r nb_pi_per, exercise=T}
 ```
@@ -783,7 +780,9 @@ rp19 %>%
 ```
 
 ### La fonction `summarize`
+
 La fonction `summarize` permet de résumer cette information de groupe en un tableau synthétique.
+
 ```{r}
 rp19 %>%
   filter(LPRM == 1) %>%
@@ -792,7 +791,8 @@ rp19 %>%
          moy_NPERR = weighted.mean(x = NPERR, w = IPONDI))
 ```
 
-Représentez graphiquement cette information à l'aide de la fonction `geom_point` qui crée un nuage de points. 
+Représentez graphiquement cette information à l'aide de la fonction `geom_point` qui crée un nuage de points.
+
 ```{r point-solution}
 rp19 %>%
   filter(LPRM == "1") %>% # La personne de référence du ménage
@@ -819,4 +819,3 @@ rp19 %>%
         y = moy_NPERR,
         label = arrondissements))
 ```
-
