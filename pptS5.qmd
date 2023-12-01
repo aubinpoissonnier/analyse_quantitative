@@ -1,0 +1,624 @@
+---
+title: "Powerpoint - Séance 5"
+format:
+  revealjs:
+    height: 800
+    width: 1200
+    incremental: true
+    smaller: true
+    theme: [default, custom.scss]
+execute: 
+  echo: false
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css}
+<style type="text/css">
+p {
+text-align: right;
+}
+</style>
+```
+
+```{r donnees}
+library(tidyverse)
+library(patchwork)
+library(gtsummary)
+theme_gtsummary_language(language = "fr", decimal.mark = ",", big.mark = " ")
+
+# sample_eec <- eec %>%
+#   filter(CSE %in% 30:69,
+#            !is.na(SALRED) &
+#            TPP == 1) %>%
+#   mutate(CSE = str_sub(CSE, 1, 1),
+#          CSE =
+#            fct(
+#            case_when(
+#              CSE == 3 ~ "Cadres",
+#              CSE == 4 ~ "Professions intermédiaires",
+#              CSE == 5 ~ "Employé·es et ouvrier·es",
+#              CSE == 6 ~ "Employé·es et ouvrier·es"
+#            ),
+#            levels =
+#              c("Cadres",
+#                "Professions intermédiaires",
+#                "Employé·es et ouvrier·es")
+#          ),
+#          TPP = if_else(TPP == 1, "Plein", "Partiel",
+#                        missing = "Non concerné"),
+#          SEXE = if_else(SEXE == 1, "Homme", "Femme")) %>%
+#   slice_sample(n = 300,
+#                by = CSE)
+
+#save(sample_eec, file = "data/sample_eec.RData")
+load("data/sample_eec.RData") 
+```
+
+## Le principe de la régression linéaire
+
+La [régression linéaire simple]{style="color:#FF7F50"} est une technique économétrique qui permet de résumer une relation entre deux variables et de s'interroger sur sa significativité statistique. Le nuage de points y est résumé par une droite, appelée droite de régression.
+
+Ce modèle tente de lier les variations d'une variable [expliquée]{style="color:#FF7F50"} (ou dépendante) à celles d'une variable [explicative]{style="color:#FF7F50"} (ou indépendante, covariable, régresseur).
+
+On dit qu'un modèle de régression est [multiple]{style="color:#FF7F50"} plutôt que simple lorsqu'on étend l'explication à plusieurs variables explicatives.
+
+Tout comme les indicateurs statistiques et les croisements de variables avec leurs tests statistiques associés, les modèles de régression ont donc pour objectif de mesurer les [relations de dépendance]{style="color:#FF7F50"} entre plusieurs grandeurs ou dimensions du monde social.
+
+Les modèles de régression linéaires s'inspirent des équations linéaires de la forme $y = ax+b$ où $b$ est l'ordonnée à l'origine, soit la valeur de $y$ quand $a=0$, et $a$ la pente, soit le nombre d'unités d'augmentation de $y$ quand $x$ augmente d'une unité.
+
+## Le salaire en fonction de l'âge, une relation linéaire ?
+
+```{r point}
+sample_eec %>%
+  ggplot() +
+  geom_point(aes(x = AGE,
+                 y = SALRED),
+             size = 1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  theme_minimal()
+```
+
+## Les moindres carrés ordinaires
+
+Le modèle s'écrit sous la forme d'une équation applicable à tout individu statistique $i$ :
+
+$$ salaire_i = \beta_0+\beta_1 \times age_i+\varepsilon_i $$
+
+Estimer un modèle consister à déterminer la valeur des paramètres $β_0$ et $β_1$ de manière à [maximiser]{style="color:#FF7F50"} l'ajustement du modèle aux données. Cela revient à chercher $β_0$ et $β_1$ tels que, à partir de l'âge d'un individu, on soit en mesure de déterminer son salaire [en se trompant en moyenne le moins possible]{style="color:#FF7F50"}.
+
+La méthode des moindres carrés ordinaires maximise l'ajustement en minimisant la somme des termes résiduels $\varepsilon_i$. $R_2$ correspond à la part de la variance expliquée par notre modèle, c'est une mesure de sa qualité.
+
+```{r point_lm}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+# Le modèle de régression simple
+model <- lm(SALRED ~ AGE, 
+            data = sample_eec,
+            subset = AGE %in% 18:65 &
+              SALRED %in% 0:5000)
+
+# Le R2
+R2 <- paste0("R2 = ", round(summary(model)$adj.r.squared, 2))
+
+# Sélection de 20 individus par CSE pour la représentation des erreurs (prochaine slide)
+# sample_eec_res_CSE <- sample_eec %>%
+#   filter(AGE %in% 18:65 &
+#      SALRED %in% 0:5000) %>%
+#       cbind(
+#         broom::augment(model) %>%
+#           select(.resid)
+#       ) %>%
+#       slice_sample(n = 100, by = CSE)
+# save(sample_eec_res_CSE, file = "data/sample_eec_res_CSE.RData")
+load("data/sample_eec_res_CSE.RData")
+
+# Sélection de 10 individus pour la représentation des erreurs
+# sample_eec_res <- sample_eec_res_CSE %>%
+#       slice_sample(n = 10, by = CSE)
+# save(sample_eec_res, file = "data/sample_eec_res.RData")
+load("data/sample_eec_res.RData")
+
+sample_eec %>%
+  ggplot() +
+  geom_point(
+    aes(x = AGE,
+        y = SALRED),
+    size = 1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  theme_minimal() +
+  geom_smooth(aes(x = AGE,
+                  y = SALRED),
+              color = "#ef3b2c",
+              method = "lm",
+              se = F) +
+  geom_segment(
+    data = sample_eec_res,
+    aes(x = AGE,
+        xend = AGE,
+        y = SALRED,
+        yend = SALRED - .resid),
+    size = 1,
+    color = "red",
+    arrow = arrow(length=unit(0.20,"cm"))
+  ) +
+  
+  geom_text(aes(x = 60,
+                y = 4500,
+                label = R2),
+            size = 6) +
+  theme(text = element_text(size = 16))
+
+
+```
+
+## Lire les résultats d'un modèle de régression linéaire
+
+```{r}
+#| echo: true
+summary(model)
+```
+
+-   La constante (*intercept)* vaut 1060. Le modèle permet d'estimer qu'en moyenne, le salaire à 0 an est de 1060 euros.
+
+-   Le coefficient pour l'âge est significatif et il vaut 25,3. Le modèle permet d'estimer qu'une année d'âge augmente en moyenne le salaire de 25,3 euros.
+
+-   À 18 ans, le salaire estimé par le modèle est de $1060 + 25,3\times18 = 1515$ euros.
+
+-   À 60 ans, le salaire estimé par le modèle est de $1060 + 25,3 \times 60 = 2578$ euros.
+
+## Un modèle adapté aux déterminants du salaire ?
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+CSE_col <-
+  c("Cadres" = "#01665e",
+    "Professions intermédiaires" = "#5ab4ac",
+    "Employé·es et ouvrier·es" = "#d8b365")
+
+sample_eec %>%
+  ggplot() +
+  geom_point(aes(x = AGE,
+                 y = SALRED,
+                 color = CSE),
+             size = 2,
+             alpha = 1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  geom_smooth(aes(x = AGE,
+                  y = SALRED),
+              method = "lm",
+              se = F,
+              color = "#ef3b2c") +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  theme_minimal() +
+  theme(legend.position = "top") 
+```
+
+## Les erreurs sont dépendantes de la catégorie socio-professionnelle
+
+```{r point_color}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+CSE_col <-
+  c("Cadres" = "#01665e",
+    "Professions intermédiaires" = "#5ab4ac",
+    "Employé·es et ouvrier·es" = "#d8b365")
+
+sample_eec %>%
+  ggplot() +
+  geom_point(aes(x = AGE,
+                 y = SALRED,
+                 color = CSE),
+             size = 2,
+             alpha = 0.1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  geom_smooth(aes(x = AGE,
+                  y = SALRED),
+              method = "lm",
+              se = F,
+              color = "#ef3b2c") +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  guides(color = guide_legend(override.aes = list(size = 6))) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  geom_segment(
+    data = sample_eec_res_CSE %>%
+      slice_sample(n = 1, by = AGE),
+    aes(x = AGE,
+        xend = AGE,
+        y = SALRED,
+        yend = SALRED - .resid,
+        color = CSE),
+    size = 1,
+    arrow = arrow(length=unit(0.20,"cm"))
+  )
+```
+
+## Complexifier le modèle - variable catégorielle
+
+Une première façon de complexifier le modèle consiste à introduire des [variables indicatrices]{style="color:#FF7F50"} : elles permettent une augmentation [de niveau]{style="color:#FF7F50"} (en modifiant la constante) de la variable expliquée.
+
+Ainsi, la catégorie socio-professionnelle peut-être exprimée par un codage disjonctif de 3 variables : la variable $cadre_i$ qui vaut 1 si l'individu est cadre et 0 sinon; la variable $prof\_inter_i$ qui vaut 1 si l'individu est profession intermédiaire et 0 sinon; la variable $emp\_ouv_i$ qui vaut 1 si l'individu est employé·e ou ouvrier·e et 0 sinon.
+
+Dans l'idée, on aurait envie de modéliser :
+
+$$ salaire_i = \beta_0 + 
+\beta_1 \times age_i+ 
+\beta_2 \times cadre_i +
+\beta_3 \times prof\_inter_i +
+\beta_4 \times emp\_ouv_i +
+\varepsilon_i $$
+
+Qu'on écrit en réalité avec une catégorie en moins, puisque le coefficient d'une catégorie parmi les trois devient la référence et correspond à $\beta_0$.
+
+$$ salaire_i = \beta_0 + 
+\beta_1 \times age_i+
+\beta_2 \times prof\_inter_i +
+\beta_3 \times emp\_ouv_i +
+\varepsilon_i $$ Le salaire d'un·e cadre est estimé par : $$ salaire_i = \beta_0 + 
+\beta_1 \times age_i+
+\beta_2 \times 0 +
+\beta_3 \times 0 +
+\varepsilon_i $$
+
+Quand celui d'un·e employé·e ou d'un·e ouvrier·e est estimé par :
+
+$$ salaire_i = \beta_0 + 
+\beta_1 \times age_i+
+\beta_2 \times 0 +
+\beta_3 \times emp\_ouv_i +
+\varepsilon_i $$
+
+## Représentation graphique variables indicatrices
+
+```{r lm_intercept}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+model <- lm(SALRED ~ AGE + CSE, 
+            data = sample_eec,
+            subset = AGE %in% 18:65 &
+              SALRED %in% 0:5000
+)
+R2 <- paste0("R2 = ", round(summary(model)$adj.r.squared, 2))
+
+sample_eec %>%
+  ggplot() +
+  geom_point(aes(x = AGE,
+                 y = SALRED,
+                 color = CSE),
+             size = 2) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  geom_abline(slope = model$coefficients["AGE"],
+              intercept = model$coefficients["(Intercept)"],
+              color = CSE_col["Cadres"],
+              linewidth = 1) +
+  geom_abline(slope = model$coefficients["AGE"],
+              intercept = model$coefficients["(Intercept)"] +
+                model$coefficients["CSEEmployé·es et ouvrier·es"],
+              color = CSE_col["Employé·es et ouvrier·es"],
+              linewidth = 1) +
+  geom_abline(slope = model$coefficients["AGE"],
+              intercept = model$coefficients["(Intercept)"] +
+                model$coefficients["CSEProfessions intermédiaires"],
+              color = CSE_col["Professions intermédiaires"],
+              linewidth = 1) +
+  geom_text(aes(x = 60,
+                y = 4500,
+                label = R2),
+            size = 6) +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  guides(color = guide_legend(override.aes = list(size = 6))) +
+  theme_minimal() +
+  theme(legend.position = "top") 
+```
+
+## Lecture du modèle de régression linéaire multiple
+
+```{r}
+summary(model)
+```
+
+-   La constante vaut 1923. En moyenne, le salaire d'un cadre (catégorie de référence) âgé de 0 ans est de 1923 euros.
+
+-   Le coefficient de l'âge est significatif et il vaut 22,1. En moyenne et [indépendamment de la catégorie socio-professionnelle]{style="color:#FF7F50"}, une année en plus augmente le salaire de 22,1 euros.
+
+-   Le coefficient des professions intermédiaires est significatif et vaut -852. En moyenne, et [indépendamment de l'âge]{style="color:#FF7F50"}, passer de la catégorie cadre à la catégorie profession intermédiaire fait baisser le salaire de 852 euros.
+
+## Une croissance similaire pour tout le monde ?
+
+Ajuster le modèle seulement en changeant le niveau des droites peut s'avérer insuffisant. Est-ce que les employé·es et les ouvrier·es bénéficient réellement de la même progression salariale au cours de leur carrière que les cadres et les professions intermédiaires ?
+
+```{r point_sep}
+sample_eec %>%
+  ggplot() +
+  geom_point(aes(x = AGE,
+                 y = SALRED,
+                 color = CSE),
+             size = 1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  facet_wrap(~CSE) +
+  theme_minimal() +
+  theme(legend.position = "none") 
+```
+
+## Complexifier le modèle - les effets d'interaction
+
+Les [effets d'interaction]{style="color:#FF7F50"} ont pour objectif de modifier -- en plus de la constante -- la pente des droites, donc l'intensité de la relation entre la variable expliquée et la variable explicative. Chaque catégorie se voit attribué deux coefficients propres :
+
+$$ salaire_i = \beta_0 + 
+\beta_1 \times age_i+
+\beta_2 \times prof\_inter_i +
+\beta_3 \times emp\_ouv_i + 
+\beta_4 \times (age_i \times prof\_inter_i) + 
+\beta_5 \times(age_i \times emp\_ouv_i) +
+\varepsilon_i $$
+
+En le décomposant, on a l'effet de niveau de la catégorie socioprofessionnelle :
+
+$$ \beta_0 +
+\beta_2 \times prof\_inter_i +
+\beta_3 \times emp\_ouv_i $$
+
+Auquel on additionne l'effet de l'âge, [en fonction de la catégorie socio-professionnelle]{style="color:#FF7F50"} :$$
+\beta_1 \times age_i+
+\beta_4 \times (age_i \times prof\_inter_i) + 
+\beta_5 \times(age_i \times emp\_ouv_i)$$
+
+## Représentation graphique interaction
+
+```{r lm_interaction}
+model <- lm(SALRED ~ AGE*CSE, 
+            data = sample_eec,
+            subset = AGE %in% 18:65 &
+              SALRED %in% 0:5000
+)
+R2 <- paste0("R2 = ", round(summary(model)$adj.r.squared, 2))
+
+
+sample_eec %>%
+  ggplot() +
+  geom_point(aes(x = AGE,
+                 y = SALRED,
+                 color = CSE),
+             size = 1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  theme_minimal() +
+  geom_smooth(aes(x = AGE,
+                  y = SALRED,
+                  color = CSE),
+              method = "lm",
+              se = F) +
+  facet_wrap(~CSE) +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  theme(legend.position = "none")
+```
+
+## Représentation graphique interaction 2
+
+```{r lm_interaction2}
+model <- lm(SALRED ~ AGE*CSE, 
+            data = sample_eec,
+            subset = AGE %in% 18:65 &
+              SALRED %in% 0:5000
+)
+R2 <- paste0("R2 = ", round(summary(model)$adj.r.squared, 2))
+
+
+sample_eec %>%
+  ggplot() +
+  geom_point(aes(x = AGE,
+                 y = SALRED,
+                 color = CSE),
+             size = 1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  theme_minimal() +
+  geom_smooth(aes(x = AGE,
+                  y = SALRED,
+                  color = CSE),
+              method = "lm",
+              se = F) +
+  geom_text(aes(x = 60,
+                y = 4500,
+                label = R2),
+            size = 6) +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  theme(legend.position = "none")
+```
+
+## Lecture d'un modèle de régression avec un effet d'interaction
+
+```{r}
+summary(model)
+```
+
+-   Le coefficient de l'âge est significatif et vaut 35,4. En moyenne chez les cadres (catégorie de référence), une année de plus augmente de 35,4 euros le salaire.
+
+-   Le coefficient d'interaction entre l'âge et la catégorie profession intermédiaire est significatif et vaut 13,3. En moyenne, passer de la catégorie cadre à celle de profession intermédiaire fait baisser de 13,3 euros l'augmentation salariale gagnée chaque année. Ainsi, en moyenne chez les professions intermédiaires, une année de plus augmente de $35,4-13,3= 22,1$ euros le salaire.
+
+-   Les coefficients des deux catégories socio-professionnelles ne sont pas significatifs. En moyenne, indépendamment de l'âge et en tenant compte de la progression salariale propre à chaque catégorie socio-professionnelle, passer de la catégorie cadre à la catégorie profession intermédiaire ne fait pas significativement baisser le salaire.
+
+-   Autrement dit, il existe bien des inégalités salariales entre catégories professionnelles mais celles-ci se constituent au fil de la carrière, quand les individus deviennent plus âgés.
+
+## Tenir compte du temps de travail
+
+Le premier modèle de régression linéaire multiple présenté permettait d'estimer, indépendamment de l'âge, l'augmentation moyenne du salaire selon qu'on appartienne à telle ou telle catégorie socio-professionnelle. Or, on peut s'interroger sur le rapport de causalité : les cadres sont-ils mieux payés uniquement parce que les professions qu'ils exercent sont mieux reconnues et rétribuées, ou est-ce que d'autres facteurs expliquent ces écarts salariaux ?
+
+NB : les heures de travail sont simulées pour l'exemple, il ne faut pas les prendre comme des données réelles
+
+```{r}
+sample_eec <- sample_eec %>%
+  arrange(CSE, -SALRED) 
+
+
+sample_eec$HEURES <-
+  map(.x = rev(seq(32, 56, by = 3)),
+      .f = ~ rnorm(100, mean = .x, sd = 3)) %>%
+  unlist()
+
+
+lm1 <- sample_eec %>%
+  ggplot() +
+  geom_point(
+    aes(x = AGE,
+        y = SALRED,
+        color = CSE),
+    size = 1) +
+  lims(x = c(18, 65),
+       y = c(0, 5000)) +
+  theme_minimal() +
+  geom_smooth(aes(x = AGE,
+                  y = SALRED),
+              color = "#ef3b2c",
+              method = "lm",
+              se = F) +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  guides(color = guide_legend(override.aes = list(size = 6))) +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+lm2 <- sample_eec %>%
+  ggplot() +
+  geom_point(
+    aes(x = HEURES,
+        y = SALRED,
+        color = CSE),
+    size = 1) +
+  lims(x = c(25, 55),
+       y = c(0, 5000)) +
+  theme_minimal() +
+  geom_smooth(aes(x = AGE,
+                  y = SALRED),
+              color = "#ef3b2c",
+              method = "lm",
+              se = F) +
+  scale_color_manual(values = CSE_col,
+                     name = "Catégorie socio-professionnelle") +
+  guides(color = guide_legend(override.aes = list(size = 6))) +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+wrap_plots(lm1, lm2) +
+  plot_layout(guides = "collect") & theme(legend.position = "top")
+
+```
+
+## Le biais de variable omise
+
+On parle [d'erreur ou de biais de la variable omise]{style="color:#FF7F50"} lorsqu'on rend compte de la variance d'une variable expliquée par une [variable explicative donnée]{style="color:#FF7F50"} et qu'on ne tient pas compte d'une [troisième variable susceptible d'expliquer la variance]{style="color:#FF7F50"}, elle-même [corrélée]{style="color:#FF7F50"} avec la variable explicative.
+
+L'erreur de la variable manquante vient [biaiser l'estimation de l'effet causal]{style="color:#FF7F50"} : on attribue à la variable explicative des variations de la variable expliquée qui sont en réalité dues à la variable manquante.
+
+La régression simple du salaire par l'âge ne fait que comparer les salaires de personnes plus ou moins âgées. Pour que cette comparaison soit instructive, il faut être sûr qu'on a comparé des personnes comparables. « Comparer du comparable », c'est respecter le critère d'analyse toutes choses égales par ailleurs (ou ceteris paribus) : les personnes comparées ne doivent différer au départ que par leur âge. On a déjà modifié notre modèle pour mesurer l'effet de la catégorie socio-professionnelle. Or, pour interpréter ces effets de manière pertinente, il faut s'assurer qu'on ne confond pas ce qui relève de la position des catégories sur le marché du travail avec ce qui relève du temps travaillé.
+
+## Complexifier le modèle - variable quantitative
+
+Le salaire est fonction du temps de travail. Or, les catégories socio-professionnelles les mieux rémunérées sont aussi celles qui travaillent le plus. Il y a donc un biais liée à une troisième variable omise, le temps de travail, qui nous induisait en erreur : on prenait pour l'effet de la catégorie socio-professionnelle ce qui est en réalité l'effet de l'inégalité en moyenne du temps de travail.
+
+On met en place un nouveau modèle avec une variable quantitative du temps de travail mensuel : $$ salaire_i = \beta_0 + 
+\beta_1 \times age_i+ 
+\beta_2 \times cadre_i +
+\beta_3 \times prof\_inter_i +
+\beta_4 \times emp\_ouv_i +
+\beta_5 \times heures_i +
+\varepsilon_i $$
+
+Dans cette situation simulée où les cadres travailleraient en moyenne plus longtemps que les professions intermédiaires et les employé·es et ouvrier·es, on obtient :
+
+```{r}
+model1 <- lm(SALRED ~ AGE + 
+               CSE,
+             data = sample_eec,
+             subset = AGE %in% 18:65 &
+               SALRED %in% 0:5000
+)
+model2 <- lm(SALRED ~ AGE + 
+              CSE +
+              HEURES, 
+            data = sample_eec,
+            subset = AGE %in% 18:65 &
+              SALRED %in% 0:5000
+)
+
+tbl_merge(
+  list(
+    tbl_regression(model1),
+    tbl_regression(model2)
+  ),
+  tab_spanner = c("Modèle 1",
+                  "Modèle 2")
+) %>%
+  as_gt() %>%
+  gt::tab_header("Résultats de deux modèles de régression du salaire")
+```
+
+## Les modèles logistiques pour les variables catégorielles dichtomiques
+
+Nous avons vu jusqu'à présent la modélisation de variables quantitatives. Cependant, il est plus courant en sciences sociales de vouloir étudier des dimensions qualitatives.
+
+Les variables peuvent porter sur un phénomène que l'on considère qualitatif « par nature » ; par exemple, il va s'agir d'étudier le passage ou non en classe supérieure, le succès ou l'échec à un concours, le fait d'être propriétaire ou non de son appartement, le fait de voter ou non à une élection, le fait d'avoir un casier judiciaire ou non, etc.
+
+Il arrive aussi que l'on veuille étudier un phénomène continu en théorie, mais dont la mesure empirique nous est, pour une raison ou une autre, inaccessible. On peut alors choisir de construire une variable qualitative indicatrice d'un phénomène observé qui serait la manifestation visible d'une variable latente.
+
+Les modèles de [régression logistique]{style="color:#FF7F50"} sont une extension des modèles linéaires. Plutôt d'estimer une [valeur]{style="color:#FF7F50"}, on va tenter d'estimer une [probabilité]{style="color:#FF7F50"}.
+
+## Le logit et les rapports de chances
+
+La logique de lecture des modèles logistiques est similaire à celle des modèles linéaires. Il existe néanmoins une difficulté liée à la nature de ce que modèle estime : on ne modélise pas les probabilités en elles-mêmes, mais une fonction qui les contient. $$
+log(\frac{P_i}{1-P_i})=logit(P_i)=\beta_0 + \beta_1X_{1i}+\beta_2X_{2i}+...+\beta_kX_{ki}+\varepsilon_i
+$$On appelle [odd ou chances]{style="color:#FF7F50"} le rapport entre la probabilité $P$ d'occurrence de l'évènement binaire considéré et la probabilité $1-P_i$ de non-occurrence de l'évènement.
+
+Par exemple, si la probabilité de tomber malade est de $0,8$, la probabilité de ne pas tomber malade est de $1-0,8 = 0,2$. L'odd ou les chances valent ainsi $\frac{0,8}{0,2} = 4$ : on attend 4 fois plus de personnes malades que de personnes saines.
+
+On appelle [logit]{style="color:#FF7F50"} la fonction qui calcule le logarithme de ces chances.
+
+On appelle [rapport de chances ou odds ratio]{style="color:#FF7F50"} le rapport $\frac{OR_1}{OR_2}$ entre deux chances ou odds. Si les chances de tomber malade chez les nourrissons valent 10 contre seulement 5 chez les adultes, l'odd ratio associé vaut $\frac{10}{5}=2$. L'interprétation est complexe car ce n'est pas un simple rapport de probabilités : on ne peut pas dire que la probabilité de tomber malade pour un nourrisson est deux fois plus élevée que celle d'un adulte.
+
+On gardera seulement en tête qu'un odd ratio supérieur à 1 signifie que la catégorie au numérateur a de plus grandes chances que la catégorie au dénominateur; on attend donc plus de personnes malades que saines chez les nourrissons que chez les adultes.
+
+## Les expulsions locative - Camille François
+
+La question de recherche :
+
+> "dans quelle mesure les magistrat·e·s tendent-ils·elles à imposer, parallèlement aux ressources et demandes juridiques des parties et aux règles formelles régissant la procédure judiciaire, des conditions spécifiques et asymétriques aux différentes catégories de justiciables pour exercer leurs droits au tribunal ?" pages 528-529
+
+L'objectif de l'article :
+
+> "L'enjeu de notre réflexion est d'articuler \[...\] deux aspects de la fabrique des inégalités d'usages et de traitement de la justice : d'une part, les usages différentiels du droit et du protocole judiciaire auxquels procèdent les propriétaires et les locataires (en termes de présence à l'audience, de recours à un·e avocat·e, etc.) ; et d'autre part, l'asymétrie des conditions -- formelles mais également informelles -- de recevabilité et d'efficacité qu'imposent les magistrat·e·s aux stratégies de ces deux catégories de justiciables" page 529
+
+## La probabilité des locataires en procédure d\'expulsion de se rendre à l\'audience
+
+![](docs/tab_audience.PNG){fig-align="center"}
+
+## Régression de la présence à l'audience
+
+![](docs/reg_audience.PNG){fig-align="center"}
+
+## L'effet du recours à un·e avocat·e et de l'enquête sociale
+
+![](docs/tab_juge.PNG){fig-align="center"}
+
+## Régression de la décision du ou de la juge
+
+![](docs/reg_expul.PNG){fig-align="center"}
