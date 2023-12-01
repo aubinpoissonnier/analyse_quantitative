@@ -607,7 +607,7 @@ L'objectif de l'article :
 
 > "L'enjeu de notre réflexion est d'articuler \[...\] deux aspects de la fabrique des inégalités d'usages et de traitement de la justice : d'une part, les usages différentiels du droit et du protocole judiciaire auxquels procèdent les propriétaires et les locataires (en termes de présence à l'audience, de recours à un·e avocat·e, etc.) ; et d'autre part, l'asymétrie des conditions -- formelles mais également informelles -- de recevabilité et d'efficacité qu'imposent les magistrat·e·s aux stratégies de ces deux catégories de justiciables" page 529
 
-## La probabilité des locataires en procédure d\'expulsion de se rendre à l\'audience
+## La probabilité des locataires en procédure d'expulsion de se rendre à l'audience
 
 ![](docs/tab_audience.PNG){fig-align="center"}
 
