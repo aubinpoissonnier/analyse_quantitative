@@ -2,8 +2,8 @@
 title: "Powerpoint - Séance 5"
 format:
   revealjs:
-    height: 800
-    width: 1200
+    height: 1000
+    width: 1400
     incremental: true
     smaller: true
     css: custom.css
