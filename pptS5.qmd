@@ -6,7 +6,7 @@ format:
     width: 1200
     incremental: true
     smaller: true
-    theme: [default, custom.scss]
+    css: custom.css
 execute: 
   echo: false
 editor: visual
@@ -53,7 +53,7 @@ theme_gtsummary_language(language = "fr", decimal.mark = ",", big.mark = " ")
 #                by = CSE)
 
 #save(sample_eec, file = "data/sample_eec.RData")
-load("data/sample_eec.RData") 
+sample_eec <- readRDS("data/sample_eec.RDS")
 ```
 
 ## Le principe de la régression linéaire
@@ -114,13 +114,13 @@ R2 <- paste0("R2 = ", round(summary(model)$adj.r.squared, 2))
 #       ) %>%
 #       slice_sample(n = 100, by = CSE)
 # save(sample_eec_res_CSE, file = "data/sample_eec_res_CSE.RData")
-load("data/sample_eec_res_CSE.RData")
+sample_eec_res_CSE <- readRDS("data/sample_eec_res_CSE.RDS")
 
 # Sélection de 10 individus pour la représentation des erreurs
 # sample_eec_res <- sample_eec_res_CSE %>%
 #       slice_sample(n = 10, by = CSE)
 # save(sample_eec_res, file = "data/sample_eec_res.RData")
-load("data/sample_eec_res.RData")
+sample_eec_res <- readRDS("data/sample_eec_res.RDS")
 
 sample_eec %>%
   ggplot() +
@@ -537,11 +537,10 @@ La régression simple du salaire par l'âge ne fait que comparer les salaires de
 Le salaire est fonction du temps de travail. Or, les catégories socio-professionnelles les mieux rémunérées sont aussi celles qui travaillent le plus. Il y a donc un biais liée à une troisième variable omise, le temps de travail, qui nous induisait en erreur : on prenait pour l'effet de la catégorie socio-professionnelle ce qui est en réalité l'effet de l'inégalité en moyenne du temps de travail.
 
 On met en place un nouveau modèle avec une variable quantitative du temps de travail mensuel : $$ salaire_i = \beta_0 + 
-\beta_1 \times age_i+ 
-\beta_2 \times cadre_i +
-\beta_3 \times prof\_inter_i +
-\beta_4 \times emp\_ouv_i +
-\beta_5 \times heures_i +
+\beta_1 \times age_i + 
+\beta_2 \times prof\_inter_i +
+\beta_3 \times emp\_ouv_i +
+\beta_4 \times heures_i +
 \varepsilon_i $$
 
 Dans cette situation simulée où les cadres travailleraient en moyenne plus longtemps que les professions intermédiaires et les employé·es et ouvrier·es, on obtient :
@@ -606,19 +605,3 @@ La question de recherche :
 L'objectif de l'article :
 
 > "L'enjeu de notre réflexion est d'articuler \[...\] deux aspects de la fabrique des inégalités d'usages et de traitement de la justice : d'une part, les usages différentiels du droit et du protocole judiciaire auxquels procèdent les propriétaires et les locataires (en termes de présence à l'audience, de recours à un·e avocat·e, etc.) ; et d'autre part, l'asymétrie des conditions -- formelles mais également informelles -- de recevabilité et d'efficacité qu'imposent les magistrat·e·s aux stratégies de ces deux catégories de justiciables" page 529
-
-## La probabilité des locataires en procédure d'expulsion de se rendre à l'audience
-
-![](docs/tab_audience.PNG){fig-align="center"}
-
-## Régression de la présence à l'audience
-
-![](docs/reg_audience.PNG){fig-align="center"}
-
-## L'effet du recours à un·e avocat·e et de l'enquête sociale
-
-![](docs/tab_juge.PNG){fig-align="center"}
-
-## Régression de la décision du ou de la juge
-
-![](docs/reg_expul.PNG){fig-align="center"}
