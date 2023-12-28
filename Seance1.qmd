@@ -10,7 +10,6 @@ editor_options:
 options(max.print = 100)
 ```
 
-
 # Prise en main
 
 R Studio fonctionne en complément du logiciel de programmation R. RStudio n'est pas à proprement parler une interface graphique qui permettrait d'utiliser R de manière "classique" via la souris, des menus et des boîtes de dialogue. Il s'agit plutôt de ce qu'on appelle un *Environnement de développement intégré* (IDE) qui facilite l'utilisation de R et le développement de scripts.
@@ -787,10 +786,10 @@ Attention, par défaut la fonction `table` n'affiche pas les valeurs manquantes 
 summary(d$qualif)
 ```
 
-
 # Recoder des variables {#sec-vectorfactor}
 
 ## Les classes de vecteur
+
 Les vecteurs peuvent être de classes différentes, selon le type de données qu'ils contiennent.
 
 On a ainsi des vecteurs de type `integer` ou `double`, qui contiennent respectivement des nombres entiers ou décimaux :
@@ -897,8 +896,7 @@ vec %in% c("Jaune", "Vert")
 ::: callout-warning
 Attention, si on souhaite tester si une valeur `x` est inconnue (ou 'manquante'), c'est-à-dire si elle est codée `NA` (*Not Available*), faire le test `x == NA` *ne donnera pas le résultat escompté*. En effet, fidèle à sa réputation de rigueur informaticienne, pour R `NA == NA` ne vaut pas `TRUE` mais... `NA` (on ne sait pas si une valeur inconnue est égale à une autre valeur inconnue).
 
-Pour tester si une valeur est inconnue (`NA`), il faut utiliser la fonction dédiée `is.na` et faire `is.na(x)`.
-Cependant, par convention, `NA %in% NA` vaut `TRUE`.
+Pour tester si une valeur est inconnue (`NA`), il faut utiliser la fonction dédiée `is.na` et faire `is.na(x)`. Cependant, par convention, `NA %in% NA` vaut `TRUE`.
 :::
 
 Enfin, on peut inverser un test avec l'opérateur *non* (`!`) :
@@ -906,4 +904,3 @@ Enfin, on peut inverser un test avec l'opérateur *non* (`!`) :
 ```{r}
 !(vec %in% c("Jaune", "Vert"))
 ```
-

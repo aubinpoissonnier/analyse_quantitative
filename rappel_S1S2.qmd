@@ -3,6 +3,7 @@ title: "Rappel avant la troisième séance"
 format: html
 editor: visual
 ---
+
 ```{r}
 #| include: false
 options(max.print = 100)
@@ -17,11 +18,9 @@ L'essentiel de l'analyse des données repose sur la transformation de tableaux d
 On prend ici l'exemple du recensement de la population restreint à la ville de Lyon en 2009 et 2019. Lancer le bloc de code suivant sans se soucier du code ni du message retourné par R.
 
 ```{r}
+library(tidyverse)
 # Ne pas tenir compte de ces lignes, c'est le chargement des données
-rp <- aws.s3::s3read_using(FUN = data.table::fread,
-                           object = "/diffusion/RP_LYON_2009_2019.csv",
-                           bucket = "aubinpoissonnier",
-                           opts = list("region" = ""))
+rp <- read_csv("data/RP_LYON_2009_2019.csv")
 ```
 
 On appelle les colonnes des tableaux de données des vecteurs car ce sont des suites de valeurs (la valeur de la variable pour l'individu 1, pour l'individu 2 etc). Une fonction s'écrit sous la forme `nom_fonction()`. On peut utiliser l'onglet "Help" pour connaître les différents arguments ou paramètres d'une fonction. On sépare les arguments des fonctions par des virgules s'il y en a plusieurs. Il faut toujours veiller à fermer les parenthèses. La fonction `str` pour *structure* résume toutes les colonnes du tableau. Elle a un seul argument, l'objet qu'on veut décrire (ici le tableau). La fonction `head` renvoie les premières lignes du tableau, elle peut prendre un deuxième argument pour choisir le nombre de lignes.

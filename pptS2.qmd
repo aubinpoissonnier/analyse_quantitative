@@ -19,27 +19,6 @@ library(tidyverse)
 library(data.table)
 ```
 
-```{r}
-#| include: false
-map(.x = list(
-  "nb_prop_immig.png",
-  "prog_immig.png",
-  "titre_sej.png",
-  "titre_sej_fam.png",
-  "natio.PNG",
-  "reg_nais.png"),
-  .f = 
-    ~ aws.s3::s3read_using(
-  FUN = png::readPNG,
-  # Mettre les options de FUN ici
-  object = paste0("analyse_quanti/", .x),
-  bucket = "aubinpoissonnier",
-  opts = list("region" = ""))
-   %>%
-  png::writePNG(., .x))
-
-```
-
 ## Pourquoi travailler sur le fait migratoire
 
 -   Le droit des étranger.es est surtout droit contre les étranger.es : les moyens dont les États se dotent pour contrôler l'entrée et la vie des étranger.es sur son territoire
@@ -60,7 +39,7 @@ map(.x = list(
 
 ## Le fait migratoire d'après les graphiques de François Héran
 
-![](nb_prop_immig.png)
+![](images/nb_prop_immig.png)
 
 ::: notes
 **Le graphique**
@@ -96,15 +75,15 @@ map(.x = list(
 
 ## La progression mondiale
 
-![](prog_immig.png)
+![](images/prog_immig.png)
 
 ## Les titres de séjour
 
-![](titre_sej.png)
+![](images/titre_sej.png)
 
 ## Les titres de séjours familiaux
 
-![](titre_sej_fam.png)
+![](images/titre_sej_fam.png)
 
 ## Les données du recensement de la population
 
@@ -122,12 +101,7 @@ map(.x = list(
 ```{r donnees}
 #| include: false
 ### Chargement des données
-rp <- aws.s3::s3read_using(
-  FUN = data.table::fread,
-  # Mettre les options de FUN ici
-  object = "analyse_quanti/Ficdep19.csv",
-  bucket = "aubinpoissonnier",
-  opts = list("region" = ""),
+rp <- data.table::fread("data/Ficdep19.csv",
   select = c(AN_RECENS="factor",
              POND="numeric",
              REG_NAIS="factor",
@@ -163,11 +137,11 @@ head(rp, 20)
 
 ::: columns
 ::: {.column width="50%"}
-![](natio.PNG)
+![](images/natio.PNG)
 :::
 
 ::: {.column width="50%"}
-![](reg_nais.png)
+![](images/reg_nais.png)
 :::
 :::
 

@@ -227,7 +227,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-scalecolor" id="toc-sec-scalecolor" class="nav-link" data-scroll-target="#sec-scalecolor"><code>scale_color</code>, <code>scale_fill</code></a></li>
   </ul></li>
   <li><a href="#thèmes" id="toc-thèmes" class="nav-link" data-scroll-target="#thèmes">Thèmes</a></li>
-  <li><a href="#ladd-in-esquisse" id="toc-ladd-in-esquisse" class="nav-link" data-scroll-target="#ladd-in-esquisse">L’add-in <code>esquisse</code></a></li>
   <li><a href="#ressources" id="toc-ressources" class="nav-link" data-scroll-target="#ressources">Ressources</a></li>
   <li><a href="#exercices-1" id="toc-exercices-1" class="nav-link" data-scroll-target="#exercices-1">Exercices</a></li>
   </ul></li>
@@ -280,16 +279,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.3     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre><code>-- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+v dplyr     1.1.2     v readr     2.1.4
+v forcats   1.0.0     v stringr   1.5.0
+v ggplot2   3.4.2     v tibble    3.2.1
+v lubridate 1.9.2     v tidyr     1.3.0
+v purrr     1.0.2     
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
 <p>Dans ce qui suit on va utiliser le jeu de données <code>nycflights13</code>, contenu dans l’extension du même nom (qu’il faut donc avoir installé). Celui-ci correspond aux données de tous les vols au départ d’un des trois aéroports de New-York en 2013. Il a la particularité d’être réparti en trois tables&nbsp;:</p>
@@ -406,7 +405,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(airports, <span class="dv">345</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 8
+<pre><code># A tibble: 1 x 8
   faa   name                lat   lon   alt    tz dst   tzone            
   &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;            
 1 CYF   Chefornak Airport  60.1 -164.    40    -9 A     America/Anchorage</code></pre>
@@ -416,21 +415,21 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(airports, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 8
+<pre><code># A tibble: 5 x 8
   faa   name                            lat   lon   alt    tz dst   tzone       
   &lt;chr&gt; &lt;chr&gt;                         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       
-1 04G   Lansdowne Airport              41.1 -80.6  1044    -5 A     America/New…
-2 06A   Moton Field Municipal Airport  32.5 -85.7   264    -6 A     America/Chi…
-3 06C   Schaumburg Regional            42.0 -88.1   801    -6 A     America/Chi…
-4 06N   Randall Airport                41.4 -74.4   523    -5 A     America/New…
-5 09J   Jekyll Island Airport          31.1 -81.4    11    -5 A     America/New…</code></pre>
+1 04G   Lansdowne Airport              41.1 -80.6  1044    -5 A     America/New~
+2 06A   Moton Field Municipal Airport  32.5 -85.7   264    -6 A     America/Chi~
+3 06C   Schaumburg Regional            42.0 -88.1   801    -6 A     America/Chi~
+4 06N   Randall Airport                41.4 -74.4   523    -5 A     America/New~
+5 09J   Jekyll Island Airport          31.1 -81.4    11    -5 A     America/New~</code></pre>
 </div>
 </div>
 <p><code>slice</code> propose plusieurs variantes utiles, dont <code>slice_head</code> et <code>slice_tail</code>, qui permettent de sélectionner les premières ou les dernières lignes du tableau (on peut spécifier le nombre de lignes souhaitées avec <code>n</code>, ou la proportion avec <code>prop</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_tail</span>(airports, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 8
+<pre><code># A tibble: 3 x 8
   faa   name                        lat   lon   alt    tz dst   tzone           
   &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;           
 1 ZWI   Wilmington Amtrak Station  39.7 -75.6     0    -5 A     America/New_York
@@ -441,7 +440,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_head</span>(airlines, <span class="at">prop =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
+<pre><code># A tibble: 3 x 2
   carrier name                  
   &lt;chr&gt;   &lt;chr&gt;                 
 1 9E      Endeavor Air Inc.     
@@ -453,11 +452,11 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_min</span>(flights, dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 19
+<pre><code># A tibble: 1 x 19
    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
 1  2013    12     7     2040           2123       -43       40           2352
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -466,14 +465,14 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_max</span>(airports, alt, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 8
+<pre><code># A tibble: 5 x 8
   faa   name                              lat   lon   alt    tz dst   tzone     
   &lt;chr&gt; &lt;chr&gt;                           &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     
-1 TEX   Telluride                        38.0 -108.  9078    -7 A     America/D…
-2 TVL   Lake Tahoe Airport               38.9 -120.  8544    -8 A     America/L…
-3 ASE   Aspen Pitkin County Sardy Field  39.2 -107.  7820    -7 A     America/D…
-4 GUC   Gunnison - Crested Butte         38.5 -107.  7678    -7 A     America/D…
-5 BCE   Bryce Canyon                     37.7 -112.  7590    -7 A     America/D…</code></pre>
+1 TEX   Telluride                        38.0 -108.  9078    -7 A     America/D~
+2 TVL   Lake Tahoe Airport               38.9 -120.  8544    -8 A     America/L~
+3 ASE   Aspen Pitkin County Sardy Field  39.2 -107.  7820    -7 A     America/D~
+4 GUC   Gunnison - Crested Butte         38.5 -107.  7678    -7 A     America/D~
+5 BCE   Bryce Canyon                     37.7 -112.  7590    -7 A     America/D~</code></pre>
 </div>
 </div>
 </section>
@@ -484,7 +483,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 27,004 × 19
+<pre><code># A tibble: 27,004 x 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     1      517            515         2      830            819
@@ -497,8 +496,8 @@ Autre Homme
  8  2013     1     1      557            600        -3      709            723
  9  2013     1     1      557            600        -3      838            846
 10  2013     1     1      558            600        -2      753            745
-# ℹ 26,994 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 26,994 more rows
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -507,7 +506,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, dep_delay <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span> dep_delay <span class="sc">&lt;=</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14,919 × 19
+<pre><code># A tibble: 14,919 x 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     1      611            600        11      945            931
@@ -520,8 +519,8 @@ Autre Homme
  8  2013     1     1      920            905        15     1039           1025
  9  2013     1     1     1011           1001        10     1133           1128
 10  2013     1     1     1112           1100        12     1440           1438
-# ℹ 14,909 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 14,909 more rows
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -530,7 +529,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, dep_delay <span class="sc">&gt;=</span> <span class="dv">10</span>, dep_delay <span class="sc">&lt;=</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14,919 × 19
+<pre><code># A tibble: 14,919 x 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     1      611            600        11      945            931
@@ -543,8 +542,8 @@ Autre Homme
  8  2013     1     1      920            905        15     1039           1025
  9  2013     1     1     1011           1001        10     1133           1128
 10  2013     1     1     1112           1100        12     1440           1438
-# ℹ 14,909 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 14,909 more rows
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -553,7 +552,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, distance <span class="sc">&gt;</span> <span class="fu">median</span>(distance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 167,133 × 19
+<pre><code># A tibble: 167,133 x 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     1      517            515         2      830            819
@@ -566,8 +565,8 @@ Autre Homme
  8  2013     1     1      558            600        -2      853            856
  9  2013     1     1      558            600        -2      924            917
 10  2013     1     1      558            600        -2      923            937
-# ℹ 167,123 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 167,123 more rows
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -579,7 +578,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(airports, lat, lon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,458 × 2
+<pre><code># A tibble: 1,458 x 2
      lat    lon
    &lt;dbl&gt;  &lt;dbl&gt;
  1  41.1  -80.6
@@ -592,14 +591,14 @@ Autre Homme
  8  42.9  -76.8
  9  39.8  -76.6
 10  48.1 -123. 
-# ℹ 1,448 more rows</code></pre>
+# i 1,448 more rows</code></pre>
 </div>
 </div>
 <p>Si on fait précéder le nom d’un <code>-</code>, la colonne est éliminée plutôt que sélectionnée&nbsp;:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(airports, <span class="sc">-</span>lat, <span class="sc">-</span>lon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,458 × 6
+<pre><code># A tibble: 1,458 x 6
    faa   name                             alt    tz dst   tzone              
    &lt;chr&gt; &lt;chr&gt;                          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;              
  1 04G   Lansdowne Airport               1044    -5 A     America/New_York   
@@ -612,14 +611,14 @@ Autre Homme
  8 0G7   Finger Lakes Regional Airport    492    -5 A     America/New_York   
  9 0P2   Shoestring Aviation Airfield    1000    -5 U     America/New_York   
 10 0S9   Jefferson County Intl            108    -8 A     America/Los_Angeles
-# ℹ 1,448 more rows</code></pre>
+# i 1,448 more rows</code></pre>
 </div>
 </div>
 <p><code>select</code> comprend toute une série de fonctions facilitant la sélection de colonnes multiples. Par exemple, <code>starts_with</code>, <code>ends_width</code>, <code>contains</code> ou <code>matches</code> permettent d’exprimer des conditions sur les noms de variables.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">starts_with</span>(<span class="st">"dep_"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 2
+<pre><code># A tibble: 336,776 x 2
    dep_time dep_delay
       &lt;int&gt;     &lt;dbl&gt;
  1      517         2
@@ -632,14 +631,14 @@ Autre Homme
  8      557        -3
  9      557        -3
 10      558        -2
-# ℹ 336,766 more rows</code></pre>
+# i 336,766 more rows</code></pre>
 </div>
 </div>
 <p>La syntaxe <code>colonne1:colonne2</code> permet de sélectionner toutes les colonnes situées entre <code>colonne1</code> et <code>colonne2</code> incluses<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year<span class="sc">:</span>day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 3
+<pre><code># A tibble: 336,776 x 3
     year month   day
    &lt;int&gt; &lt;int&gt; &lt;int&gt;
  1  2013     1     1
@@ -652,7 +651,7 @@ Autre Homme
  8  2013     1     1
  9  2013     1     1
 10  2013     1     1
-# ℹ 336,766 more rows</code></pre>
+# i 336,766 more rows</code></pre>
 </div>
 </div>
 <p><code>select</code> propose de nombreuses autres possibilités de sélection qui sont décrites dans <a href="https://tidyselect.r-lib.org/reference/language.html">la documentation de l’extension <code>tidyselect</code></a>.</p>
@@ -660,20 +659,20 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(airports, <span class="at">longitude =</span> lon, <span class="at">latitude =</span> lat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,458 × 8
+<pre><code># A tibble: 1,458 x 8
    faa   name                         latitude longitude   alt    tz dst   tzone
    &lt;chr&gt; &lt;chr&gt;                           &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
- 1 04G   Lansdowne Airport                41.1     -80.6  1044    -5 A     Amer…
- 2 06A   Moton Field Municipal Airpo…     32.5     -85.7   264    -6 A     Amer…
- 3 06C   Schaumburg Regional              42.0     -88.1   801    -6 A     Amer…
- 4 06N   Randall Airport                  41.4     -74.4   523    -5 A     Amer…
- 5 09J   Jekyll Island Airport            31.1     -81.4    11    -5 A     Amer…
- 6 0A9   Elizabethton Municipal Airp…     36.4     -82.2  1593    -5 A     Amer…
- 7 0G6   Williams County Airport          41.5     -84.5   730    -5 A     Amer…
- 8 0G7   Finger Lakes Regional Airpo…     42.9     -76.8   492    -5 A     Amer…
- 9 0P2   Shoestring Aviation Airfield     39.8     -76.6  1000    -5 U     Amer…
-10 0S9   Jefferson County Intl            48.1    -123.    108    -8 A     Amer…
-# ℹ 1,448 more rows</code></pre>
+ 1 04G   Lansdowne Airport                41.1     -80.6  1044    -5 A     Amer~
+ 2 06A   Moton Field Municipal Airpo~     32.5     -85.7   264    -6 A     Amer~
+ 3 06C   Schaumburg Regional              42.0     -88.1   801    -6 A     Amer~
+ 4 06N   Randall Airport                  41.4     -74.4   523    -5 A     Amer~
+ 5 09J   Jekyll Island Airport            31.1     -81.4    11    -5 A     Amer~
+ 6 0A9   Elizabethton Municipal Airp~     36.4     -82.2  1593    -5 A     Amer~
+ 7 0G6   Williams County Airport          41.5     -84.5   730    -5 A     Amer~
+ 8 0G7   Finger Lakes Regional Airpo~     42.9     -76.8   492    -5 A     Amer~
+ 9 0P2   Shoestring Aviation Airfield     39.8     -76.6  1000    -5 U     Amer~
+10 0S9   Jefferson County Intl            48.1    -123.    108    -8 A     Amer~
+# i 1,448 more rows</code></pre>
 </div>
 </div>
 <p>Si les noms de colonnes comportent des espaces ou des caractères spéciaux, on peut les entourer de guillemets (<code>"</code>) ou de quotes inverses (<code>`</code>)&nbsp;:</p>
@@ -685,7 +684,7 @@ Autre Homme
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(tmp, <span class="st">`</span><span class="at">retard départ</span><span class="st">`</span>, <span class="st">`</span><span class="at">retard arrivée</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 2
+<pre><code># A tibble: 336,776 x 2
    `retard départ` `retard arrivée`
              &lt;dbl&gt;            &lt;dbl&gt;
  1               2               11
@@ -698,7 +697,7 @@ Autre Homme
  8              -3              -14
  9              -3               -8
 10              -2                8
-# ℹ 336,766 more rows</code></pre>
+# i 336,766 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -709,7 +708,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 19
+<pre><code># A tibble: 336,776 x 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013    12     7     2040           2123       -43       40           2352
@@ -722,8 +721,8 @@ Autre Homme
  8  2013     3    30     2030           2055       -25     2213           2250
  9  2013     3     2     1431           1455       -24     1601           1631
 10  2013     5     5      934            958       -24     1225           1309
-# ℹ 336,766 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 336,766 more rows
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -732,7 +731,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, month, dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 19
+<pre><code># A tibble: 336,776 x 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1    11     1900           1930       -30     2233           2243
@@ -745,8 +744,8 @@ Autre Homme
  8  2013     1    14     2050           2110       -20     2329           2355
  9  2013     1     4     2140           2159       -19     2241           2316
 10  2013     1    11     1947           2005       -18     2209           2230
-# ℹ 336,766 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 336,766 more rows
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -755,7 +754,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_delay))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 19
+<pre><code># A tibble: 336,776 x 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     9      641            900      1301     1242           1530
@@ -768,8 +767,8 @@ Autre Homme
  8  2013     6    27      959           1900       899     1236           2226
  9  2013     7    22     2257            759       898      121           1026
 10  2013    12     5      756           1700       896     1058           2020
-# ℹ 336,766 more rows
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 336,766 more rows
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -779,13 +778,13 @@ Autre Homme
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_delay))</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(tmp, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 19
+<pre><code># A tibble: 3 x 19
    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
 1  2013     1     9      641            900      1301     1242           1530
 2  2013     6    15     1432           1935      1137     1607           2120
 3  2013     1    10     1121           1635      1126     1239           1810
-# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
@@ -800,7 +799,7 @@ Autre Homme
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, air_time, duree_h)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 2
+<pre><code># A tibble: 336,776 x 2
    air_time duree_h
       &lt;dbl&gt;   &lt;dbl&gt;
  1      227   3.78 
@@ -813,7 +812,7 @@ Autre Homme
  8       53   0.883
  9      140   2.33 
 10      138   2.3  
-# ℹ 336,766 more rows</code></pre>
+# i 336,766 more rows</code></pre>
 </div>
 </div>
 <p>On peut créer plusieurs nouvelles colonnes en une seule commande, et les expressions successives peuvent prendre en compte les résultats des calculs précédents. L’exemple suivant convertit d’abord la durée en heures dans une variable <code>duree_h</code> et la distance en kilomètres dans une variable <code>distance_km</code>, puis utilise ces nouvelles colonnes pour calculer la vitesse en km/h.</p>
@@ -827,7 +826,7 @@ Autre Homme
 <span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, air_time, duree_h, distance, distance_km, vitesse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 5
+<pre><code># A tibble: 336,776 x 5
    air_time duree_h distance distance_km vitesse
       &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
  1      227   3.78      1400       2253.    596.
@@ -840,7 +839,7 @@ Autre Homme
  8       53   0.883      229        369.    417.
  9      140   2.33       944       1519.    651.
 10      138   2.3        733       1180.    513.
-# ℹ 336,766 more rows</code></pre>
+# i 336,766 more rows</code></pre>
 </div>
 </div>
 <p>L’avantage d’utiliser <code>mutate</code> est double. D’abord il permet d’éviter d’avoir à saisir le nom du tableau de données dans les conditions d’un <code>ifelse</code> ou d’un <code>case_when</code>&nbsp;:</p>
@@ -865,7 +864,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(<span class="fu">select</span>(<span class="fu">filter</span>(flights, dest <span class="sc">==</span> <span class="st">"LAX"</span>), dep_delay, arr_delay), dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16,174 × 2
+<pre><code># A tibble: 16,174 x 2
    dep_delay arr_delay
        &lt;dbl&gt;     &lt;dbl&gt;
  1       -16       -31
@@ -878,7 +877,7 @@ Autre Homme
  8       -15       -35
  9       -15       -17
 10       -15        -7
-# ℹ 16,164 more rows</code></pre>
+# i 16,164 more rows</code></pre>
 </div>
 </div>
 <p>Cette notation a plusieurs inconvénients&nbsp;:</p>
@@ -893,7 +892,7 @@ Autre Homme
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">select</span>(tmp, dep_delay, arr_delay)</span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(tmp, dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16,174 × 2
+<pre><code># A tibble: 16,174 x 2
    dep_delay arr_delay
        &lt;dbl&gt;     &lt;dbl&gt;
  1       -16       -31
@@ -906,7 +905,7 @@ Autre Homme
  8       -15       -35
  9       -15       -17
 10       -15        -7
-# ℹ 16,164 more rows</code></pre>
+# i 16,164 more rows</code></pre>
 </div>
 </div>
 <p>C’est nettement plus lisible, l’ordre des opérations est le bon, et les paramètres sont bien rattachés à leur fonction. Par contre, ça reste un peu “verbeux”, et on crée un objet temporaire <code>tmp</code> dont on n’a pas réellement besoin.</p>
@@ -915,7 +914,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, dest <span class="sc">==</span> <span class="st">"LAX"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16,174 × 22
+<pre><code># A tibble: 16,174 x 22
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     1      558            600        -2      924            917
@@ -928,8 +927,8 @@ Autre Homme
  8  2013     1     1      856            900        -4     1226           1220
  9  2013     1     1      859            900        -1     1223           1225
 10  2013     1     1      921            900        21     1237           1227
-# ℹ 16,164 more rows
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 16,164 more rows
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -938,7 +937,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">"LAX"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16,174 × 22
+<pre><code># A tibble: 16,174 x 22
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     1      558            600        -2      924            917
@@ -951,8 +950,8 @@ Autre Homme
  8  2013     1     1      856            900        -4     1226           1220
  9  2013     1     1      859            900        -1     1223           1225
 10  2013     1     1      921            900        21     1237           1227
-# ℹ 16,164 more rows
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 16,164 more rows
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -962,7 +961,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="fu">filter</span>(flights, dest <span class="sc">==</span> <span class="st">"LAX"</span>), dep_delay, arr_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16,174 × 2
+<pre><code># A tibble: 16,174 x 2
    dep_delay arr_delay
        &lt;dbl&gt;     &lt;dbl&gt;
  1        -2         7
@@ -975,14 +974,14 @@ Autre Homme
  8        -4         6
  9        -1        -2
 10        21        10
-# ℹ 16,164 more rows</code></pre>
+# i 16,164 more rows</code></pre>
 </div>
 </div>
 <p>On va pouvoir faire&nbsp;:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">"LAX"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(dep_delay, arr_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16,174 × 2
+<pre><code># A tibble: 16,174 x 2
    dep_delay arr_delay
        &lt;dbl&gt;     &lt;dbl&gt;
  1        -2         7
@@ -995,7 +994,7 @@ Autre Homme
  8        -4         6
  9        -1        -2
 10        21        10
-# ℹ 16,164 more rows</code></pre>
+# i 16,164 more rows</code></pre>
 </div>
 </div>
 <p>À chaque fois, le résultat de ce qui se trouve à gauche du <em>pipe</em> est passé comme premier argument à ce qui se trouve à droite&nbsp;: on part de l’objet <code>flights</code>, qu’on passe comme premier argument à la fonction <code>filter</code>, puis on passe le résultat de ce <code>filter</code> comme premier argument du <code>select</code>.</p>
@@ -1007,7 +1006,7 @@ Autre Homme
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_delay, arr_delay) <span class="sc">%&gt;%</span></span>
 <span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16,174 × 2
+<pre><code># A tibble: 16,174 x 2
    dep_delay arr_delay
        &lt;dbl&gt;     &lt;dbl&gt;
  1       -16       -31
@@ -1020,7 +1019,7 @@ Autre Homme
  8       -15       -35
  9       -15       -17
 10       -15        -7
-# ℹ 16,164 more rows</code></pre>
+# i 16,164 more rows</code></pre>
 </div>
 </div>
 <p>Évidemment, il est naturel de vouloir récupérer le résultat final d’un <em>pipeline</em> pour le stocker dans un objet. On peut stocker le résultat du <em>pipeline</em> ci-dessus dans un nouveau tableau <code>delay_la</code> de la manière suivante&nbsp;:</p>
@@ -1051,7 +1050,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 22
+<pre><code># A tibble: 336,776 x 22
 # Groups:   month [12]
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -1065,8 +1064,8 @@ Autre Homme
  8  2013     1     1      557            600        -3      709            723
  9  2013     1     1      557            600        -3      838            846
 10  2013     1     1      558            600        -2      753            745
-# ℹ 336,766 more rows
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 336,766 more rows
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -1077,7 +1076,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 22
+<pre><code># A tibble: 12 x 22
 # Groups:   month [12]
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -1093,7 +1092,7 @@ Autre Homme
 10  2013    10     1      447            500       -13      614            648
 11  2013    11     1        5           2359         6      352            345
 12  2013    12     1       13           2359        14      446            445
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -1103,7 +1102,7 @@ Autre Homme
 <div class="cell">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> <span class="fu">slice_max</span>(dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 22
+<pre><code># A tibble: 12 x 22
 # Groups:   month [12]
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -1119,7 +1118,7 @@ Autre Homme
 10  2013    10    14     2042            900       702     2255           1127
 11  2013    11     3      603           1645       798      829           1913
 12  2013    12     5      756           1700       896     1058           2020
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -1135,7 +1134,7 @@ Autre Homme
 <pre><code>Adding missing grouping variables: `carrier`</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 3
+<pre><code># A tibble: 336,776 x 3
 # Groups:   carrier [16]
    carrier dep_delay mean_delay_carrier
    &lt;chr&gt;       &lt;dbl&gt;              &lt;dbl&gt;
@@ -1149,7 +1148,7 @@ Autre Homme
  8 EV             -3              20.0 
  9 B6             -3              13.0 
 10 AA             -2               8.59
-# ℹ 336,766 more rows</code></pre>
+# i 336,766 more rows</code></pre>
 </div>
 </div>
 <p>Ceci peut permettre, par exemple, de déterminer si un retard donné est supérieur ou inférieur au retard médian de la compagnie&nbsp;:</p>
@@ -1169,7 +1168,7 @@ Autre Homme
 <pre><code>Adding missing grouping variables: `carrier`</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 4
+<pre><code># A tibble: 336,776 x 4
 # Groups:   carrier [16]
    carrier dep_delay median_delay delay_carrier    
    &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;            
@@ -1183,7 +1182,7 @@ Autre Homme
  8 EV             -3           -1 Inférieur ou égal
  9 B6             -3           -1 Inférieur ou égal
 10 AA             -2           -3 Supérieur        
-# ℹ 336,766 more rows</code></pre>
+# i 336,766 more rows</code></pre>
 </div>
 </div>
 <p><code>group_by</code> peut aussi être utile avec <code>filter</code>, par exemple pour sélectionner <em>pour chaque mois</em> les vols avec un retard au départ plus élevé que le retard moyen ce mois-ci.</p>
@@ -1192,7 +1191,7 @@ Autre Homme
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dep_delay <span class="sc">&gt;=</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 78,164 × 22
+<pre><code># A tibble: 78,164 x 22
 # Groups:   month [12]
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -1206,8 +1205,8 @@ Autre Homme
  8  2013     1     1      811            630       101     1047            830
  9  2013     1     1      826            715        71     1136           1045
 10  2013     1     1      848           1835       853     1001           1950
-# ℹ 78,154 more rows
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 78,154 more rows
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -1232,7 +1231,7 @@ Warning
 <span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
 <span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dep_delay))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 22
+<pre><code># A tibble: 336,776 x 22
 # Groups:   month [12]
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -1246,8 +1245,8 @@ Warning
  8  2013     6    27      959           1900       899     1236           2226
  9  2013     7    22     2257            759       898      121           1026
 10  2013    12     5      756           1700       896     1058           2020
-# ℹ 336,766 more rows
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 336,766 more rows
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -1258,7 +1257,7 @@ Warning
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dep_delay), <span class="at">.by_group =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 336,776 × 22
+<pre><code># A tibble: 336,776 x 22
 # Groups:   month [12]
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -1272,8 +1271,8 @@ Warning
  8  2013     1     1     2343           1724       379      314           1938
  9  2013     1     2     2131           1512       379     2340           1741
 10  2013     1     7     2021           1415       366     2332           1724
-# ℹ 336,766 more rows
-# ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+# i 336,766 more rows
+# i 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, duree_h &lt;dbl&gt;,
 #   distance_km &lt;dbl&gt;, vitesse &lt;dbl&gt;</code></pre>
@@ -1290,7 +1289,7 @@ Warning
 <span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">retard_arr =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
+<pre><code># A tibble: 1 x 2
   retard_dep retard_arr
        &lt;dbl&gt;      &lt;dbl&gt;
 1       12.6       6.90</code></pre>
@@ -1306,7 +1305,7 @@ Warning
 <span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 4
+<pre><code># A tibble: 12 x 4
    month max_delay min_delay mean_delay
    &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
  1     1      1301       -30      10.0 
@@ -1329,7 +1328,7 @@ Warning
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
 <span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">nb =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 105 × 2
+<pre><code># A tibble: 105 x 2
    dest     nb
    &lt;chr&gt; &lt;int&gt;
  1 ABQ     254
@@ -1342,7 +1341,7 @@ Warning
  8 BDL     443
  9 BGR     375
 10 BHM     297
-# ℹ 95 more rows</code></pre>
+# i 95 more rows</code></pre>
 </div>
 </div>
 <p><code>n()</code> peut aussi être utilisée avec <code>filter</code> et <code>mutate</code>.</p>
@@ -1351,7 +1350,7 @@ Warning
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
 <span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 105 × 2
+<pre><code># A tibble: 105 x 2
    dest      n
    &lt;chr&gt; &lt;int&gt;
  1 ABQ     254
@@ -1364,7 +1363,7 @@ Warning
  8 BDL     443
  9 BGR     375
 10 BHM     297
-# ℹ 95 more rows</code></pre>
+# i 95 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -1381,7 +1380,7 @@ Warning
 `.groups` argument.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,113 × 3
+<pre><code># A tibble: 1,113 x 3
 # Groups:   month [12]
    month dest  retard_moyen
    &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -1395,7 +1394,7 @@ Warning
  8     6 BHM           57.2
  9     1 TUL           55.2
 10     1 SAV           54.8
-# ℹ 1,103 more rows</code></pre>
+# i 1,103 more rows</code></pre>
 </div>
 </div>
 <p>On peut également utiliser <code>count</code> sur plusieurs variables. Les commandes suivantes comptent le nombre de vols pour chaque couple aéroport de départ / aéroport d’arrivée, et trie le résultat par nombre de vols décroissant. Ici la colonne qui contient le nombre de vols, créée par <code>count</code>, s’appelle <code>n</code> par défaut&nbsp;:</p>
@@ -1404,7 +1403,7 @@ Warning
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(origin, dest) <span class="sc">%&gt;%</span></span>
 <span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 224 × 3
+<pre><code># A tibble: 224 x 3
    origin dest      n
    &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
  1 JFK    LAX   11262
@@ -1417,7 +1416,7 @@ Warning
  8 LGA    MIA    5781
  9 JFK    MCO    5464
 10 EWR    BOS    5327
-# ℹ 214 more rows</code></pre>
+# i 214 more rows</code></pre>
 </div>
 </div>
 <p>On peut utiliser plusieurs opérations de groupage dans le même <em>pipeline</em>. Ainsi, si on souhaite déterminer le couple aéroport de départ / aéroport d’arrivée ayant le retard moyen au départ le plus élevé pour chaque mois de l’année, on devra procéder en deux étapes&nbsp;:</p>
@@ -1437,7 +1436,7 @@ Warning
 the `.groups` argument.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 4
+<pre><code># A tibble: 12 x 4
 # Groups:   month [12]
    month origin dest  retard_moyen
    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt;
@@ -1468,7 +1467,7 @@ the `.groups` argument.</code></pre>
 the `.groups` argument.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,313 × 4
+<pre><code># A tibble: 2,313 x 4
 # Groups:   month, origin [36]
    month origin dest  retard_moyen
    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt;
@@ -1482,7 +1481,7 @@ the `.groups` argument.</code></pre>
  8     1 EWR    BQN          12.3 
  9     1 EWR    BTV          20.5 
 10     1 EWR    BUF          23.1 
-# ℹ 2,303 more rows</code></pre>
+# i 2,303 more rows</code></pre>
 </div>
 </div>
 <p><code>dplyr</code> nous le signale d’ailleurs via un message d’avertissement : <code>summarise() has grouped output by 'month', 'origin'</code>.</p>
@@ -1497,7 +1496,7 @@ the `.groups` argument.</code></pre>
 `.groups` argument.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 36 × 3
+<pre><code># A tibble: 36 x 3
 # Groups:   month [12]
    month dest  retard_moyen
    &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -1511,7 +1510,7 @@ the `.groups` argument.</code></pre>
  8     3 PVD           47.5
  9     3 CAE           46.9
 10     4 OKC           47.0
-# ℹ 26 more rows</code></pre>
+# i 26 more rows</code></pre>
 </div>
 </div>
 <p>On peut à tout moment “dégrouper” un tableau à l’aide de <code>ungroup</code>. C’est nécessaire, dans l’exemple précédent, si on veut seulement récupérer les trois retards les plus importants pour l’ensemble des couples mois / destination.</p>
@@ -1526,7 +1525,7 @@ the `.groups` argument.</code></pre>
 `.groups` argument.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
+<pre><code># A tibble: 3 x 3
   month dest  retard_moyen
   &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt;
 1    12 BZN           75  
@@ -1546,7 +1545,7 @@ the `.groups` argument.</code></pre>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(month, dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,113 × 3
+<pre><code># A tibble: 1,113 x 3
    month dest      n
    &lt;int&gt; &lt;chr&gt; &lt;int&gt;
  1     1 ALB      64
@@ -1559,7 +1558,7 @@ the `.groups` argument.</code></pre>
  8     1 BOS    1245
  9     1 BQN      93
 10     1 BTV     223
-# ℹ 1,103 more rows</code></pre>
+# i 1,103 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -1870,7 +1869,7 @@ Note
 <div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"economics"</span>)</span>
 <span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>economics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 574 × 6
+<pre><code># A tibble: 574 x 6
    date         pce    pop psavert uempmed unemploy
    &lt;date&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
  1 1967-07-01  507. 198712    12.6     4.5     2944
@@ -1883,7 +1882,7 @@ Note
  8 1968-02-01  534. 199920    12.3     4.5     3001
  9 1968-03-01  544. 200056    11.7     4.1     2877
 10 1968-04-01  544  200208    12.3     4.6     2709
-# ℹ 564 more rows</code></pre>
+# i 564 more rows</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -2478,28 +2477,6 @@ Note
 </div>
 </div>
 </section>
-<section id="ladd-in-esquisse" class="level2">
-<h2 class="anchored" data-anchor-id="ladd-in-esquisse">L’add-in <code>esquisse</code></h2>
-<p><code>esquisse</code> est un package développé notamment par <a href="https://twitter.com/_pvictorr">Victor Perrier</a> de <a href="https://www.dreamrs.fr/">dreamRs</a> et qui fournit une interface graphique pour la construction de graphiques avec <code>ggplot2</code>.</p>
-<p>Pour l’utiliser, il faut évidemment préalablement installer l’extension&nbsp;:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb197"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"esquisse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Pour lancer l’interface, ouvrez le menu <em>Addins</em> dans la barre d’outils de RStudio, et cliquez sur <em>‘ggplot2’ builder</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
-<p><img src="resources/screenshots/esquisse_addin_menu.png" class="img-fluid"></p>
-<p>Une fenêtre s’ouvre : la première étape consiste à choisir un <em>data frame</em> de votre environnement, et éventuellement à ne sélectionner que certaines de ses variables.</p>
-<p><img src="resources/screenshots/esquisse_choose_dataset.png" class="img-fluid" alt="Choix d'un data frame"> Une fois le choix effectué, cliquez sur <em>Validate imported data</em>.</p>
-<p>L’interface principale s’affiche alors. La liste des variables du <em>data frame</em> apparaît en haut, et vous pouvez les faire glisser dans les zones <em>X</em>, <em>Y</em>, <em>Fill</em>, <em>Color</em>, <em>Size</em> et <em>Facet</em> pour créer des mappages. Le graphique se met automatiquement à jour.</p>
-<p><img src="resources/screenshots/esquisse_plot.png" class="img-fluid"></p>
-<p>Par défaut, <code>esquisse</code> sélectionne le type de graphique le plus approprié selon la nature de vos variables. Mais vous pouvez choisir un autre type de graphique à l’aide de l’icône en haut à gauche, parmi onze disponibles (dont <em>Auto</em>):</p>
-<p><img src="resources/screenshots/esquisse_chart_type.png" class="img-fluid">.</p>
-<p>Enfin, une série de menus en bas de l’interface vous permet de personnaliser les titres, les annotations (<em>labels</em>), la présentation ou de filtrer des valeurs de vos variables.</p>
-<p>Quand vous avez généré un graphique que vous souhaitez conserver, ouvrez le menu <em>Export &amp; code</em>&nbsp;:</p>
-<p><img src="resources/screenshots/esquisse_export.png" class="img-fluid"></p>
-<p>Vous y trouverez le code R correspondant au graphique actuellement affiché. Vous pouvez dès lors le copier pour le coller dans votre script, ou cliquer sur <em>Insert code in script</em> pour l’insérer directement dans votre script à l’endroit où se trouve votre curseur.</p>
-<p><code>esquisse</code> ne propose pas (encore) tous les <code>geom</code> ou toutes les possibilités de <code>ggplot2</code>, mais ça peut être un outil très utile et pratique pour une exploration rapide de données ou lorsqu’on est un peu perdu dans la syntaxe et les fonctions de l’extension.</p>
-<p>Pour plus d’informations, vous pouvez vous référer à la <a href="https://github.com/dreamRs/esquisse">page du projet sur GitHub</a> (en anglais).</p>
-</section>
 <section id="ressources" class="level2">
 <h2 class="anchored" data-anchor-id="ressources">Ressources</h2>
 <p><a href="http://ggplot2.tidyverse.org/index.html">La documentation officielle</a> (en anglais) de <code>ggplot2</code> est très complète et accessible en ligne.</p>
@@ -2513,11 +2490,11 @@ Note
 <h2 class="anchored" data-anchor-id="exercices-1">Exercices</h2>
 <p>Pour les exercices qui suivent, on commence par charger les extensions nécessaires et les données du jeu de données <code>rp2018</code>. On crée alors un objet <code>rp69</code> comprenant uniquement les communes du Rhône et de la Loire.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb198"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb198-2"><a href="#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span>
-<span id="cb198-3"><a href="#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(rp2018)</span>
-<span id="cb198-4"><a href="#cb198-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-5"><a href="#cb198-5" aria-hidden="true" tabindex="-1"></a>rp69 <span class="ot">&lt;-</span> <span class="fu">filter</span>(rp2018, departement <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Rhône"</span>, <span class="st">"Loire"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb197"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb197-2"><a href="#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span>
+<span id="cb197-3"><a href="#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(rp2018)</span>
+<span id="cb197-4"><a href="#cb197-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-5"><a href="#cb197-5" aria-hidden="true" tabindex="-1"></a>rp69 <span class="ot">&lt;-</span> <span class="fu">filter</span>(rp2018, departement <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Rhône"</span>, <span class="st">"Loire"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Exercice 1</strong></p>
 <p>Faire un nuage de points croisant le pourcentage de sans diplôme (<code>dipl_aucun</code>) et le pourcentage d’ouvriers (<code>ouvr</code>).</p>
@@ -2555,7 +2532,6 @@ Note
 <ol>
 <li id="fn1"><p>Vous pouvez aussi lancer la commande <code>esquisser::esquisse()</code> dans la Console.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Il est également possible de renommer des colonnes directement avec <code>select</code>, avec la même syntaxe que pour <code>rename</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Vous pouvez aussi lancer la commande <code>esquisser::esquisse()</code> dans la Console.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

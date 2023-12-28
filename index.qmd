@@ -2,4 +2,4 @@
 title: "Analyse quantitative - M2 Villes et environnements urbains"
 ---
 
-Ce site est dédié au cours d'analyse quantitative du premier semestre du M2 Villes et environnements urbains. Les pages intitulées "Séance" reprennent dans un autre ordre [l'introduction à R et au tidyverse de Julien Barnier](https://juba.github.io/tidyverse/). Elles doivent vous servir de documentation. Tout leur contenu n'aura pas été vu en cours et ne vous sera pas forcément utile, il faut néanmoins vous y référez pour faciliter l'écriture de votre code.
+Ce site est dédié au cours d'analyse quantitative du premier semestre du M2 Villes et environnements urbains. Les deux premières séances reprennent en partie [l'introduction à R et au tidyverse de Julien Barnier](https://juba.github.io/tidyverse/).

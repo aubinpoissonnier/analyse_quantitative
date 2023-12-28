@@ -16,6 +16,7 @@ website:
       - pptS4.qmd
       - DM_corrige_code.qmd
       - pptS5.qmd
+      - Seance6.qmd
 format:
   html:
     theme: cosmo

@@ -222,10 +222,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<style>
-body {
-text-align: justify}
-</style>
 <section id="acquis-des-premières-et-deuxièmes-séances-programme-du-jour" class="level2">
 <h2 class="anchored" data-anchor-id="acquis-des-premières-et-deuxièmes-séances-programme-du-jour">Acquis des premières et deuxièmes séances, programme du jour</h2>
 <p>La première séance a introduit le langage de programmation R et l’interface RStudio. La deuxième séance a introduit l’univers tidyverse à l’aide de l’exemple du cours au collège de France de François Héran.<br>
@@ -240,18 +236,19 @@ Cette troisième séance reviendra d’abord sur la production de tri à plats e
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regardons à nouveau la structure de l'extrait du recensement</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Classes 'data.table' and 'data.frame':  377833 obs. of  10 variables:
- $ annee : Factor w/ 2 levels "2009","2019": 2 2 2 2 2 2 2 2 2 2 ...
- $ ARM   : int  69388 69388 69388 69384 69383 69388 69384 69383 69383 69383 ...
- $ IPONDI: num  1.178 1.178 1.178 2.965 0.956 ...
- $ CS1   : Factor w/ 8 levels "1","2","3","4",..: 8 3 8 8 8 4 5 8 4 6 ...
- $ IMMI  : Factor w/ 2 levels "1","2": 2 2 2 1 2 2 2 2 2 2 ...
- $ SEXE  : Factor w/ 2 levels "1","2": 1 2 1 2 1 1 2 1 2 1 ...
- $ AGEREV: int  14 43 11 85 23 28 50 23 23 21 ...
- $ NPERR : int  3 3 3 1 1 1 1 2 2 1 ...
- $ NBPI  : int  3 3 3 4 1 1 2 1 1 3 ...
- $ LPRM  : Factor w/ 10 levels "1","2","3","4",..: 3 1 3 1 1 1 1 1 2 1 ...
- - attr(*, ".internal.selfref")=&lt;externalptr&gt; </code></pre>
+<pre><code>tibble [377,833 x 12] (S3: tbl_df/tbl/data.frame)
+ $ annee          : Factor w/ 2 levels "2009","2019": 2 2 2 2 2 2 2 2 2 2 ...
+ $ ARM            : num [1:377833] 69388 69388 69388 69384 69383 ...
+ $ IPONDI         : num [1:377833] 1.178 1.178 1.178 2.965 0.956 ...
+ $ CS1            : Factor w/ 8 levels "1","2","3","4",..: 8 3 8 8 8 4 5 8 4 6 ...
+ $ IMMI           : Factor w/ 2 levels "Pas immigré.e",..: 1 1 1 2 1 1 1 1 1 1 ...
+ $ SEXE           : Factor w/ 2 levels "Femme","Homme": 2 1 2 1 2 2 1 2 1 2 ...
+ $ AGEREV         : num [1:377833] 14 43 11 85 23 28 50 23 23 21 ...
+ $ NPERR          : num [1:377833] 3 3 3 1 1 1 1 2 2 1 ...
+ $ NBPI           : num [1:377833] 3 3 3 4 1 1 2 1 1 3 ...
+ $ LPRM           : Factor w/ 10 levels "1","2","3","4",..: 3 1 3 1 1 1 1 1 2 1 ...
+ $ arrondissements: Factor w/ 9 levels "1er","2nd","3e",..: 8 8 8 4 3 8 4 3 3 3 ...
+ $ csp            : Factor w/ 8 levels "Agriculteurs exploitants",..: 8 3 8 8 8 4 5 8 4 6 ...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La variable annee est un facteur à deux modalités</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rp<span class="sc">$</span>annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -273,80 +270,60 @@ Cette troisième séance reviendra d’abord sur la production de tri à plats e
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, <span class="at">wt =</span> IPONDI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   annee        n
-1:  2009 479786.7
-2:  2019 522896.5</code></pre>
+<pre><code># A tibble: 2 x 2
+  annee       n
+  &lt;fct&gt;   &lt;dbl&gt;
+1 2009  479787.
+2 2019  522897.</code></pre>
 </div>
 </div>
 <p>Complétez ce code pour compter la population lyonnaise par arrondissement en 2009 et 2019</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, <span class="at">wt =</span> IPONDI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, <span class="at">wt =</span> IPONDI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    annee   ARM         n
- 1:  2009 69381  28283.00
- 2:  2009 69382  30518.00
- 3:  2009 69383  95462.80
- 4:  2009 69384  35056.55
- 5:  2009 69385  46797.00
- 6:  2009 69386  49141.42
- 7:  2009 69387  69162.78
- 8:  2009 69388  76781.25
- 9:  2009 69389  48583.91
-10:  2019 69381  29648.00
-11:  2019 69382  31298.00
-12:  2019 69383 102720.60
-13:  2019 69384  36051.48
-14:  2019 69385  49670.00
-15:  2019 69386  52850.00
-16:  2019 69387  82545.87
-17:  2019 69388  86135.57
-18:  2019 69389  51977.00</code></pre>
+<pre><code># A tibble: 18 x 3
+   annee arrondissements       n
+   &lt;fct&gt; &lt;fct&gt;             &lt;dbl&gt;
+ 1 2009  1er              28283.
+ 2 2009  2nd              30518.
+ 3 2009  3e               95463.
+ 4 2009  4e               35057.
+ 5 2009  5e               46797.
+ 6 2009  6e               49141.
+ 7 2009  7e               69163.
+ 8 2009  8e               76781.
+ 9 2009  9e               48584.
+10 2019  1er              29648.
+11 2019  2nd              31298.
+12 2019  3e              102721.
+13 2019  4e               36051.
+14 2019  5e               49670.
+15 2019  6e               52850.
+16 2019  7e               82546.
+17 2019  8e               86136.
+18 2019  9e               51977.</code></pre>
 </div>
 </div>
 <p>Complétez ce code pour compter la population lyonnaise par arrondissement et par sexe en 2009 et 2019</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, SEXE, <span class="at">wt =</span> IPONDI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, SEXE, <span class="at">wt =</span> IPONDI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    annee   ARM SEXE        n
- 1:  2009 69381    1 13550.49
- 2:  2009 69381    2 14732.51
- 3:  2009 69382    1 14440.44
- 4:  2009 69382    2 16077.56
- 5:  2009 69383    1 44708.85
- 6:  2009 69383    2 50753.96
- 7:  2009 69384    1 16076.23
- 8:  2009 69384    2 18980.32
- 9:  2009 69385    1 21116.68
-10:  2009 69385    2 25680.32
-11:  2009 69386    1 22276.92
-12:  2009 69386    2 26864.50
-13:  2009 69387    1 32999.05
-14:  2009 69387    2 36163.73
-15:  2009 69388    1 35639.23
-16:  2009 69388    2 41142.01
-17:  2009 69389    1 23050.31
-18:  2009 69389    2 25533.60
-19:  2019 69381    1 14533.11
-20:  2019 69381    2 15114.89
-21:  2019 69382    1 14637.82
-22:  2019 69382    2 16660.18
-23:  2019 69383    1 48527.88
-24:  2019 69383    2 54192.73
-25:  2019 69384    1 16538.39
-26:  2019 69384    2 19513.09
-27:  2019 69385    1 22921.85
-28:  2019 69385    2 26748.15
-29:  2019 69386    1 24357.64
-30:  2019 69386    2 28492.36
-31:  2019 69387    1 39524.19
-32:  2019 69387    2 43021.68
-33:  2019 69388    1 40121.70
-34:  2019 69388    2 46013.87
-35:  2019 69389    1 24781.01
-36:  2019 69389    2 27195.99
-    annee   ARM SEXE        n</code></pre>
+<pre><code># A tibble: 36 x 4
+   annee arrondissements SEXE       n
+   &lt;fct&gt; &lt;fct&gt;           &lt;fct&gt;  &lt;dbl&gt;
+ 1 2009  1er             Femme 14733.
+ 2 2009  1er             Homme 13550.
+ 3 2009  2nd             Femme 16078.
+ 4 2009  2nd             Homme 14440.
+ 5 2009  3e              Femme 50754.
+ 6 2009  3e              Homme 44709.
+ 7 2009  4e              Femme 18980.
+ 8 2009  4e              Homme 16076.
+ 9 2009  5e              Femme 25680.
+10 2009  5e              Homme 21117.
+# i 26 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -358,19 +335,21 @@ Cette troisième séance reviendra d’abord sur la production de tri à plats e
 <p>Complétez ce code pour calculer la part de chaque arrondissement dans la population lyonnaise en 2019</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ARM, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(arrondissements, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     ARM         n          p
-1: 69381  57931.00 0.05777597
-2: 69382  61816.00 0.06165058
-3: 69383 198183.41 0.19765306
-4: 69384  71108.03 0.07091774
-5: 69385  96467.00 0.09620885
-6: 69386 101991.42 0.10171848
-7: 69387 151708.64 0.15130266
-8: 69388 162916.82 0.16248085
-9: 69389 100560.91 0.10029180</code></pre>
+<pre><code># A tibble: 9 x 3
+  arrondissements       n      p
+  &lt;fct&gt;             &lt;dbl&gt;  &lt;dbl&gt;
+1 1er              57931. 0.0578
+2 2nd              61816. 0.0617
+3 3e              198183. 0.198 
+4 4e               71108. 0.0709
+5 5e               96467. 0.0962
+6 6e              101991. 0.102 
+7 7e              151709. 0.151 
+8 8e              162917. 0.162 
+9 9e              100561. 0.100 </code></pre>
 </div>
 </div>
 </section>
@@ -391,35 +370,35 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quelle est la part de femmes dans le premier arrondissement lyonnais en 2019 ?</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, ARM) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, arrondissements) <span class="sc">%&gt;%</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="dv">2019</span> <span class="sc">&amp;</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>           ARM <span class="sc">==</span> <span class="dv">69381</span> <span class="sc">&amp;</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>           SEXE <span class="sc">==</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="st">"2019"</span> <span class="sc">&amp;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>           arrondissements <span class="sc">==</span> <span class="st">"1er"</span> <span class="sc">&amp;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>           SEXE <span class="sc">==</span> <span class="st">"Femme"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 5
-  annee   ARM SEXE       n     p
-  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1 2019  69381 2     15115. 0.510</code></pre>
+<pre><code># A tibble: 1 x 5
+  annee arrondissements SEXE       n     p
+  &lt;fct&gt; &lt;fct&gt;           &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 2019  1er             Femme 15115. 0.510</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Il y a 51,0% de femmes dans le 1er arrondissement en 2019.</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quelle part représentent les femmes du premier arrondissement parmi la population lyonnaise en 2019 ?</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee) <span class="sc">%&gt;%</span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="dv">2019</span> <span class="sc">&amp;</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>           ARM <span class="sc">==</span> <span class="dv">69381</span> <span class="sc">&amp;</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>           SEXE <span class="sc">==</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="st">"2019"</span> <span class="sc">&amp;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>           arrondissements <span class="sc">==</span> <span class="st">"1er"</span> <span class="sc">&amp;</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>           SEXE <span class="sc">==</span> <span class="st">"Femme"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 5
-  annee   ARM SEXE       n      p
-  &lt;fct&gt; &lt;int&gt; &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 2019  69381 2     15115. 0.0289</code></pre>
+<pre><code># A tibble: 1 x 5
+  annee arrondissements SEXE       n      p
+  &lt;fct&gt; &lt;fct&gt;           &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 2019  1er             Femme 15115. 0.0289</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Les femmes du 1er arrondissement représentent 2,9% de la population lyonnaise en 2019.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -434,82 +413,82 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La part d'hommes et de femmes par arrondissement en 2019</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Code pour obtenir le tableau sous format long</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, ARM) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, arrondissements) <span class="sc">%&gt;%</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="st">"2019"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>annee, <span class="sc">-</span>n) <span class="co"># On enlève la colonne des effectifs pour ne garder que les pourcentages</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 18 × 3
-     ARM SEXE      p
-   &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;
- 1 69381 1     0.490
- 2 69381 2     0.510
- 3 69382 1     0.468
- 4 69382 2     0.532
- 5 69383 1     0.472
- 6 69383 2     0.528
- 7 69384 1     0.459
- 8 69384 2     0.541
- 9 69385 1     0.461
-10 69385 2     0.539
-11 69386 1     0.461
-12 69386 2     0.539
-13 69387 1     0.479
-14 69387 2     0.521
-15 69388 1     0.466
-16 69388 2     0.534
-17 69389 1     0.477
-18 69389 2     0.523</code></pre>
+<pre><code># A tibble: 18 x 3
+   arrondissements SEXE      p
+   &lt;fct&gt;           &lt;fct&gt; &lt;dbl&gt;
+ 1 1er             Femme 0.510
+ 2 1er             Homme 0.490
+ 3 2nd             Femme 0.532
+ 4 2nd             Homme 0.468
+ 5 3e              Femme 0.528
+ 6 3e              Homme 0.472
+ 7 4e              Femme 0.541
+ 8 4e              Homme 0.459
+ 9 5e              Femme 0.539
+10 5e              Homme 0.461
+11 6e              Femme 0.539
+12 6e              Homme 0.461
+13 7e              Femme 0.521
+14 7e              Homme 0.479
+15 8e              Femme 0.534
+16 8e              Homme 0.466
+17 9e              Femme 0.523
+18 9e              Homme 0.477</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Il faut rajouter une fonction pour l'élargir</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Ici en mettant le sexe en colonne et l'arrondissement en ligne</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, ARM) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, arrondissements) <span class="sc">%&gt;%</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="st">"2019"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>annee, <span class="sc">-</span>n) <span class="sc">%&gt;%</span> </span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> SEXE, <span class="co"># La variable qui donnera leur nom aux colonnes du tableau élargi</span></span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> p <span class="co"># La variable qui donnera les valeurs à mettre dans les colonnes</span></span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9 × 3
-    ARM   `1`   `2`
-  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 69381 0.490 0.510
-2 69382 0.468 0.532
-3 69383 0.472 0.528
-4 69384 0.459 0.541
-5 69385 0.461 0.539
-6 69386 0.461 0.539
-7 69387 0.479 0.521
-8 69388 0.466 0.534
-9 69389 0.477 0.523</code></pre>
+<pre><code># A tibble: 9 x 3
+  arrondissements Femme Homme
+  &lt;fct&gt;           &lt;dbl&gt; &lt;dbl&gt;
+1 1er             0.510 0.490
+2 2nd             0.532 0.468
+3 3e              0.528 0.472
+4 4e              0.541 0.459
+5 5e              0.539 0.461
+6 6e              0.539 0.461
+7 7e              0.521 0.479
+8 8e              0.534 0.466
+9 9e              0.523 0.477</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Là en mettant l'arrondissement en colonne et le sexe en ligne</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Ce n'est pas la présentation habituelle car on regarde la proportion d'hommes et de femmes</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Mais ce format est parfois nécessaire pour que les tableaux rentrent dans le document final</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, ARM) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, arrondissements) <span class="sc">%&gt;%</span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>annee, <span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> ARM, <span class="co"># La variable qui donnera leur nom aux colonnes du tableau élargi</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> arrondissements, <span class="co"># La variable qui donnera leur nom aux colonnes du tableau élargi</span></span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> p <span class="co"># La variable qui donnera les valeurs à mettre dans les colonnes</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 10
-  SEXE  `69381` `69382` `69383` `69384` `69385` `69386` `69387` `69388` `69389`
-  &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 1       0.490   0.468   0.472   0.459   0.461   0.461   0.479   0.466   0.477
-2 2       0.510   0.532   0.528   0.541   0.539   0.539   0.521   0.534   0.523</code></pre>
+<pre><code># A tibble: 2 x 10
+  SEXE  `1er` `2nd`  `3e`  `4e`  `5e`  `6e`  `7e`  `8e`  `9e`
+  &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 Femme 0.510 0.532 0.528 0.541 0.539 0.539 0.521 0.534 0.523
+2 Homme 0.490 0.468 0.472 0.459 0.461 0.461 0.479 0.466 0.477</code></pre>
 </div>
 </div>
 </section>
@@ -519,8 +498,8 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  rp <span class="sc">%&gt;%</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, ARM, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, ARM) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(annee, arrondissements, SEXE, <span class="at">wt =</span> IPONDI) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(annee, arrondissements) <span class="sc">%&gt;%</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span></span>
@@ -540,11 +519,11 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(annee <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>annee, <span class="sc">-</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
+<pre><code># A tibble: 2 x 2
   SEXE      p
   &lt;fct&gt; &lt;dbl&gt;
-1 1     0.470
-2 2     0.530</code></pre>
+1 Femme 0.530
+2 Homme 0.470</code></pre>
 </div>
 </div>
 </section>
@@ -565,9 +544,9 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Créons un diagramme en bâtons de la population des arrondissements lyonnais</span></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rp19) <span class="sc">+</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> ARM))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> arrondissements))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -575,9 +554,10 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <h3 class="anchored" data-anchor-id="cohérence-entre-les-données-le-type-de-graphique-et-le-code">Cohérence entre les données, le type de graphique et le code</h3>
 <p>Le graphique ci-dessus est un exemple très commun des problèmes qui émergent quand on ne s’assure pas de la cohérence entre les données dont on dispose, le type de graphique qu’on construit et le code qu’on écrit. Il faut toujours régler les problèmes au fur et à mesure, c’est la seule façon d’isoler les problèmes et de les régler efficacement.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rp19<span class="sc">$</span>ARM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dans la version précédente de ce code, la variable non recodée des arrondissements était utilisée</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rp19<span class="sc">$</span>ARM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "integer"</code></pre>
+<pre><code>[1] "numeric"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Les arrondissements sont considérés comme des valeurs numériques.</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Il faut les convertir en facteurs. Profitons-en pour recoder.</span></span>
@@ -618,14 +598,14 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rp19) <span class="sc">+</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> arrondissements))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Sachant que la fonction pour représenter des histogrammes (pour les variables quantitatives) est <code>geom_histogram</code> et que la variable de l’âge des individus rencensés est <code>AGEREV</code>, vérifiez que la variable d’âge est de la bonne classe d’objet et construisez un histogramme qui représente la distribution des âges.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rp19<span class="sc">$</span>AGEREV)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "integer"</code></pre>
+<pre><code>[1] "numeric"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rp19) <span class="sc">+</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> AGEREV))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -633,7 +613,7 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/hist_age-solution-1.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -656,36 +636,27 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> arrondissements),</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/fill-1.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rp19) <span class="sc">+</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> arrondissements,</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> SEXE))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/fill-2.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rp19) <span class="sc">+</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> arrondissements,</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> SEXE,</span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/fill-3.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="ot">&lt;-</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  rp19 <span class="sc">%&gt;%</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">IMMI =</span> </span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fct</span>(</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ifelse</span>(IMMI <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Immigré.e"</span>, <span class="st">"Pas immigré.e"</span>),</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pas immigré.e"</span>, <span class="st">"Immigré.e"</span>))</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rp19) <span class="sc">+</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> arrondissements,</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> IMMI,</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rp19) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> arrondissements,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> IMMI,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/fill-4.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-13-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -770,7 +741,7 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> csp,</span>
 <span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>               <span class="at">weight =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/pop_ARM_CS1-solution-1.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -815,7 +786,7 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">3</span>,</span>
 <span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a>                             <span class="at">byrow =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="768"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 </section>
@@ -864,7 +835,7 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">3</span>,</span>
 <span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a>                             <span class="at">byrow =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="768"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 </section>
@@ -915,7 +886,7 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">3</span>,</span>
 <span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a>                             <span class="at">byrow =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="768"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 </section>
@@ -926,79 +897,19 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <h3 class="anchored" data-anchor-id="les-distributions-à-laide-des-boîtes-à-moustache">Les distributions à l’aide des boîtes à moustache</h3>
 <p>Créez des boîtes à moustache à l’aide de la fonction <code>geom_boxplot</code> qui représente la distribution de l’âge en fonction de la variable <code>IMMI</code>. N’utilisez pas les poids cette fois-ci.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>rp <span class="ot">&lt;-</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  rp <span class="sc">%&gt;%</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrondissements =</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fct</span>(</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">case_when</span>(</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69381</span> <span class="sc">~</span> <span class="st">"1er"</span>,</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69382</span> <span class="sc">~</span> <span class="st">"2nd"</span>,</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69383</span> <span class="sc">~</span> <span class="st">"3e"</span>,</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69384</span> <span class="sc">~</span> <span class="st">"4e"</span>,</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69385</span> <span class="sc">~</span> <span class="st">"5e"</span>,</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69386</span> <span class="sc">~</span> <span class="st">"6e"</span>,</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69387</span> <span class="sc">~</span> <span class="st">"7e"</span>,</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69388</span> <span class="sc">~</span> <span class="st">"8e"</span>,</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>          ARM <span class="sc">==</span> <span class="dv">69389</span> <span class="sc">~</span> <span class="st">"9e"</span></span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1er"</span>,</span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"2nd"</span>,</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"3e"</span>,</span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"4e"</span>,</span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"5e"</span>,</span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"6e"</span>,</span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"7e"</span>,</span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"8e"</span>,</span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"9e"</span>)</span>
-<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">csp =</span></span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fct</span>(</span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">case_when</span>(</span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Agriculteurs exploitants"</span>,</span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Artisans, commerçants et chefs d'entreprise"</span>,</span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Cadres et professions intellectuelles supérieures"</span>,</span>
-<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Professions intermédiaires"</span>,</span>
-<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"Employés"</span>,</span>
-<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> <span class="st">"Ouvriers"</span>,</span>
-<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">7</span> <span class="sc">~</span> <span class="st">"Retraités"</span>,</span>
-<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>          CS1 <span class="sc">==</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">"Inactifs"</span>),</span>
-<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Agriculteurs exploitants"</span>,</span>
-<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Artisans, commerçants et chefs d'entreprise"</span>,</span>
-<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Cadres et professions intellectuelles supérieures"</span>,</span>
-<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Professions intermédiaires"</span>,</span>
-<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Employés"</span>,</span>
-<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Ouvriers"</span>,</span>
-<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Retraités"</span>,</span>
-<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Inactifs"</span>)</span>
-<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">IMMI =</span> <span class="fu">fct</span>(<span class="fu">ifelse</span>(IMMI <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Immigré.e"</span>, <span class="st">"Pas immigré.e"</span>),</span>
-<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pas immigré.e"</span>, <span class="st">"Immigré.e"</span>)),</span>
-<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">SEXE =</span> <span class="fu">fct</span>(<span class="fu">ifelse</span>(SEXE <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Homme"</span>, <span class="st">"Femme"</span>),</span>
-<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Femme"</span>, <span class="st">"Homme"</span>))</span>
-<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a>rp19 <span class="ot">&lt;-</span></span>
-<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a>  rp19 <span class="sc">%&gt;%</span></span>
-<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">IMMI =</span> <span class="fu">fct</span>(<span class="fu">ifelse</span>(IMMI <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Immigré.e"</span>, <span class="st">"Pas immigré.e"</span>),</span>
-<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a>               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pas immigré.e"</span>, <span class="st">"Immigré.e"</span>)),</span>
-<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">SEXE =</span> <span class="fu">fct</span>(<span class="fu">ifelse</span>(SEXE <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Homme"</span>, <span class="st">"Femme"</span>),</span>
-<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a>               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Femme"</span>, <span class="st">"Homme"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AGEREV,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> IMMI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Seance3_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AGEREV,</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> IMMI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> AGEREV,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> IMMI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/box-solution-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> AGEREV,</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> IMMI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/box-solution-2.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1006,23 +917,23 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <h3 class="anchored" data-anchor-id="combiner-plusieurs-graphiques">Combiner plusieurs graphiques</h3>
 <p>On souhaite parfois réaliser la même opération de visualisation mais le représenter dans des graphiques différents. Cela permet de distinguer les niveaux d’analyse à plus de deux dimensions. Il faut pour cela utiliser les fonctions <code>facet_</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduire la comparaison des âges à 2 recensements mis côte-à-côte</span></span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduire la comparaison des âges à 2 recensements mis côte-à-côte</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> AGEREV,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> IMMI)) <span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(annee))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Seance3_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On peut même créer des grilles avec plus d'un croisement</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> AGEREV,</span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> IMMI)) <span class="sc">+</span></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(annee))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="fu">vars</span>(SEXE), <span class="fu">vars</span>(annee))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On peut même créer des grilles avec plus d'un croisement</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>rp <span class="sc">%&gt;%</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> AGEREV,</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> IMMI)) <span class="sc">+</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="fu">vars</span>(SEXE), <span class="fu">vars</span>(annee))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1030,28 +941,28 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <h3 class="anchored" data-anchor-id="transformer-des-données-numériques-avant-de-les-représenter">Transformer des données numériques avant de les représenter</h3>
 <p>Nous avons déjà vu que les verbes de dplyr tel <code>mutate</code> changeaient leur fonctionnement si un groupement avait été annoncé avec <code>group_by</code>. Les variables <code>NBPI</code> et <code>NPERR</code> représentent respectivement le nombre de pièces et le nombre de personnes dans le logement habité par la personne recensée. La variable <code>LPRM</code> prend la valeur 1 quand la personne recensée est la personne de référence du logement. Créez une nouvelle colonne sur le tableau du recensement de 2019 du nombre de pièces et de personnes moyens par arrondissement. La fonction <code>weighted.mean</code> qui prend les arguments <code>x</code> pour le vecteur et <code>w</code> pour les poids vous permettra de tenir compte de la pondération.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LPRM <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(arrondissements) <span class="sc">%&gt;%</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moy_NBPI =</span> <span class="fu">weighted.mean</span>(<span class="at">x=</span> NBPI, <span class="at">w =</span> IPONDI),</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">moy_NPERR =</span> <span class="fu">mean</span>(<span class="at">x =</span> NPERR, <span class="at">w =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LPRM <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(arrondissements) <span class="sc">%&gt;%</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moy_NBPI =</span> <span class="fu">weighted.mean</span>(<span class="at">x=</span> NBPI, <span class="at">w =</span> IPONDI),</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">moy_NPERR =</span> <span class="fu">mean</span>(<span class="at">x =</span> NPERR, <span class="at">w =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 104,042 × 14
+<pre><code># A tibble: 104,042 x 14
 # Groups:   arrondissements [9]
    annee   ARM IPONDI CS1   IMMI  SEXE  AGEREV NPERR  NBPI LPRM  arrondissements
-   &lt;fct&gt; &lt;int&gt;  &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;          
- 1 2019  69388  1.18  3     Pas … Femme     43     3     3 1     8e             
- 2 2019  69384  2.97  8     Pas … Femme     85     1     4 1     4e             
- 3 2019  69383  0.956 8     Pas … Femme     23     1     1 1     3e             
- 4 2019  69388  1.07  4     Pas … Femme     28     1     1 1     8e             
- 5 2019  69384  2.62  5     Pas … Femme     50     1     2 1     4e             
- 6 2019  69383  3.02  8     Pas … Femme     23     2     1 1     3e             
- 7 2019  69383  2.95  6     Pas … Femme     21     1     3 1     3e             
- 8 2019  69382  2.88  3     Pas … Femme     29     1     2 1     2nd            
- 9 2019  69389  0.941 5     Pas … Femme     48     1     4 1     9e             
-10 2019  69384  2.79  3     Pas … Femme     38     5     6 1     4e             
-# ℹ 104,032 more rows
-# ℹ 3 more variables: csp &lt;fct&gt;, moy_NBPI &lt;dbl&gt;, moy_NPERR &lt;dbl&gt;</code></pre>
+   &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;          
+ 1 2019  69388  1.18  3     Pas ~ Femme     43     3     3 1     8e             
+ 2 2019  69384  2.97  8     Immi~ Femme     85     1     4 1     4e             
+ 3 2019  69383  0.956 8     Pas ~ Femme     23     1     1 1     3e             
+ 4 2019  69388  1.07  4     Pas ~ Femme     28     1     1 1     8e             
+ 5 2019  69384  2.62  5     Pas ~ Femme     50     1     2 1     4e             
+ 6 2019  69383  3.02  8     Pas ~ Femme     23     2     1 1     3e             
+ 7 2019  69383  2.95  6     Pas ~ Femme     21     1     3 1     3e             
+ 8 2019  69382  2.88  3     Pas ~ Femme     29     1     2 1     2nd            
+ 9 2019  69389  0.941 5     Immi~ Femme     48     1     4 1     9e             
+10 2019  69384  2.79  3     Pas ~ Femme     38     5     6 1     4e             
+# i 104,032 more rows
+# i 3 more variables: csp &lt;fct&gt;, moy_NBPI &lt;dbl&gt;, moy_NPERR &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1059,13 +970,13 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 <h3 class="anchored" data-anchor-id="la-fonction-summarize">La fonction <code>summarize</code></h3>
 <p>La fonction <code>summarize</code> permet de résumer cette information de groupe en un tableau synthétique.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LPRM <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(arrondissements) <span class="sc">%&gt;%</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">moy_NBPI =</span> <span class="fu">weighted.mean</span>(<span class="at">x=</span> NBPI, <span class="at">w =</span> IPONDI),</span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">moy_NPERR =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NPERR, <span class="at">w =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LPRM <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(arrondissements) <span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">moy_NBPI =</span> <span class="fu">weighted.mean</span>(<span class="at">x=</span> NBPI, <span class="at">w =</span> IPONDI),</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">moy_NPERR =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NPERR, <span class="at">w =</span> IPONDI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9 × 3
+<pre><code># A tibble: 9 x 3
   arrondissements moy_NBPI moy_NPERR
   &lt;fct&gt;              &lt;dbl&gt;     &lt;dbl&gt;
 1 1er                 2.71      1.79
@@ -1081,33 +992,33 @@ Il faudra faire la somme de la population pour chaque année uniquement, soit in
 </div>
 <p>Représentez graphiquement cette information à l’aide de la fonction <code>geom_point</code> qui crée un nuage de points.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LPRM <span class="sc">==</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span> <span class="co"># La personne de référence du ménage</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(arrondissements) <span class="sc">%&gt;%</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">moy_NBPI =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NBPI, <span class="at">w =</span> IPONDI),</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">moy_NPERR =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NPERR, <span class="at">w =</span> IPONDI)) <span class="sc">%&gt;%</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> moy_NBPI,</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> moy_NPERR))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Seance3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Associez les points dans le plan en deux dimensions au nom des arrondissements en remplaçant <code>geom_point</code> par <code>geom_text</code>.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LPRM <span class="sc">==</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span> <span class="co"># La personne de référence du ménage</span></span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(arrondissements) <span class="sc">%&gt;%</span></span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">moy_NBPI =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NBPI, <span class="at">w =</span> IPONDI),</span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">moy_NPERR =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NPERR, <span class="at">w =</span> IPONDI)) <span class="sc">%&gt;%</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
 <span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> moy_NBPI,</span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> moy_NPERR))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> moy_NPERR,</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> arrondissements))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/point-solution-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Associez les points dans le plan en deux dimensions au nom des arrondissements en remplaçant <code>geom_point</code> par <code>geom_text</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>rp19 <span class="sc">%&gt;%</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LPRM <span class="sc">==</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span> <span class="co"># La personne de référence du ménage</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(arrondissements) <span class="sc">%&gt;%</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">moy_NBPI =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NBPI, <span class="at">w =</span> IPONDI),</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">moy_NPERR =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> NPERR, <span class="at">w =</span> IPONDI)) <span class="sc">%&gt;%</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> moy_NBPI,</span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> moy_NPERR,</span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> arrondissements))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Seance3_files/figure-html/text-solution-1.png" class="img-fluid" width="672"></p>
+<p><img src="Seance3_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
