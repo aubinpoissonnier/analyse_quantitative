@@ -8,7 +8,19 @@ editor_options:
 ```{r}
 #| include: false
 
-install.packages("questionr")
+## First specify the packages of interest
+packages = c("questionr", "tidyverse")
+
+## Now load or install&load all
+package.check <- lapply(
+  packages,
+  FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  }
+)
 options(max.print = 100)
 ```
 
@@ -692,8 +704,15 @@ On charge ici deux tableaux de données, `deces_f` pour les femmes et `deces_h` 
 
 ```{r}
 # Chargement du tableau de données
-dec_f <- read.csv2("data/deces_f.csv")
-dec_h <- read.csv2("data/deces_h.csv")
+dec_f <- aws.s3::s3read_using(FUN = data.table::fread,
+                           object = "/diffusion/deces_f.csv",
+                           bucket = "aubinpoissonnier",
+                           opts = list("region" = ""))
+
+dec_h <- aws.s3::s3read_using(FUN = data.table::fread,
+                           object = "/diffusion/deces_h.csv",
+                           bucket = "aubinpoissonnier",
+                           opts = list("region" = ""))
 ```
 
 ### Exploration du tableau de données
@@ -702,8 +721,8 @@ La plupart du temps, l'analyse quantitative porte sur des données de seconde ma
 
 ```{r}
 # Visualisez les deux tableaux de données
-View(dec_f)
-View(dec_h)
+#View(dec_f)
+#View(dec_h)
 
 # Affichez leurs dimensions
 dim(dec_f)
@@ -811,7 +830,10 @@ On charge maintenant les tables de mortalité de 2019 fournies par l'INSEE. C'es
 
 ```{r}
 # Chargement des données
-mort <- read.csv2("data/tab_mort19.csv")
+mort <- aws.s3::s3read_using(FUN = data.table::fread,
+                           object = "/diffusion/tab_mort19.csv",
+                           bucket = "aubinpoissonnier",
+                           opts = list("region" = ""))
 ```
 
 ### Exploration du tableau
@@ -820,7 +842,7 @@ Explorez le tableau de données et tentez de comprendre à quoi correspondent le
 
 ```{r}
 # Visualiser
-View(mort)
+#View(mort)
 
 # La structure
 str(mort)
