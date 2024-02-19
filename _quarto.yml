@@ -8,15 +8,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - Seance1.qmd
-      - Seance2.qmd
-      - pptS2.qmd
-      - rappel_S1S2.qmd
-      - Seance3.qmd
-      - pptS4.qmd
-      - DM_corrige_code.qmd
-      - pptS5.qmd
-      - Seance6.qmd
+      - Seance_1.qmd
 format:
   html:
     theme: cosmo
