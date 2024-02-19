@@ -6,4 +6,4 @@ Ce site est dédié au cours d'analyse quantitative du master Villes et Environn
 
 Vous trouverez les supports de cours au format PDF aux liens suivants :
 
--   [Séance 1- Les indicateurs](~/work/analyse_quantitative/supportpdf/S1.pdf)
+-   [Séance 1- Les indicateurs](supportpdf/S1.pdf)
