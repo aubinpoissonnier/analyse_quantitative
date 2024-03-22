@@ -9,3 +9,4 @@ Vous trouverez les supports de cours au format PDF aux liens suivants :
 -   [Séance 1 - Les indicateurs](supportpdf/S1.pdf)
 -   [Séance 2 - La catégorisation](supportpdf/S2.pdf)
 -   [Séance 3 - La représentation graphique des données](supportpdf/S3.pdf)
+-   [Séance 4 - Enquêtes par questionnaire et représentativité statistique](supportpdf/S4.pdf)
