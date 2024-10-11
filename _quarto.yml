@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Analyse quantitative - M1 Villes et environnements urbains"
+  title: "Analyse quantitative - M1 et M2 Villes et environnements urbains"
   navbar:
     left:
       - href: index.qmd

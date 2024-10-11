@@ -1,12 +1,20 @@
 ---
-title: "Analyse quantitative - M2 Villes et environnements urbains"
+title: "Analyse quantitative - M1 et M2 - Villes et environnements urbains"
 ---
 
-Ce site est dédié au cours d'analyse quantitative du master Villes et Environnements urbains. Les premières séances s'appuient sur [l'introduction à R et au tidyverse de Julien Barnier](https://juba.github.io/tidyverse/).
+Ce site est dédié au cours d'analyse quantitative du master Villes et Environnements urbains. 
 
-Vous trouverez les supports de cours au format PDF aux liens suivants :
+Les supports de cours pour le programme de M1
 
--   [Séance 1 - Les indicateurs](supportpdf/S1.pdf)
--   [Séance 2 - La catégorisation](supportpdf/S2.pdf)
--   [Séance 3 - La représentation graphique des données](supportpdf/S3.pdf)
--   [Séance 4 - Enquêtes par questionnaire et représentativité statistique](supportpdf/S4.pdf)
+-   [Séance 1 - Les indicateurs](supportpdf/M1S1.pdf)
+-   [Séance 2 - La catégorisation](supportpdf/M1S2.pdf)
+-   [Séance 3 - La représentation graphique des données](supportpdf/M1S3.pdf)
+-   [Séance 4 - Enquêtes par questionnaire et représentativité statistique](supportpdf/M1S4.pdf)
+
+
+Les supports de cours pour le programme de M2
+
+-   [Séance 1 - Introduction à la corrélation linéaire](supportpdf/M2S1.pdf)
+
+Ressources pour la programmation :
+-   [Introduction à R et au tidyverse de Julien Barnier](https://juba.github.io/tidyverse/).
