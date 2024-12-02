@@ -8,8 +8,11 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - Seance_1.qmd
-      - Seance_2.qmd
+      - M1_Seance_1_corr.qmd
+      - M1_Seance_2_corr.qmd
+      - M2_Seance_1_corr.qmd
+      - M2_Seance_2_3_corr.qmd
+      - M2_Seance_4_corr.qmd
 format:
   html:
     theme: cosmo

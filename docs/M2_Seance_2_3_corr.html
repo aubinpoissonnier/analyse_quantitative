@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Analyse quantitative - M1 et M2 Villes et environnements urbains</title>
+<title>La corrélation et les modèles de régression linéaire – Analyse quantitative - M1 et M2 Villes et environnements urbains</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -105,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">La visualisation de données avec ggplot2</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./M2_Seance_2_3_corr.html"> 
+    <a class="nav-link active" href="./M2_Seance_2_3_corr.html" aria-current="page"> 
 <span class="menu-text">La corrélation et les modèles de régression linéaire</span></a>
   </li>  
   <li class="nav-item">
@@ -123,15 +157,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#la-corrélation-linéaire" id="toc-la-corrélation-linéaire" class="nav-link active" data-scroll-target="#la-corrélation-linéaire">La corrélation linéaire</a></li>
+  <li><a href="#la-régression-linéaire" id="toc-la-régression-linéaire" class="nav-link" data-scroll-target="#la-régression-linéaire">La régression linéaire</a>
+  <ul class="collapse">
+  <li><a href="#les-modèles-simples" id="toc-les-modèles-simples" class="nav-link" data-scroll-target="#les-modèles-simples">Les modèles simples</a></li>
+  <li><a href="#les-modèles-multiples" id="toc-les-modèles-multiples" class="nav-link" data-scroll-target="#les-modèles-multiples">Les modèles multiples</a></li>
+  <li><a href="#les-modèles-à-interaction" id="toc-les-modèles-à-interaction" class="nav-link" data-scroll-target="#les-modèles-à-interaction">Les modèles à interaction</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">La corrélation et les modèles de régression linéaire</h1>
 </div>
 
 
@@ -148,8 +194,128 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Le tableau de données <code>bac</code> recense les résultats au baccalauréat de 2322 lycées et il fournit leur indice de position sociale dans la colonne <code>IPS</code>.</p>
+<section id="la-corrélation-linéaire" class="level1">
+<h1>La corrélation linéaire</h1>
+<p>Avec la fonction <code>cor</code>, déterminez que vaut la corrélation entre l’indice de position sociale et le taux de réussite au bac en série générale; le taux de mentions en série générale, le taux de mentions toutes séries confondues ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corrélation </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(bac<span class="sc">$</span>IPS, bac<span class="sc">$</span>taux_mention_brut_toutes_series)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7409667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corrélation pondérée par les effectifs</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Il faut utiliser une fonction du package weights</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wtd.cors</span>(bac<span class="sc">$</span>IPS, bac<span class="sc">$</span>taux_mention_brut_toutes_series, <span class="at">weight =</span> bac<span class="sc">$</span>effectif_presents_total_series)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] 0.7948856</code></pre>
+</div>
+</div>
+</section>
+<section id="la-régression-linéaire" class="level1">
+<h1>La régression linéaire</h1>
+<section id="les-modèles-simples" class="level2">
+<h2 class="anchored" data-anchor-id="les-modèles-simples">Les modèles simples</h2>
+<p>Les modèles de régression linéaires peuvent être construits grâce à la fonction <code>lm</code>. Il faut alors utiliser une nouvelle notation, celle des formules utilisant l’opérateur <code>~</code>. À gauche de l’opérateur se trouve la variable expliquée, à droite la ou les variables explicatives.</p>
+<p>Construisez un modèle de régression linéaire expliquant taux de mentions toutes séries confondues à partir du score IPS.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(taux_mention_brut_toutes_series <span class="sc">~</span> IPS,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> bac)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Les résultats du modèle peuvent être obtenus de manière synthétique grâce à la fonction <code>summary</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = taux_mention_brut_toutes_series ~ IPS, data = bac)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-54.221  -6.246   0.412   7.016  36.881 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -24.02432    1.63253  -14.72   &lt;2e-16 ***
+IPS           0.75953    0.01429   53.15   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.7 on 2320 degrees of freedom
+Multiple R-squared:  0.549, Adjusted R-squared:  0.5488 
+F-statistic:  2824 on 1 and 2320 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="les-modèles-multiples" class="level2">
+<h2 class="anchored" data-anchor-id="les-modèles-multiples">Les modèles multiples</h2>
+<p>Les modèles multiples se construisent grâce à l’opérateur <code>+</code> du côté droit de la formule. Il suffit d’additionner les variables explicatives.</p>
+<p>Construisez un modèle de régression linéaire qui explique le taux de mentions toutes séries confondues à partir du score IPS et du statut public/privé.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(taux_mention_brut_toutes_series <span class="sc">~</span> IPS <span class="sc">+</span> secteur_public_pu_prive_pr,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> bac)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = taux_mention_brut_toutes_series ~ IPS + secteur_public_pu_prive_pr, 
+    data = bac)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-56.280  -5.942   0.722   6.797  37.225 
+
+Coefficients:
+                                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      -13.80143    2.05315  -6.722 2.25e-11 ***
+IPS                                0.69443    0.01627  42.695  &lt; 2e-16 ***
+secteur_public_pu_prive_prpublic  -4.29700    0.53520  -8.029 1.55e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.56 on 2319 degrees of freedom
+Multiple R-squared:  0.5612,    Adjusted R-squared:  0.5609 
+F-statistic:  1483 on 2 and 2319 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="les-modèles-à-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="les-modèles-à-interaction">Les modèles à interaction</h2>
+<p>Les modèles multiples se construisent grâce à l’opérateur <code>*</code> du côté droit de la formule, entre deux variables. Il suffit d’additionner les variables explicatives</p>
+<p>Construisez un modèle de régression linéaire qui explique le taux de mentions toutes séries confondues à partir de l’interaction du score IPS et du statut public/privé.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(taux_mention_brut_toutes_series <span class="sc">~</span> IPS<span class="sc">*</span>secteur_public_pu_prive_pr,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> bac)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = taux_mention_brut_toutes_series ~ IPS * secteur_public_pu_prive_pr, 
+    data = bac)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-56.381  -5.909   0.857   6.678  36.891 
+
+Coefficients:
+                                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                          -23.18093    3.82653  -6.058  1.6e-09 ***
+IPS                                    0.77003    0.03069  25.090  &lt; 2e-16 ***
+secteur_public_pu_prive_prpublic       8.24724    4.35430   1.894  0.05834 .  
+IPS:secteur_public_pu_prive_prpublic  -0.10499    0.03617  -2.903  0.00373 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.54 on 2318 degrees of freedom
+Multiple R-squared:  0.5628,    Adjusted R-squared:  0.5623 
+F-statistic: 994.7 on 3 and 2318 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

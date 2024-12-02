@@ -1,5 +1,5 @@
 ---
-title: "Séance 2"
+title: "Compter, recoder et tester"
 editor: visual
 ---
 

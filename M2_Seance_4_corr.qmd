@@ -19,8 +19,8 @@ pisa <- aws.s3::s3read_using(FUN = readRDS,
   mutate(poids = poids*(4613/sum(poids)))
 ```
 
-
 On crée une variable de positionnement social en quintiles
+
 ```{r}
 quant_pos_soc <- quantile(pisa$pos_soc, probs = c(0, 0.2, 0.4, 0.6, 0.8, 1), na.rm = T)
 # On crée une nouvelle variable
@@ -37,6 +37,7 @@ pisa <-
 ```
 
 On crée un modèle simple
+
 ```{r}
 m1 <- glm(redouble ~ pos_soc_5c, 
              family = binomial("logit"),
@@ -46,6 +47,7 @@ summary(m1)
 ```
 
 On crée un modèle multiple
+
 ```{r}
 m2 <- glm(redouble ~ pos_soc_5c +
             sexe, 
@@ -54,4 +56,3 @@ m2 <- glm(redouble ~ pos_soc_5c +
           weights = pisa$poids)
 summary(m2)
 ```
-

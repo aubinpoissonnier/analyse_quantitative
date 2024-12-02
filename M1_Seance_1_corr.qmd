@@ -1,5 +1,5 @@
 ---
-title: "Séance 1"
+title: "Découverte de R"
 output: html_document
 editor_options: 
   chunk_output_type: console
