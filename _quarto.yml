@@ -3,16 +3,11 @@ project:
   output-dir: docs
 
 website:
-  title: "Analyse quantitative - M1 et M2 Villes et environnements urbains"
+  title: "Analyse quantitative - M1 Villes et environnements urbains"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - M1_Seance_1_corr.qmd
-      - M1_Seance_2_corr.qmd
-      - M2_Seance_1_corr.qmd
-      - M2_Seance_2_3_corr.qmd
-      - M2_Seance_4_corr.qmd
 format:
   html:
     theme: cosmo
