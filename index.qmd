@@ -8,6 +8,7 @@ Les supports de cours pour le programme de M1
 
 -   [Séance 1 - Les indicateurs](supportspdf/M1S1.pdf)
 -   [Séance 2 - La catégorisation](supportspdf/M1S2.pdf)
+-   [Séance 3 - Construire un tableau statistique](supportspdf/M1S3.pdf)
 
 
 Ressources pour la programmation :
