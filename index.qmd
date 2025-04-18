@@ -11,6 +11,7 @@ Les supports de cours pour le programme de M1
 -   [Séance 3 - Construire un tableau statistique](supportspdf/M1S3.pdf)
 -   [Séance 4 - La représentation graphique des données](supportspdf/M1S4.pdf)
 -   [Séance 5 - Enquête par questionnaire et représentativité statistique](supportspdf/M1S5.pdf)
+-   [Séance 6 - Les tests d'hypothèse et la statistique du Khi2](supportspdf/M1S6.pdf)
 
 Ressources pour la programmation :
 -   [Introduction à R et au tidyverse de Julien Barnier](https://juba.github.io/tidyverse/).
