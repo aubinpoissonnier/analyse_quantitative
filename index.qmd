@@ -13,9 +13,11 @@ Les supports de cours pour le programme de M1
 -   [Séance 5 - Enquête par questionnaire et représentativité statistique](supportspdf/M1S5.pdf)
 -   [Séance 6 - Les tests d'hypothèse et la statistique du Khi2](supportspdf/M1S6.pdf)
 
-Les supports de cours pour le programme de M1
+Les supports de cours pour le programme de M2
 
 -   [Séance 1 - Introduction à la corrélation et aux modèles de régression linéaire simples](supportspdf/M2S1.pdf)
+-   [Séance 2 - Exemple d'étude corrélationnelle : la socio-géographie électorale](supportspdf/M2S2.pdf)
+-   [Séance 3 - Les modèles de régression linéaire multiples et les effets d’interaction](supportspdf/M2S3.pdf)
 
 Ressources pour la programmation :
 -   [Introduction à R et au tidyverse de Julien Barnier](https://juba.github.io/tidyverse/).
